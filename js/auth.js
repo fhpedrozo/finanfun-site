@@ -186,7 +186,7 @@ class FinanFunAuth {
     
     // Real API integration methods
     async realLogin(email, password) {
-        const response = await fetch('/api/auth/login', {
+        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -203,7 +203,7 @@ class FinanFunAuth {
     }
     
     async realSignup(name, email, password) {
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ class FinanFunAuth {
     async realSocialLogin(provider) {
         // Social login integration would go here
         // For now, we'll create a demo account
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/register`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -357,7 +357,7 @@ class FinanFunAuth {
             
             if (sessionToken) {
                 // Call logout API
-                await fetch('/api/auth/logout', {
+                await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/logout`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
