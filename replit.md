@@ -108,6 +108,15 @@ Changelog:
   - Session management with token-based authentication
   - User accounts with real and virtual (BitFun) currency support
   - Database tables: users, user_profiles, user_sessions, accounts, bitfun_transactions
+
+- June 18, 2025: Content and visual improvements
+  - Real app mockup image implemented replacing placeholder
+  - Subtitle updated to "O Futuro Financeiro Começa Cedo"
+  - Extended problem section with 6 total challenges:
+    * Falta de Educação Financeira, Uso Improdutivo de Telas
+    * Poucas Ferramentas Práticas, Cursos Caros e Limitados
+    * Desinteresse no Aprendizado Financeiro, Falta de Responsabilidade Financeira
+  - User feedback: "Ficou ótimo" - satisfied with recent updates
 ```
 
 ## User Preferences
