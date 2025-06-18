@@ -1,0 +1,113 @@
+Objetivo Principal: Desenvolver a estrutura base de um site de apresentação para o aplicativo FinanFun. O site deve ser simples (principalmente single-page ou com poucas páginas essenciais), mas com um design visual que capture a essência moderna, lúdica e inspirada em aplicativos financeiros, utilizando a paleta de cores e elementos visuais identificados nas imagens e na apresentação do projeto. O objetivo é ter um ponto de partida visual e informativo online.
+
+Contexto do Projeto (FinanFun): O FinanFun é um aplicativo de educação e controle financeiro voltado para crianças e adolescentes (público infantojuvenil). Ele busca preencher a lacuna na educação financeira desde cedo, oferecendo uma ferramenta prática e engajadora que funciona como um "controle financeiro pessoal" para os jovens. A plataforma se destaca por sua interface simples e moderna (inspirada em apps bancários reais), o uso de um avatar inteligente com IA para guiar o aprendizado, e funcionalidades gamificadas (tarefas, metas, recompensas, moeda virtual BitFun, simulador de investimentos). O app tem uma vertente para a criança (FinanFun) e outra para o responsável (FinanBoss).
+
+Público-Alvo do Site: Pais/responsáveis, educadores, escolas, ONGs e potenciais parceiros, além de apresentar o conceito aos próprios jovens usuários.
+
+Stack Tecnológico: HTML, CSS (para estilização), e JavaScript básico (para interatividade opcional, como scroll suave ou efeitos simples).
+
+Estrutura de Arquivos e Pastas:
+
+No diretório raiz:
+index.html (A página principal de apresentação)
+Dentro da pasta /css:
+style.css (O arquivo CSS principal para toda a estilização)
+Dentro da pasta /js:
+script.js (Arquivo JavaScript para interatividade básica, pode estar vazio inicialmente)
+Dentro da pasta /images:
+Esta pasta deve ser criada para armazenar futuras imagens e ícones. Por enquanto, pode ficar vazia ou conter placeholders.
+Dentro da pasta /pages:
+Esta pasta deve ser criada para futuras páginas secundárias. Por enquanto, pode conter arquivos placeholder como sobre.html e contato.html.
+Conteúdo e Estrutura das Seções da Página Principal (index.html):
+
+O conteúdo deve ser organizado em seções claras, utilizando tags semânticas (<header>, <section>, <footer>).
+
+Header (Cabeçalho):
+
+Título: FinanFun
+Subtítulo/Slogan: Algo que capture a essência, como "Educação Financeira Divertida para o Futuro" ou "Controle seu Dinheiro. Aprenda Brincando.".
+Breve Descrição: Uma frase concisa sobre o que é o FinanFun.
+Chamada para Ação (CTA): Botão (placeholder por enquanto) como "Saiba Mais" ou "Descubra o App".
+Elemento Visual: Um espaço reservado para uma imagem ou ilustração principal (placeholder), idealmente representando o avatar, a interface do app, ou o logo do FinanFun (como visto na Image #1).
+Seção "O Problema":
+
+Apresentar os desafios que o FinanFun aborda, baseando-se na Apresentação FinanFun:
+Falta de educação financeira desde a infância.
+Uso de telas sem propósito construtivo.
+Pais e escolas com poucas ferramentas práticas.
+Cursos tradicionais caros, escassos e com limitações de idade.
+Seção "A Solução: FinanFun":
+
+Descrever como o FinanFun resolve os problemas, utilizando os pontos da Apresentação FinanFun:
+App com avatar e gamificação para ensinar finanças de forma leve.
+Experiência personalizada por faixa etária.
+Interações diárias e práticas.
+Compreensão do funcionamento do dinheiro através de tarefas e missões.
+Seção "Como Funciona e Funcionalidades":
+
+Explicar a dualidade FinanFun (criança) e FinanBoss (responsável).
+Detalhar as Funcionalidades Chave listadas na Apresentação FinanFun:
+Painel dos pais (FinanBoss): gerenciamento, depósitos (mesadas/recompensas).
+Controle de saldo (real e virtual).
+Tarefas diárias, metas, conquistas e recompensas.
+BitFun: a moeda virtual para trocas e aprendizado de valor.
+Personalização do Avatar e aprendizado com IA.
+Simulador de investimentos.
+FinanPlay (modo educativo).
+Seção "Nosso Diferencial: O Avatar Inteligente":
+
+Destacar a importância do avatar com IA, como mencionado na Apresentação FinanFun.
+Explicar suas funções: dar dicas financeiras, lembrar atividades, auxiliar em jogos interativos.
+Seção "Impacto na Formação":
+
+Listar os resultados e benefícios para o desenvolvimento dos jovens, conforme a Apresentação FinanFun:
+Criação de hábitos saudáveis com o dinheiro.
+Compreensão prática de economia, investimento e escolhas.
+Desenvolvimento de responsabilidade e autonomia desde cedo.
+Maior segurança para decisões econômicas futuras (integrando com o contexto).
+Seção "Potencial de Expansão e Parcerias":
+
+Mencionar o potencial de crescimento e adaptação:
+Adaptação por faixa etária e experiências visuais.
+Adoção por famílias, escolas e programas sociais.
+Possibilidades de parcerias (fintechs, escolas, ONGs).
+Seção "Design e Experiência Visual":
+
+Reiterar os princípios de design do FinanFun, baseados na Apresentação FinanFun e Image #1 / Image #2:
+Design moderno e lúdico.
+Temas diferenciados e interativos.
+Inspirado em apps de bancos e grupos financeiros.
+Especificar o uso das cores identificadas:
+Verde Vibrante/Neon: Para elementos de destaque, CTAs, ícones de crescimento/ganho.
+Azul: Para fundos principais, tipografia de títulos, elementos que remetem a segurança e estabilidade.
+Roxo/Lilás: Como cor secundária para detalhes ou seções específicas (talvez as voltadas para público mais velho, como o FinCity 14+ sugere).
+Fundos Escuros (Azul Marinho/Preto) e Gradientes: Utilizar como base para criar contraste e um visual moderno, similar ao que é visto nos ícones.
+Usar fontes amigáveis e legíveis para o público jovem.
+Incluir espaços para placeholders de ícones (similares aos vistos na Image #2) para ilustrar as funcionalidades.
+Footer (Rodapé):
+
+Informações básicas: Copyright (ex: © [Ano Atual] FinanFun. Todos os direitos reservados.).
+Links (placeholders) para futuras páginas (como Sobre, Contato) ou redes sociais.
+Instruções Específicas para o Replit:
+
+Crie a estrutura de pastas: /css, /js, /images, /pages.
+Dentro da pasta /css, crie o arquivo style.css.
+Dentro da pasta /js, crie o arquivo script.js (pode deixá-lo vazio por enquanto).
+Dentro da pasta /pages, crie os arquivos placeholder sobre.html e contato.html (apenas com um título H1 indicando a página).
+No arquivo index.html:
+Configure a estrutura HTML5 básica.
+Link o style.css no <head>: <link rel="stylesheet" href="css/style.css">.
+Link o script.js no final do <body>, antes da tag de fechamento: <script src="js/script.js"></script>.
+Construa as seções de conteúdo (<header>, <section>, <footer>) na ordem especificada acima.
+Preencha cada seção com o texto correspondente, baseado na descrição do conteúdo chave. Use parágrafos (<p>), listas (<ul>/<ol>), títulos (<h2>/<h3>) conforme apropriado.
+Adicione placeholders para imagens (<img src="images/placeholder.png" alt="[Descrição da Imagem]">) onde elementos visuais são mencionados (Header, talvez nas seções de Funcionalidades e Avatar).
+Adicione placeholders para links (<a href="#">[Texto do Link]</a>) nos CTAs e no Footer.
+No arquivo css/style.css:
+Defina estilos básicos que incorporem a paleta de cores identificada (Verde Vibrante/Neon, Azul, Roxo/Lilás) e o uso de fundos escuros/gradientes.
+Aplique estilos simples para layout (ex: usando Flexbox ou Grid básico para centralizar conteúdo), tipografia (cores das fontes, tamanhos), e o estilo dos botões (CTA).
+Busque um visual limpo, moderno e que remeta a interfaces bancárias, mas com elementos lúdicos (cores vibrantes, fontes amigáveis).
+Inclua estilos básicos para responsividade (media queries simples, se possível) para que o site seja visualizável em dispositivos móveis.
+Adicione comentários no CSS para explicar as seções de estilo.
+Adicione comentários relevantes nos arquivos HTML e CSS para explicar a estrutura e o propósito de diferentes partes do código.
+O objetivo é uma representação visual e estrutural básica, não um site funcional completo. Use texto e elementos de design para simular a aparência desejada.
+Saída Esperada: Um projeto no Replit com a estrutura de pastas e arquivos criada, onde index.html contém a estrutura de conteúdo e links para os outros arquivos. O style.css deve conter estilos básicos utilizando a paleta de cores e princípios de design do FinanFun para dar uma aparência inicial ao site. O script.js e os arquivos em /pages podem ser mínimos, apenas para completar a estrutura.
