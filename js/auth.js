@@ -14,9 +14,6 @@ class FinanFunAuth {
     }
     
     init() {
-        // Check OAuth callback first
-        this.checkOAuthCallback();
-        
         // Event listeners
         this.loginBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -69,42 +66,8 @@ class FinanFunAuth {
             this.handleSocialLogin('facebook');
         });
         
-        // Check if user is already logged in
+        // Ensure button is in original state
         this.checkAuthStatus();
-    }
-    
-    checkOAuthCallback() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const loginStatus = urlParams.get('login');
-        const token = urlParams.get('token');
-        const userParam = urlParams.get('user');
-        
-        if (loginStatus === 'success' && token && userParam) {
-            try {
-                const user = JSON.parse(decodeURIComponent(userParam));
-                
-                // Store session
-                localStorage.setItem('finanfun_session', token);
-                localStorage.setItem('finanfun_user', JSON.stringify(user));
-                
-                // Update UI
-                this.updateUIForLoggedInUser(user);
-                this.showSuccess('Login realizado com sucesso!');
-                
-                // Clean URL
-                window.history.replaceState({}, document.title, window.location.pathname);
-                
-            } catch (error) {
-                console.error('Error processing OAuth callback:', error);
-                this.showError('Erro ao processar login');
-            }
-        } else if (loginStatus === 'error') {
-            const message = urlParams.get('message') || 'Erro no login';
-            this.showError(decodeURIComponent(message));
-            
-            // Clean URL
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
     }
     
     openModal() {
@@ -442,68 +405,45 @@ class FinanFunAuth {
     
     async logout() {
         try {
-            const sessionToken = localStorage.getItem('finanfun_session');
-            
-            if (sessionToken) {
-                // Call logout API
-                await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/logout`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ session_token: sessionToken }),
-                });
-            }
-            
             // Clear local storage
             localStorage.removeItem('finanfun_session');
             localStorage.removeItem('finanfun_user');
             
             this.currentUser = null;
             
-            // Reset login button and UI
-            this.resetLoginButton();
+            // Reset login button to original state
+            this.loginBtn.innerHTML = 'Login';
+            this.loginBtn.className = 'nav-link login-btn';
+            
+            // Remove any user menus
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu) {
+                userMenu.remove();
+            }
             
             this.showSuccess('Logout realizado com sucesso!');
             console.log('User logged out');
             
         } catch (error) {
             console.error('Logout error:', error);
-            // Still clear local data even if API call fails
-            localStorage.removeItem('finanfun_session');
-            localStorage.removeItem('finanfun_user');
+            // Force clear everything
+            localStorage.clear();
             this.currentUser = null;
+            this.loginBtn.innerHTML = 'Login';
+            this.loginBtn.className = 'nav-link login-btn';
         }
     }
     
     checkAuthStatus() {
-        const savedUser = localStorage.getItem('finanfun_user');
-        const savedSession = localStorage.getItem('finanfun_session');
+        // Clear any existing auth data and reset to original state
+        localStorage.removeItem('finanfun_user');
+        localStorage.removeItem('finanfun_session');
         
-        if (savedUser && savedSession) {
-            try {
-                const user = JSON.parse(savedUser);
-                this.updateUIForLoggedInUser(user);
-            } catch (error) {
-                console.error('Error parsing saved user:', error);
-                // Clear corrupted data
-                localStorage.removeItem('finanfun_user');
-                localStorage.removeItem('finanfun_session');
-                this.resetLoginButton();
-            }
-        } else {
-            // Clear partial data and reset button
-            localStorage.removeItem('finanfun_user');
-            localStorage.removeItem('finanfun_session');
-            this.resetLoginButton();
-        }
-    }
-    
-    resetLoginButton() {
+        // Ensure button shows original text
         this.loginBtn.innerHTML = 'Login';
         this.loginBtn.className = 'nav-link login-btn';
         
-        // Remove any existing user menu
+        // Remove any user menus
         const userMenu = document.querySelector('.user-menu');
         if (userMenu) {
             userMenu.remove();
