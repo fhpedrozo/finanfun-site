@@ -461,14 +461,8 @@ class FinanFunAuth {
             
             this.currentUser = null;
             
-            // Reset login button
-            this.loginBtn.innerHTML = 'Login';
-            
-            // Remove user menu
-            const userMenu = document.querySelector('.user-menu');
-            if (userMenu) {
-                userMenu.remove();
-            }
+            // Reset login button and UI
+            this.resetLoginButton();
             
             this.showSuccess('Logout realizado com sucesso!');
             console.log('User logged out');
@@ -484,14 +478,35 @@ class FinanFunAuth {
     
     checkAuthStatus() {
         const savedUser = localStorage.getItem('finanfun_user');
-        if (savedUser) {
+        const savedSession = localStorage.getItem('finanfun_session');
+        
+        if (savedUser && savedSession) {
             try {
                 const user = JSON.parse(savedUser);
                 this.updateUIForLoggedInUser(user);
             } catch (error) {
                 console.error('Error parsing saved user:', error);
+                // Clear corrupted data
                 localStorage.removeItem('finanfun_user');
+                localStorage.removeItem('finanfun_session');
+                this.resetLoginButton();
             }
+        } else {
+            // Clear partial data and reset button
+            localStorage.removeItem('finanfun_user');
+            localStorage.removeItem('finanfun_session');
+            this.resetLoginButton();
+        }
+    }
+    
+    resetLoginButton() {
+        this.loginBtn.innerHTML = 'Login';
+        this.loginBtn.className = 'nav-link login-btn';
+        
+        // Remove any existing user menu
+        const userMenu = document.querySelector('.user-menu');
+        if (userMenu) {
+            userMenu.remove();
         }
     }
     
