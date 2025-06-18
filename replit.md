@@ -91,6 +91,14 @@ Changelog:
   - Interactive JavaScript features and smooth scrolling
   - Additional About and Contact pages
   - User feedback: "Gostei muito!" - satisfied with overall design
+  
+- June 18, 2025: Login system integration with Stack Auth
+  - Added Login button to navigation bar with modern styling
+  - Implemented authentication modal with login/signup forms
+  - Social login integration (Google, Facebook) ready for Stack Auth
+  - Mobile-responsive authentication interface
+  - User session management and logout functionality
+  - Stack Auth SDK (@stackframe/stack) installed for future integration
 ```
 
 ## User Preferences
