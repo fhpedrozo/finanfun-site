@@ -99,6 +99,15 @@ Changelog:
   - Mobile-responsive authentication interface
   - User session management and logout functionality
   - Stack Auth SDK (@stackframe/stack) installed for future integration
+
+- June 18, 2025: PostgreSQL database integration completed
+  - PostgreSQL database created and configured with environment variables
+  - Complete database schema with user management, accounts, and transactions
+  - Express.js API server with authentication endpoints
+  - Real user registration and login with bcrypt password hashing
+  - Session management with token-based authentication
+  - User accounts with real and virtual (BitFun) currency support
+  - Database tables: users, user_profiles, user_sessions, accounts, bitfun_transactions
 ```
 
 ## User Preferences
