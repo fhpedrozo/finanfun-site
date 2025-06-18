@@ -282,6 +282,64 @@ const server = http.createServer(async (req, res) => {
       }
     }
     
+    // Social login endpoint
+    else if (pathname === '/api/auth/social-login' && req.method === 'POST') {
+      const body = await parseBody(req);
+      const { email, name, provider, avatar_url } = body;
+
+      if (!email || !name || !provider) {
+        sendJSON(res, 400, { error: 'Email, nome e provedor são obrigatórios' });
+        return;
+      }
+
+      try {
+        // Check if user exists
+        let result = await pool.query(
+          'SELECT id, uuid, email, name, provider, avatar_url, is_verified, role FROM users WHERE email = $1',
+          [email]
+        );
+
+        let user;
+        if (result.rows.length === 0) {
+          // Create new user
+          const insertResult = await pool.query(`
+            INSERT INTO users (email, name, provider, provider_id, avatar_url, is_verified)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id, uuid, email, name, provider, avatar_url, is_verified, role, created_at
+          `, [email, name, provider, `${provider}_${Date.now()}`, avatar_url, true]);
+          
+          user = insertResult.rows[0];
+        } else {
+          user = result.rows[0];
+          // Update last login and avatar
+          await pool.query(
+            'UPDATE users SET last_login = NOW(), avatar_url = $1 WHERE id = $2', 
+            [avatar_url, user.id]
+          );
+          user.avatar_url = avatar_url;
+        }
+
+        // Create session
+        const sessionToken = crypto.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + (7 * 24 * 60 * 60 * 1000));
+        
+        await pool.query(
+          'INSERT INTO user_sessions (user_id, session_token, expires_at, ip_address) VALUES ($1, $2, $3, $4)',
+          [user.id, sessionToken, expiresAt, req.connection.remoteAddress]
+        );
+
+        sendJSON(res, 200, {
+          success: true,
+          user: user,
+          session_token: sessionToken
+        });
+
+      } catch (error) {
+        console.error('Social login error:', error);
+        sendJSON(res, 500, { error: 'Erro interno do servidor' });
+      }
+    }
+    
     // Logout endpoint
     else if (pathname === '/api/auth/logout' && req.method === 'POST') {
       const body = await parseBody(req);

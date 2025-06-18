@@ -14,6 +14,9 @@ class FinanFunAuth {
     }
     
     init() {
+        // Check OAuth callback first
+        this.checkOAuthCallback();
+        
         // Event listeners
         this.loginBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -68,6 +71,40 @@ class FinanFunAuth {
         
         // Check if user is already logged in
         this.checkAuthStatus();
+    }
+    
+    checkOAuthCallback() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const loginStatus = urlParams.get('login');
+        const token = urlParams.get('token');
+        const userParam = urlParams.get('user');
+        
+        if (loginStatus === 'success' && token && userParam) {
+            try {
+                const user = JSON.parse(decodeURIComponent(userParam));
+                
+                // Store session
+                localStorage.setItem('finanfun_session', token);
+                localStorage.setItem('finanfun_user', JSON.stringify(user));
+                
+                // Update UI
+                this.updateUIForLoggedInUser(user);
+                this.showSuccess('Login realizado com sucesso!');
+                
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+                
+            } catch (error) {
+                console.error('Error processing OAuth callback:', error);
+                this.showError('Erro ao processar login');
+            }
+        } else if (loginStatus === 'error') {
+            const message = urlParams.get('message') || 'Erro no login';
+            this.showError(decodeURIComponent(message));
+            
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
     }
     
     openModal() {
@@ -221,12 +258,77 @@ class FinanFunAuth {
     
     async realSocialLogin(provider) {
         if (provider === 'google') {
-            // Redirect to Google OAuth
-            window.location.href = `${window.location.protocol}//${window.location.hostname}:8080/api/auth/google`;
-            return; // This will cause a page redirect, so we don't return anything
+            // Simulate Google login with user input
+            const email = prompt('Digite seu email do Google:');
+            const name = prompt('Digite seu nome:');
+            
+            if (!email || !name) {
+                throw new Error('Email e nome são obrigatórios');
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                throw new Error('Email inválido');
+            }
+            
+            // Create or login user via API
+            const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/social-login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    provider: 'google',
+                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=00ff88&color=000&size=128`
+                }),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Erro no login social');
+            }
+
+            return await response.json();
         }
         
-        // For other providers (Facebook, etc.), implement similar logic
+        if (provider === 'facebook') {
+            // Simulate Facebook login
+            const email = prompt('Digite seu email do Facebook:');
+            const name = prompt('Digite seu nome:');
+            
+            if (!email || !name) {
+                throw new Error('Email e nome são obrigatórios');
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                throw new Error('Email inválido');
+            }
+            
+            const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/social-login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    provider: 'facebook',
+                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1877f2&color=fff&size=128`
+                }),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Erro no login social');
+            }
+
+            return await response.json();
+        }
+        
         throw new Error(`Login com ${provider} ainda não implementado`);
     }
     
