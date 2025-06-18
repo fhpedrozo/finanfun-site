@@ -1,6 +1,8 @@
 // FinanFun Simple API Server
 const http = require('http');
+const https = require('https');
 const url = require('url');
+const querystring = require('querystring');
 const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
@@ -198,6 +200,88 @@ const server = http.createServer(async (req, res) => {
       });
     }
     
+    // Google OAuth login initiation
+    else if (pathname === '/api/auth/google' && req.method === 'GET') {
+      const clientId = process.env.GOOGLE_CLIENT_ID || 'demo-client-id';
+      const redirectUri = `${req.headers.origin || 'http://localhost:5000'}/api/auth/google/callback`;
+      
+      const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?` +
+        `client_id=${clientId}&` +
+        `redirect_uri=${encodeURIComponent(redirectUri)}&` +
+        `response_type=code&` +
+        `scope=openid%20email%20profile&` +
+        `access_type=offline&` +
+        `prompt=consent`;
+      
+      res.writeHead(302, { 'Location': authUrl });
+      res.end();
+    }
+    
+    // Google OAuth callback
+    else if (pathname === '/api/auth/google/callback' && req.method === 'GET') {
+      const urlParams = new URL(req.url, 'http://localhost').searchParams;
+      const code = urlParams.get('code');
+      
+      if (!code) {
+        sendJSON(res, 400, { error: 'Authorization code not provided' });
+        return;
+      }
+      
+      try {
+        // Exchange code for tokens
+        const tokenResponse = await exchangeCodeForTokens(code, req.headers.origin);
+        
+        if (!tokenResponse.access_token) {
+          throw new Error('Failed to get access token');
+        }
+        
+        // Get user info from Google
+        const userInfo = await getUserInfoFromGoogle(tokenResponse.access_token);
+        
+        // Check if user exists or create new user
+        let result = await pool.query(
+          'SELECT id, uuid, email, name, provider, avatar_url, is_verified, role FROM users WHERE email = $1',
+          [userInfo.email]
+        );
+        
+        let user;
+        if (result.rows.length === 0) {
+          // Create new user
+          const insertResult = await pool.query(`
+            INSERT INTO users (email, name, provider, provider_id, avatar_url, is_verified)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id, uuid, email, name, provider, avatar_url, is_verified, role, created_at
+          `, [userInfo.email, userInfo.name, 'google', userInfo.sub, userInfo.picture, userInfo.email_verified]);
+          
+          user = insertResult.rows[0];
+        } else {
+          user = result.rows[0];
+          // Update last login
+          await pool.query('UPDATE users SET last_login = NOW() WHERE id = $1', [user.id]);
+        }
+        
+        // Create session
+        const sessionToken = crypto.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + (7 * 24 * 60 * 60 * 1000));
+        
+        await pool.query(
+          'INSERT INTO user_sessions (user_id, session_token, expires_at, ip_address) VALUES ($1, $2, $3, $4)',
+          [user.id, sessionToken, expiresAt, req.connection.remoteAddress]
+        );
+        
+        // Redirect to frontend with session token
+        const redirectUrl = `${req.headers.origin || 'http://localhost:5000'}?login=success&token=${sessionToken}&user=${encodeURIComponent(JSON.stringify(user))}`;
+        res.writeHead(302, { 'Location': redirectUrl });
+        res.end();
+        
+      } catch (error) {
+        console.error('Google OAuth error:', error);
+        const errorUrl = `${req.headers.origin || 'http://localhost:5000'}?login=error&message=${encodeURIComponent('Erro no login com Google')}`;
+        res.writeHead(302, { 'Location': errorUrl });
+        res.end();
+      }
+    }
+    
     // Logout endpoint
     else if (pathname === '/api/auth/logout' && req.method === 'POST') {
       const body = await parseBody(req);
@@ -242,6 +326,79 @@ const server = http.createServer(async (req, res) => {
     sendJSON(res, 500, { error: 'Internal server error' });
   }
 });
+
+// Helper functions for Google OAuth
+async function exchangeCodeForTokens(code, origin) {
+  const clientId = process.env.GOOGLE_CLIENT_ID || 'demo-client-id';
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET || 'demo-client-secret';
+  const redirectUri = `${origin || 'http://localhost:5000'}/api/auth/google/callback`;
+  
+  const tokenData = querystring.stringify({
+    client_id: clientId,
+    client_secret: clientSecret,
+    code: code,
+    grant_type: 'authorization_code',
+    redirect_uri: redirectUri
+  });
+  
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: 'oauth2.googleapis.com',
+      port: 443,
+      path: '/token',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(tokenData)
+      }
+    };
+    
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => data += chunk);
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(data));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    });
+    
+    req.on('error', reject);
+    req.write(tokenData);
+    req.end();
+  });
+}
+
+async function getUserInfoFromGoogle(accessToken) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: 'www.googleapis.com',
+      port: 443,
+      path: '/oauth2/v2/userinfo',
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    };
+    
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', (chunk) => data += chunk);
+      res.on('end', () => {
+        try {
+          resolve(JSON.parse(data));
+        } catch (error) {
+          reject(error);
+        }
+      });
+    });
+    
+    req.on('error', reject);
+    req.end();
+  });
+}
 
 // Start server
 async function startServer() {

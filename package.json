@@ -11,10 +11,13 @@
   "description": "",
   "dependencies": {
     "@stackframe/stack": "^2.8.12",
+    "@types/memoizee": "^0.4.12",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "memoizee": "^0.4.17",
+    "openid-client": "^6.5.1",
     "pg": "^8.16.1"
   }
 }

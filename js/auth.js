@@ -220,27 +220,14 @@ class FinanFunAuth {
     }
     
     async realSocialLogin(provider) {
-        // Social login integration would go here
-        // For now, we'll create a demo account
-        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: `Usuário do ${provider}`,
-                email: `demo@${provider}.com`,
-                provider: provider,
-                provider_id: `${provider}_${Date.now()}`
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Social login failed');
+        if (provider === 'google') {
+            // Redirect to Google OAuth
+            window.location.href = `${window.location.protocol}//${window.location.hostname}:8080/api/auth/google`;
+            return; // This will cause a page redirect, so we don't return anything
         }
-
-        return await response.json();
+        
+        // For other providers (Facebook, etc.), implement similar logic
+        throw new Error(`Login com ${provider} ainda não implementado`);
     }
     
     updateUIForLoggedInUser(user) {
