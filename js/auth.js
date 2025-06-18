@@ -108,18 +108,20 @@ class FinanFunAuth {
         try {
             this.showLoading(event.target.querySelector('.auth-submit'));
             
-            // Here you would integrate with Stack Auth
-            // For now, we'll simulate the login process
-            await this.simulateLogin(email, password);
+            // Real database authentication
+            const result = await this.realLogin(email, password);
+            
+            // Store session token
+            localStorage.setItem('finanfun_session', result.session_token);
             
             this.showSuccess('Login realizado com sucesso!');
             setTimeout(() => {
                 this.closeModal();
-                this.updateUIForLoggedInUser({ email, name: email.split('@')[0] });
+                this.updateUIForLoggedInUser(result.user);
             }, 1500);
             
         } catch (error) {
-            this.showError('Erro ao fazer login. Verifique suas credenciais.');
+            this.showError(error.message || 'Erro ao fazer login. Verifique suas credenciais.');
             console.error('Login error:', error);
         } finally {
             this.hideLoading(event.target.querySelector('.auth-submit'));
@@ -141,18 +143,20 @@ class FinanFunAuth {
         try {
             this.showLoading(form.querySelector('.auth-submit'));
             
-            // Here you would integrate with Stack Auth
-            // For now, we'll simulate the signup process
-            await this.simulateSignup(name, email, password);
+            // Real database registration
+            const result = await this.realSignup(name, email, password);
+            
+            // Store session token
+            localStorage.setItem('finanfun_session', result.session_token);
             
             this.showSuccess('Conta criada com sucesso!');
             setTimeout(() => {
                 this.closeModal();
-                this.updateUIForLoggedInUser({ email, name });
+                this.updateUIForLoggedInUser(result.user);
             }, 1500);
             
         } catch (error) {
-            this.showError('Erro ao criar conta. Tente novamente.');
+            this.showError(error.message || 'Erro ao criar conta. Tente novamente.');
             console.error('Signup error:', error);
         } finally {
             this.hideLoading(form.querySelector('.auth-submit'));
@@ -161,58 +165,82 @@ class FinanFunAuth {
     
     async handleSocialLogin(provider) {
         try {
-            // Here you would integrate with Stack Auth for social login
-            // For now, we'll simulate the process
             this.showSuccess(`Conectando com ${provider}...`);
             
-            await this.simulateSocialLogin(provider);
+            // Real social login integration
+            const result = await this.realSocialLogin(provider);
+            
+            // Store session token
+            localStorage.setItem('finanfun_session', result.session_token);
             
             setTimeout(() => {
                 this.closeModal();
-                this.updateUIForLoggedInUser({ 
-                    email: `user@${provider}.com`, 
-                    name: `Usuário do ${provider}`,
-                    provider 
-                });
+                this.updateUIForLoggedInUser(result.user);
             }, 1500);
             
         } catch (error) {
-            this.showError(`Erro ao conectar com ${provider}.`);
+            this.showError(error.message || `Erro ao conectar com ${provider}.`);
             console.error('Social login error:', error);
         }
     }
     
-    // Simulation methods (replace with actual Stack Auth integration)
-    async simulateLogin(email, password) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (email && password) {
-                    resolve({ email, authenticated: true });
-                } else {
-                    reject(new Error('Invalid credentials'));
-                }
-            }, 1000);
+    // Real API integration methods
+    async realLogin(email, password) {
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password }),
         });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Login failed');
+        }
+
+        return await response.json();
     }
     
-    async simulateSignup(name, email, password) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (name && email && password) {
-                    resolve({ name, email, created: true });
-                } else {
-                    reject(new Error('Invalid data'));
-                }
-            }, 1000);
+    async realSignup(name, email, password) {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
         });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Registration failed');
+        }
+
+        return await response.json();
     }
     
-    async simulateSocialLogin(provider) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({ provider, authenticated: true });
-            }, 1000);
+    async realSocialLogin(provider) {
+        // Social login integration would go here
+        // For now, we'll create a demo account
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: `Usuário do ${provider}`,
+                email: `demo@${provider}.com`,
+                provider: provider,
+                provider_id: `${provider}_${Date.now()}`
+            }),
         });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Social login failed');
+        }
+
+        return await response.json();
     }
     
     updateUIForLoggedInUser(user) {
@@ -323,21 +351,46 @@ class FinanFunAuth {
         });
     }
     
-    logout() {
-        this.currentUser = null;
-        localStorage.removeItem('finanfun_user');
-        
-        // Reset login button
-        this.loginBtn.innerHTML = 'Login';
-        
-        // Remove user menu
-        const userMenu = document.querySelector('.user-menu');
-        if (userMenu) {
-            userMenu.remove();
+    async logout() {
+        try {
+            const sessionToken = localStorage.getItem('finanfun_session');
+            
+            if (sessionToken) {
+                // Call logout API
+                await fetch('/api/auth/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ session_token: sessionToken }),
+                });
+            }
+            
+            // Clear local storage
+            localStorage.removeItem('finanfun_session');
+            localStorage.removeItem('finanfun_user');
+            
+            this.currentUser = null;
+            
+            // Reset login button
+            this.loginBtn.innerHTML = 'Login';
+            
+            // Remove user menu
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu) {
+                userMenu.remove();
+            }
+            
+            this.showSuccess('Logout realizado com sucesso!');
+            console.log('User logged out');
+            
+        } catch (error) {
+            console.error('Logout error:', error);
+            // Still clear local data even if API call fails
+            localStorage.removeItem('finanfun_session');
+            localStorage.removeItem('finanfun_user');
+            this.currentUser = null;
         }
-        
-        this.showSuccess('Logout realizado com sucesso!');
-        console.log('User logged out');
     }
     
     checkAuthStatus() {
