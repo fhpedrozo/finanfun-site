@@ -26,8 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-            e.preventDefault();
             const targetId = this.getAttribute('href');
+            
+            // Skip smooth scrolling for external links or pages
+            if (!targetId.startsWith('#') || targetId === '#') {
+                return; // Let the browser handle normal navigation
+            }
+            
+            e.preventDefault();
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
