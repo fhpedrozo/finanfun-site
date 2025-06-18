@@ -159,10 +159,8 @@ app.get('/api/health', async (req, res) => {
   });
 });
 
-// Serve static files
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'index.html'));
-});
+// Serve static files for frontend
+app.use(express.static(path.join(__dirname, '..')));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 FinanFun server running on port ${PORT}`);
