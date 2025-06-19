@@ -232,6 +232,7 @@ Changelog:
   - 📊 PROJECT STATUS: Fully functional presentation website with complete backend integration
   - ✅ Solution section card order updated: "Avatar com IA" moved from position 1 to position 4
   - ✅ Card title updated: "Interações Diárias" changed to "Interações Periódicas"
+  - ✅ Card description updated: "missões diárias" changed to "missões personalizadas"
 ```
 
 ## User Preferences
