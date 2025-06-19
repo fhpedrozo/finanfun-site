@@ -3,9 +3,9 @@
 
 class FinanFunAuth {
     constructor() {
-        this.modal = document.getElementById('authModal');
-        this.loginBtn = document.getElementById('loginBtn');
-        this.closeBtn = document.getElementById('closeAuth');
+        this.modal = document.getElementById('auth-modal');
+        this.loginBtn = document.getElementById('login-btn');
+        this.closeBtn = document.querySelector('.close-auth');
         this.tabs = document.querySelectorAll('.auth-tab');
         this.forms = document.querySelectorAll('.auth-form');
         this.currentUser = null;
@@ -14,22 +14,28 @@ class FinanFunAuth {
     }
     
     init() {
-        // Event listeners
-        this.loginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.openModal();
-        });
+        // Only add event listeners if elements exist
+        if (this.loginBtn) {
+            this.loginBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openModal();
+            });
+        }
         
-        this.closeBtn.addEventListener('click', () => {
-            this.closeModal();
-        });
-        
-        // Close modal when clicking outside
-        this.modal.addEventListener('click', (e) => {
-            if (e.target === this.modal) {
+        if (this.closeBtn) {
+            this.closeBtn.addEventListener('click', () => {
                 this.closeModal();
-            }
-        });
+            });
+        }
+        
+        if (this.modal) {
+            // Close modal when clicking outside
+            this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) {
+                    this.closeModal();
+                }
+            });
+        }
         
         // Tab switching
         this.tabs.forEach(tab => {
@@ -39,31 +45,30 @@ class FinanFunAuth {
         });
         
         // Form submissions
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handleLogin(e);
-        });
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
         
-        document.getElementById('signupForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handleSignup(e);
-        });
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleLogin(e);
+            });
+        }
+        
+        if (signupForm) {
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleSignup(e);
+            });
+        }
         
         // Social login buttons
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            this.handleSocialLogin('google');
-        });
-        
-        document.getElementById('facebookLogin').addEventListener('click', () => {
-            this.handleSocialLogin('facebook');
-        });
-        
-        document.getElementById('googleSignup').addEventListener('click', () => {
-            this.handleSocialLogin('google');
-        });
-        
-        document.getElementById('facebookSignup').addEventListener('click', () => {
-            this.handleSocialLogin('facebook');
+        const socialButtons = document.querySelectorAll('.social-btn');
+        socialButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const provider = button.dataset.provider;
+                this.handleSocialLogin(provider);
+            });
         });
         
         // Ensure button is in original state
@@ -71,32 +76,41 @@ class FinanFunAuth {
     }
     
     openModal() {
-        this.modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-        
-        // Add animation
-        setTimeout(() => {
-            this.modal.querySelector('.auth-modal-content').style.transform = 'scale(1)';
-            this.modal.querySelector('.auth-modal-content').style.opacity = '1';
-        }, 10);
+        if (this.modal) {
+            this.modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Add animation
+            setTimeout(() => {
+                const modalContent = this.modal.querySelector('.auth-modal-content');
+                if (modalContent) {
+                    modalContent.style.transform = 'scale(1)';
+                    modalContent.style.opacity = '1';
+                }
+            }, 10);
+        }
     }
     
     closeModal() {
-        this.modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
+        if (this.modal) {
+            this.modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
     }
     
     switchTab(tabName) {
         // Update tab appearance
         this.tabs.forEach(tab => tab.classList.remove('active'));
-        document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        const selectedTab = document.querySelector(`[data-tab="${tabName}"]`);
+        if (selectedTab) {
+            selectedTab.classList.add('active');
+        }
         
         // Show corresponding form
         this.forms.forEach(form => form.classList.remove('active'));
-        if (tabName === 'login') {
-            document.getElementById('loginForm').classList.add('active');
-        } else {
-            document.getElementById('signupForm').classList.add('active');
+        const targetForm = document.getElementById(`${tabName}-form`);
+        if (targetForm) {
+            targetForm.classList.add('active');
         }
     }
     

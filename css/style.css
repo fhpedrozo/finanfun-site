@@ -44,15 +44,15 @@
 
 /* FinanFun Dual Color Branding */
 .finan-text {
-    color: var(--white);
+    color: var(--white) !important;
 }
 
 .fun-text {
-    color: var(--primary-green);
+    color: var(--primary-green) !important;
 }
 
 .boss-text {
-    color: var(--white);
+    color: var(--white) !important;
 }
 
 /* Custom Coin Icon */
