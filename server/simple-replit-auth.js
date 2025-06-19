@@ -118,27 +118,30 @@ app.post('/api/auth/mock-login', async (req, res) => {
     const userId = 'mock_' + Date.now();
     
     // Create or update user in database
-    await pool.query(`
-      INSERT INTO users (id, email, first_name, last_name, profile_image_url, user_type)
-      VALUES ($1, $2, $3, $4, $5, $6)
+    const result = await pool.query(`
+      INSERT INTO users (email, name, provider, avatar_url, role)
+      VALUES ($1, $2, $3, $4, $5)
       ON CONFLICT (email) DO UPDATE SET
-        updated_at = CURRENT_TIMESTAMP
+        updated_at = CURRENT_TIMESTAMP,
+        last_login = CURRENT_TIMESTAMP
       RETURNING *
-    `, [userId, email, 'Mock', 'User', 'https://via.placeholder.com/150', userType]);
+    `, [email, 'Mock User', 'mock', 'https://via.placeholder.com/150', userType]);
+    
+    const user = result.rows[0];
 
     // Create user session
     req.session.user = {
-      id: userId,
-      email: email,
-      firstName: 'Mock',
-      lastName: 'User',
-      profileImageUrl: 'https://via.placeholder.com/150',
-      userType: userType
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      avatar_url: user.avatar_url,
+      userType: user.role || userType
     };
 
     res.json({ 
       message: 'Logged in successfully',
-      user: req.session.user 
+      user: req.session.user,
+      session_token: req.session.id
     });
   } catch (error) {
     console.error('Mock login error:', error);
