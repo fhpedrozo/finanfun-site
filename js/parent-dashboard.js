@@ -21,12 +21,27 @@ class ParentDashboard {
         try {
             // Load user data from localStorage (set during login)
             const sessionToken = localStorage.getItem('finanfun_session');
-            if (sessionToken) {
+            const storedUserData = localStorage.getItem('finanfun_user_data');
+            
+            if (sessionToken && storedUserData) {
+                const userData = JSON.parse(storedUserData);
+                
+                // Map the data from social login to our format
+                this.userData = {
+                    id: userData.id,
+                    firstName: userData.name.split(' ')[0], // First name
+                    lastName: userData.name.split(' ').slice(1).join(' ') || '', // Rest as last name
+                    email: userData.email,
+                    profileImageUrl: userData.picture || userData.avatar_url || 'https://via.placeholder.com/150',
+                    userType: userData.userType || 'parent'
+                };
+            } else if (sessionToken) {
+                // Fallback for sessions without stored user data
                 this.userData = {
                     id: 'parent_user_123',
-                    firstName: 'Maria',
-                    lastName: 'Silva',
-                    email: 'maria.silva@gmail.com',
+                    firstName: 'Usuário',
+                    lastName: 'FinanFun',
+                    email: 'usuario@finanfun.com',
                     profileImageUrl: 'https://via.placeholder.com/150',
                     userType: 'parent'
                 };

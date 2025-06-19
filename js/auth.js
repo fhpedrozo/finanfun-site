@@ -192,11 +192,23 @@ class FinanFunAuth {
     }
     
     async handleSocialLogin(provider) {
+        console.log('Social login clicked:', provider);
+        
+        const button = document.querySelector(`[data-provider="${provider}"]`);
+        this.showLoading(button);
+        
         try {
-            this.showSuccess(`Conectando com ${provider}...`);
+            // For demo purposes, prompt user for their real name to simulate Google login
+            let realName = 'Usuário FinanFun';
             
-            // Real social login integration
-            const result = await this.realSocialLogin(provider);
+            if (provider === 'google') {
+                realName = prompt('Para demonstração: Digite seu nome real para simular o login do Google:') || 'Usuário Google';
+            } else if (provider === 'facebook') {
+                realName = prompt('Para demonstração: Digite seu nome real para simular o login do Facebook:') || 'Usuário Facebook';
+            }
+            
+            const result = await this.realSocialLogin(provider, realName);
+            this.showSuccess(result.message);
             
             // Store session token
             localStorage.setItem('finanfun_session', result.session_token);
@@ -214,6 +226,8 @@ class FinanFunAuth {
         } catch (error) {
             this.showError(error.message || `Erro ao conectar com ${provider}.`);
             console.error('Social login error:', error);
+        } finally {
+            this.hideLoading(button);
         }
     }
     
@@ -256,31 +270,37 @@ class FinanFunAuth {
         return await response.json();
     }
     
-    async realSocialLogin(provider) {
-        // Simulate successful login for demonstration
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
+    async realSocialLogin(provider, userName = null) {
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
-        const mockUsers = {
-            google: {
-                id: 'google_user_123',
-                email: 'usuario.google@gmail.com',
-                name: 'Usuário Google',
-                avatar_url: 'https://via.placeholder.com/150',
+        let userData = null;
+        
+        if (provider === 'google') {
+            userData = {
+                id: 'google_user_' + Date.now(),
+                email: 'usuario@gmail.com',
+                name: userName || 'Usuário Google',
+                picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c',
                 userType: 'parent'
-            },
-            facebook: {
-                id: 'facebook_user_456', 
-                email: 'usuario.facebook@facebook.com',
-                name: 'Usuário Facebook',
-                avatar_url: 'https://via.placeholder.com/150',
+            };
+        } else if (provider === 'facebook') {
+            userData = {
+                id: 'facebook_user_' + Date.now(),
+                email: 'usuario@facebook.com',
+                name: userName || 'Usuário Facebook',
+                picture: 'https://graph.facebook.com/me/picture?type=large',
                 userType: 'parent'
-            }
-        };
+            };
+        }
 
-        if (mockUsers[provider]) {
+        if (userData) {
+            // Store user data in localStorage for dashboard access
+            localStorage.setItem('finanfun_user_data', JSON.stringify(userData));
+            
             return {
                 message: 'Login realizado com sucesso',
-                user: mockUsers[provider],
+                user: userData,
                 session_token: 'mock_session_' + Date.now()
             };
         }
