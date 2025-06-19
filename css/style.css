@@ -27,7 +27,7 @@
 
 /* FinanFun Brand Styling */
 .finanfun-brand .finan {
-    color: #F37126;
+    color: var(--white);
 }
 
 .finanfun-brand .fun {
