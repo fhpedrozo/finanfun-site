@@ -2,37 +2,35 @@ class ChildDashboard {
     constructor() {
         this.userData = null;
         this.dashboardData = null;
-        this.init();
+        
+        // Use setTimeout to avoid promise rejection issues
+        setTimeout(() => {
+            this.init();
+        }, 100);
     }
 
-    async init() {
-        try {
-            console.log('Child Dashboard initializing...');
-            
-            // Load data sequentially to avoid race conditions
-            await this.loadUserData();
-            await this.loadDashboardData();
-            
-            // Update UI components
-            this.updateUserDisplay();
-            this.updateBalanceCards();
-            this.loadTasks();
-            this.loadAchievements();
-            this.setupEventListeners();
-            this.initializeAvatarChat();
-            
-            // Hide loading screen last
-            this.hideLoadingScreen();
-            
-            console.log('Child Dashboard initialized successfully');
-        } catch (error) {
-            console.log('Dashboard initialization error:', error.message);
-            // Still hide loading screen even if there's an error
-            this.hideLoadingScreen();
-        }
+    init() {
+        console.log('Child Dashboard initializing...');
+        
+        // Load data synchronously
+        this.loadUserData();
+        this.loadDashboardData();
+        
+        // Update UI components
+        this.updateUserDisplay();
+        this.updateBalanceCards();
+        this.loadTasks();
+        this.loadAchievements();
+        this.setupEventListeners();
+        this.initializeAvatarChat();
+        
+        // Hide loading screen
+        this.hideLoadingScreen();
+        
+        console.log('Child Dashboard initialized successfully');
     }
 
-    async loadUserData() {
+    loadUserData() {
         try {
             const sessionToken = localStorage.getItem('finanfun_session');
             const storedUserData = localStorage.getItem('finanfun_user_data');
@@ -50,7 +48,7 @@ class ChildDashboard {
                 };
                 console.log('User data loaded successfully:', this.userData.firstName);
             } else {
-                console.log('No session found, using fallback data');
+                console.log('No session found, using demo data');
                 this.userData = {
                     id: 'demo_user',
                     firstName: 'Jovem',
@@ -61,7 +59,7 @@ class ChildDashboard {
                 };
             }
         } catch (error) {
-            console.log('Loading fallback user data due to error:', error.message);
+            console.log('Loading demo user data due to error:', error.message);
             this.userData = {
                 id: 'demo_user',
                 firstName: 'Jovem',
@@ -71,10 +69,9 @@ class ChildDashboard {
                 userType: 'child'
             };
         }
-        return Promise.resolve();
     }
 
-    async loadDashboardData() {
+    loadDashboardData() {
         try {
             this.dashboardData = {
                 balance: {
@@ -125,7 +122,6 @@ class ChildDashboard {
                 achievements: []
             };
         }
-        return Promise.resolve();
     }
 
     updateUserDisplay() {
