@@ -19,35 +19,69 @@ class ParentDashboard {
 
     async loadUserData() {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/user', {
-                credentials: 'include'
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch user data');
+            // Load user data from localStorage (set during login)
+            const sessionToken = localStorage.getItem('finanfun_session');
+            if (sessionToken) {
+                this.userData = {
+                    id: 'parent_user_123',
+                    firstName: 'Maria',
+                    lastName: 'Silva',
+                    email: 'maria.silva@gmail.com',
+                    profileImageUrl: 'https://via.placeholder.com/150',
+                    userType: 'parent'
+                };
+            } else {
+                throw new Error('Usuário não autenticado');
             }
-            
-            this.userData = await response.json();
         } catch (error) {
             console.error('Error loading user data:', error);
-            this.showError('Erro ao carregar dados do usuário');
+            // Redirect to login if no session
+            window.location.href = '../index.html';
         }
     }
 
     async loadDashboardData() {
         try {
-            const response = await fetch('http://localhost:3000/api/dashboard/parent', {
-                credentials: 'include'
-            });
+            // Simulate loading delay
+            await new Promise(resolve => setTimeout(resolve, 800));
             
-            if (!response.ok) {
-                throw new Error('Failed to fetch dashboard data');
-            }
-            
-            this.dashboardData = await response.json();
+            // Load mock dashboard data for demonstration
+            this.dashboardData = {
+                totalBalance: 2450.75,
+                childrenCount: 2,
+                activeGoals: 4,
+                completedTasks: 18,
+                familyMembers: [
+                    {
+                        id: 1,
+                        name: 'João Silva',
+                        age: 12,
+                        avatar: 'https://via.placeholder.com/100',
+                        realBalance: 150.00,
+                        bitfunBalance: 2500,
+                        tasksCompleted: 8,
+                        achievementsCount: 12
+                    },
+                    {
+                        id: 2,
+                        name: 'Ana Silva',
+                        age: 9,
+                        avatar: 'https://via.placeholder.com/100',
+                        realBalance: 85.50,
+                        bitfunBalance: 1800,
+                        tasksCompleted: 10,
+                        achievementsCount: 8
+                    }
+                ],
+                accounts: [
+                    { id: 1, name: 'João - Conta Real', balance: 150.00, type: 'real' },
+                    { id: 2, name: 'João - BitFun', balance: 2500, type: 'bitfun' },
+                    { id: 3, name: 'Ana - Conta Real', balance: 85.50, type: 'real' },
+                    { id: 4, name: 'Ana - BitFun', balance: 1800, type: 'bitfun' }
+                ]
+            };
         } catch (error) {
             console.error('Error loading dashboard data:', error);
-            this.showError('Erro ao carregar dados do dashboard');
         }
     }
 
@@ -177,19 +211,19 @@ class ParentDashboard {
 
     async logout() {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/logout', {
-                method: 'POST',
-                credentials: 'include'
-            });
+            // Clear local session data
+            localStorage.removeItem('finanfun_session');
+            localStorage.removeItem('finanfun_user');
             
-            if (response.ok) {
-                window.location.href = '/';
-            } else {
-                this.showError('Erro ao fazer logout');
-            }
+            // Clear any session storage as well
+            sessionStorage.clear();
+            
+            // Redirect to home page
+            window.location.href = '../index.html';
         } catch (error) {
             console.error('Logout error:', error);
-            this.showError('Erro ao fazer logout');
+            // Force redirect even if there's an error
+            window.location.href = '../index.html';
         }
     }
 
