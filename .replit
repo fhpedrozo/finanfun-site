@@ -21,15 +21,15 @@ args = "FinanFun API"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "FinanFun Website"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "FinanFun Auth Server"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
 args = "FinanFun No-Cache Server"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "FinanFun Website"
 
 [[workflows.workflow]]
 name = "FinanFun Unified Server"
@@ -50,15 +50,6 @@ args = "node simple-server.js"
 waitForPort = 8080
 
 [[workflows.workflow]]
-name = "FinanFun Website"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python3 -m http.server 5000"
-waitForPort = 5000
-
-[[workflows.workflow]]
 name = "FinanFun Auth Server"
 author = "agent"
 
@@ -74,6 +65,15 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python3 no-cache-server.py"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "FinanFun Website"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python3 -m http.server 5000"
 waitForPort = 5000
 
 [deployment]
