@@ -213,6 +213,8 @@ Changelog:
   - ✅ Mission text updated: "Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro dos jovens através da tecnologia!"
   - ✅ Gamification text updated: "Transformamos o aprendizado em uma aventura lúdica e divertida, usando metas, recompensas, jogos e inteligência artificial para manter as crianças engajadas."
   - ✅ Family text updated: "Fortalecemos os laços familiares através de ferramentas que promovem conversas educativas e saudáveis sobre dinheiro e investimentos."
+  - ✅ Contact page FinanFun branding corrected to standard pattern: "Finan" in white, "Fun" in green
+  - ✅ Partnership text updated: "Entre em contato conosco através do formulário acima ou pelo email contato@finanfun.com.br para discutir oportunidades conjuntas."
   - ⚠️ PERSISTENT CACHE ISSUE: Browser cache preventing visual updates despite multiple refresh attempts
   - 📝 WORKAROUND: Created backup pages (sobre-new.html) for testing
   - 💾 CHECKPOINT SAVED: All content changes implemented and documented
