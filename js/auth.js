@@ -3,8 +3,8 @@
 
 class FinanFunAuth {
     constructor() {
-        this.modal = document.getElementById('auth-modal');
-        this.loginBtn = document.getElementById('login-btn');
+        this.modal = document.getElementById('authModal');
+        this.loginBtn = document.getElementById('loginBtn');
         this.closeBtn = document.querySelector('.close-auth');
         this.tabs = document.querySelectorAll('.auth-tab');
         this.forms = document.querySelectorAll('.auth-form');
@@ -45,8 +45,8 @@ class FinanFunAuth {
         });
         
         // Form submissions
-        const loginForm = document.getElementById('login-form');
-        const signupForm = document.getElementById('signup-form');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
         
         if (loginForm) {
             loginForm.addEventListener('submit', (e) => {
@@ -108,9 +108,12 @@ class FinanFunAuth {
         
         // Show corresponding form
         this.forms.forEach(form => form.classList.remove('active'));
-        const targetForm = document.getElementById(`${tabName}-form`);
-        if (targetForm) {
-            targetForm.classList.add('active');
+        if (tabName === 'login') {
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) loginForm.classList.add('active');
+        } else if (tabName === 'signup') {
+            const signupForm = document.getElementById('signupForm');
+            if (signupForm) signupForm.classList.add('active');
         }
     }
     
