@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fale Conosco - FinanFun</title>
+    <meta name="description" content="Entre em contato com a equipe do FinanFun. Estamos aqui para ajudar!">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #46FE77;
+            --secondary-blue: #181D4E;
+            --accent-purple: #8b5cf6;
+            --dark-navy: #0F1419;
+            --text-light: #ffffff;
+            --text-gray: #a0a9c0;
+            --white: #ffffff;
+            --gradient-primary: linear-gradient(135deg, var(--primary-green), #00d4aa);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary-blue), #2d3748);
+            --gradient-card: linear-gradient(135deg, rgba(15, 20, 25, 0.8), rgba(24, 29, 78, 0.3));
+            --gradient-dark: linear-gradient(135deg, var(--dark-navy), var(--secondary-blue));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--gradient-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .finan-text {
+            color: var(--text-light);
+        }
+
+        .fun-text {
+            color: var(--primary-green);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: var(--dark-navy);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(70, 254, 119, 0.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+        }
+
+        .contact-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-navy);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 2px rgba(70, 254, 119, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-navy);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(15, 20, 25, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="../index.html" style="text-decoration: none;">
+                    <span class="finan-text">Finan</span><span class="fun-text">Fun</span>
+                </a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Voltar ao Início</a></li>
+                <li><a href="../index.html#problema" class="nav-link">O Problema</a></li>
+                <li><a href="../index.html#solucao" class="nav-link">Solução</a></li>
+                <li><a href="../index.html#funcionalidades" class="nav-link">Como Funciona</a></li>
+                <li><a href="sobre.html" class="nav-link">Sobre</a></li>
+                <li>
+                    <button id="login-btn" class="btn btn-primary">
+                        <i class="fas fa-user" style="margin-right: 0.5rem;"></i>
+                        Login
+                    </button>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main style="padding-top: 120px; min-height: 80vh;">
+        <div class="container">
+            <section class="section">
+                <h1 class="section-title">Fale Conosco</h1>
+                
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.7;">
+                            Tem dúvidas sobre o FinanFun? Quer saber mais sobre como podemos ajudar na educação 
+                            financeira das crianças? Entre em contato conosco!
+                        </p>
+                    </div>
+                    
+                    <div class="contact-grid">
+                        <!-- Contact Info -->
+                        <div class="contact-card">
+                            <h3>
+                                <i class="fas fa-address-book"></i>
+                                Informações de Contato
+                            </h3>
+                            
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="color: var(--text-light); margin-bottom: 0.2rem;">Email</h4>
+                                        <p style="color: var(--text-gray); font-size: 0.9rem;">contato@finanfun.com.br</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="color: var(--text-light); margin-bottom: 0.2rem;">Telefone</h4>
+                                        <p style="color: var(--text-gray); font-size: 0.9rem;">(43) 1234-5678</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="contact-item">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="color: var(--text-light); margin-bottom: 0.2rem;">Localização</h4>
+                                        <p style="color: var(--text-gray); font-size: 0.9rem;">Londrina, PR - Brasil</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.5rem; margin-top: 1.5rem;">
+                                <h4 style="color: var(--text-light); margin-bottom: 1rem;">Siga-nos nas Redes Sociais</h4>
+                                <div class="social-links">
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="social-link">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Form -->
+                        <div style="background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 15px; padding: 2rem;">
+                            <h3 style="color: var(--accent-purple); margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <i class="fas fa-paper-plane"></i>
+                                Envie uma Mensagem
+                            </h3>
+                            
+                            <form id="contact-form">
+                                <div class="form-group">
+                                    <label for="name">Nome Completo *</label>
+                                    <input type="text" id="name" name="name" class="form-control" placeholder="Seu nome completo" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone">Telefone</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="(11) 99999-9999">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="subject">Assunto *</label>
+                                    <select id="subject" name="subject" class="form-control" required>
+                                        <option value="">Selecione um assunto</option>
+                                        <option value="como-funciona">Como Funciona o App</option>
+                                        <option value="cadastro-familiar">Cadastro da Família</option>
+                                        <option value="conta-crianca">Criação de Conta para Criança</option>
+                                        <option value="seguranca">Segurança e Controle Parental</option>
+                                        <option value="bitfun-moeda">Sistema BitFun (Moeda Virtual)</option>
+                                        <option value="tarefas-metas">Tarefas e Metas Financeiras</option>
+                                        <option value="parcerias-escolas">Parcerias com Escolas/Instituições</option>
+                                        <option value="suporte-tecnico">Suporte Técnico</option>
+                                        <option value="feedback-sugestao">Feedback e Sugestões</option>
+                                        <option value="problema-app">Problema com o App</option>
+                                        <option value="outros">Outros Assuntos</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="message">Mensagem *</label>
+                                    <textarea id="message" name="message" class="form-control" rows="5" placeholder="Digite sua mensagem aqui..." required></textarea>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>
+                                    Enviar Mensagem
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Section -->
+                    <div style="background: var(--gradient-card); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 2rem;">
+                        <h3 style="color: var(--primary-green); margin-bottom: 2rem; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <i class="fas fa-question-circle"></i>
+                            Perguntas Frequentes
+                        </h3>
+                        
+                        <div style="display: grid; gap: 1.5rem;">
+                            <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem;">
+                                <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">Quando o FinanFun estará disponível?</h4>
+                                <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
+                                    Estamos trabalhando no desenvolvimento do aplicativo. Em breve divulgaremos mais informações sobre o lançamento.
+                                </p>
+                            </div>
+                            
+                            <div style="border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem;">
+                                <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">Para que idade o app é indicado?</h4>
+                                <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
+                                    O FinanFun foi desenvolvido para crianças e adolescentes de 6 a 18 anos, com conteúdo adaptado para cada faixa etária.
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: var(--text-light); margin-bottom: 0.5rem;">Como posso me tornar um parceiro?</h4>
+                                <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
+                                    Entre em contato conosco através do formulário acima ou pelo email contato@finanfun.com.br para discutir oportunidades de parceria.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile navigation
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Contact form
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const data = {
+                        name: formData.get('name'),
+                        email: formData.get('email'),
+                        phone: formData.get('phone'),
+                        subject: formData.get('subject'),
+                        message: formData.get('message')
+                    };
+                    
+                    if (!data.name || !data.email || !data.subject || !data.message) {
+                        alert('Por favor, preencha todos os campos obrigatórios (marcados com *).');
+                        return;
+                    }
+                    
+                    // Show success message
+                    alert('✅ Mensagem enviada com sucesso!\n\nEntraremos em contato em breve através do email ou telefone informado.');
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+            
+            // Login button
+            const loginBtn = document.getElementById('login-btn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function() {
+                    window.location.href = '../index.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
