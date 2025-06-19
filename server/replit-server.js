@@ -1,11 +1,9 @@
-import express from 'express';
-import cors from 'cors';
-import { setupAuth, isAuthenticated } from './replit-auth.js';
-import { storage } from './replit-storage.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const express = require('express');
+const cors = require('cors');
+const { setupAuth, isAuthenticated } = require('./replit-auth.js');
+const { storage } = require('./replit-storage.js');
+const path = require('path');
 
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();

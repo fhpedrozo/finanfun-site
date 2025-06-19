@@ -23,6 +23,10 @@ args = "FinanFun API"
 task = "workflow.run"
 args = "FinanFun Website"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "FinanFun Replit Auth Server"
+
 [[workflows.workflow]]
 name = "FinanFun Unified Server"
 author = "agent"
@@ -48,6 +52,15 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python3 -m http.server 5000"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "FinanFun Replit Auth Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node server/replit-server.js"
 waitForPort = 5000
 
 [deployment]

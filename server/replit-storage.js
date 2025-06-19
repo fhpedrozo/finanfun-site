@@ -1,4 +1,4 @@
-import { pool } from './db.js';
+const { pool } = require('./db.js');
 
 // Interface for storage operations compatible with Replit Auth
 export class ReplitStorage {
