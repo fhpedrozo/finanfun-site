@@ -20,35 +20,87 @@ class ChildDashboard {
 
     async loadUserData() {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/user', {
-                credentials: 'include'
-            });
+            const sessionToken = localStorage.getItem('finanfun_session');
+            const storedUserData = localStorage.getItem('finanfun_user_data');
             
-            if (!response.ok) {
-                throw new Error('Failed to fetch user data');
+            if (sessionToken && storedUserData) {
+                const userData = JSON.parse(storedUserData);
+                
+                this.userData = {
+                    id: userData.id,
+                    firstName: userData.name ? userData.name.split(' ')[0] : 'Jovem',
+                    lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
+                    email: userData.email,
+                    profileImageUrl: userData.avatar_url || userData.picture || 'https://via.placeholder.com/150',
+                    userType: 'child'
+                };
+            } else {
+                throw new Error('Usuário não autenticado');
             }
-            
-            this.userData = await response.json();
         } catch (error) {
             console.error('Error loading user data:', error);
-            this.showError('Erro ao carregar dados do usuário');
+            // Don't redirect immediately, use fallback data
+            this.userData = {
+                id: 'temp_user',
+                firstName: 'Jovem',
+                lastName: 'Investidor',
+                email: 'jovem@finanfun.com',
+                profileImageUrl: 'https://via.placeholder.com/150',
+                userType: 'child'
+            };
         }
     }
 
     async loadDashboardData() {
         try {
-            const response = await fetch('http://localhost:3000/api/dashboard/child', {
-                credentials: 'include'
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to fetch dashboard data');
-            }
-            
-            this.dashboardData = await response.json();
+            // Use mock data for demonstration purposes
+            this.dashboardData = {
+                balance: {
+                    real: 150.00,
+                    bitfun: 250
+                },
+                tasks: [
+                    {
+                        id: 1,
+                        title: 'Economizar R$ 10 esta semana',
+                        description: 'Guarde R$ 10 para alcançar sua meta',
+                        reward: 50,
+                        progress: 70,
+                        completed: false
+                    },
+                    {
+                        id: 2,
+                        title: 'Aprender sobre investimentos',
+                        description: 'Complete o módulo de investimentos',
+                        reward: 30,
+                        progress: 100,
+                        completed: true
+                    }
+                ],
+                achievements: [
+                    {
+                        id: 1,
+                        title: 'Primeiro Depósito',
+                        description: 'Fez seu primeiro depósito!',
+                        icon: 'fas fa-medal',
+                        earned: true
+                    },
+                    {
+                        id: 2,
+                        title: 'Economizador',
+                        description: 'Economizou por 7 dias seguidos',
+                        icon: 'fas fa-trophy',
+                        earned: true
+                    }
+                ]
+            };
         } catch (error) {
             console.error('Error loading dashboard data:', error);
-            this.showError('Erro ao carregar dados do dashboard');
+            this.dashboardData = {
+                balance: { real: 0, bitfun: 0 },
+                tasks: [],
+                achievements: []
+            };
         }
     }
 
@@ -305,16 +357,12 @@ class ChildDashboard {
 
     async logout() {
         try {
-            const response = await fetch('http://localhost:3000/api/auth/logout', {
-                method: 'POST',
-                credentials: 'include'
-            });
+            // Clear local session data
+            localStorage.removeItem('finanfun_session');
+            localStorage.removeItem('finanfun_user_data');
             
-            if (response.ok) {
-                window.location.href = '/';
-            } else {
-                this.showError('Erro ao fazer logout');
-            }
+            // Redirect to home page
+            window.location.href = '../index.html';
         } catch (error) {
             console.error('Logout error:', error);
             this.showError('Erro ao fazer logout');
