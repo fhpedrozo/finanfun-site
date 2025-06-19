@@ -23,26 +23,27 @@
         
         .auth-modal-content {
             background: var(--gradient-dark);
-            margin: 5% auto;
+            margin: 2% auto;
             padding: 0;
             border: 1px solid rgba(0, 255, 136, 0.3);
             border-radius: 20px;
             width: 90%;
             max-width: 450px;
+            max-height: 90vh;
             position: relative;
-            overflow: hidden;
+            overflow-y: auto;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
         }
         
         .auth-header {
             background: var(--gradient-primary);
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             text-align: center;
             color: var(--white);
         }
         
         .auth-body {
-            padding: 2rem;
+            padding: 1.5rem 2rem 2rem;
         }
         
         .close-auth {
@@ -93,7 +94,7 @@
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
         
         .form-label {
@@ -105,12 +106,12 @@
         
         .form-input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 10px 12px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: border-color 0.3s ease;
         }
         
@@ -125,9 +126,9 @@
             background: var(--gradient-primary);
             color: var(--white);
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -140,15 +141,15 @@
         
         .social-login {
             display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 0.75rem;
+            margin-top: 1rem;
         }
         
         .social-btn {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
+            border-radius: 6px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-light);
             cursor: pointer;
@@ -157,6 +158,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
+            font-size: 0.9rem;
         }
         
         .social-btn:hover {
@@ -166,9 +168,10 @@
         
         .divider {
             text-align: center;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             color: var(--text-gray);
             position: relative;
+            font-size: 0.9rem;
         }
         
         .divider::before {
