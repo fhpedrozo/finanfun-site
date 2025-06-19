@@ -216,7 +216,7 @@ class ParentDashboard {
     }
 
     setupEventListeners() {
-        const logoutBtn = document.getElementById('logout-btn');
+        const logoutBtn = document.getElementById('logoutBtn');
         const addChildBtn = document.getElementById('add-child-btn');
         const createAccountBtn = document.getElementById('create-account-btn');
         
@@ -237,7 +237,7 @@ class ParentDashboard {
         try {
             // Clear local session data
             localStorage.removeItem('finanfun_session');
-            localStorage.removeItem('finanfun_user');
+            localStorage.removeItem('finanfun_user_data');
             
             // Clear any session storage as well
             sessionStorage.clear();
