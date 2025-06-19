@@ -1,17 +1,18 @@
-// Child Dashboard JavaScript for FinanFun
-
 class ChildDashboard {
     constructor() {
-        this.user = null;
-        this.accounts = [];
-        this.tasks = [];
-        this.achievements = [];
+        this.userData = null;
+        this.dashboardData = null;
         this.init();
     }
 
     async init() {
+        console.log('Child Dashboard initializing...');
         await this.loadUserData();
         await this.loadDashboardData();
+        this.updateUserDisplay();
+        this.updateBalanceCards();
+        this.loadTasks();
+        this.loadAchievements();
         this.setupEventListeners();
         this.initializeAvatarChat();
         this.hideLoadingScreen();
@@ -19,21 +20,15 @@ class ChildDashboard {
 
     async loadUserData() {
         try {
-            const response = await fetch('/api/auth/user', {
+            const response = await fetch('http://localhost:3000/api/auth/user', {
                 credentials: 'include'
             });
             
-            if (response.status === 401) {
-                window.location.href = '/api/login';
-                return;
-            }
-            
             if (!response.ok) {
-                throw new Error('Failed to load user data');
+                throw new Error('Failed to fetch user data');
             }
             
-            this.user = await response.json();
-            this.updateUserDisplay();
+            this.userData = await response.json();
         } catch (error) {
             console.error('Error loading user data:', error);
             this.showError('Erro ao carregar dados do usuário');
@@ -42,20 +37,15 @@ class ChildDashboard {
 
     async loadDashboardData() {
         try {
-            const response = await fetch('/api/dashboard/child', {
+            const response = await fetch('http://localhost:3000/api/dashboard/child', {
                 credentials: 'include'
             });
             
             if (!response.ok) {
-                throw new Error('Failed to load dashboard data');
+                throw new Error('Failed to fetch dashboard data');
             }
             
-            const data = await response.json();
-            this.accounts = data.accounts || [];
-            
-            this.updateBalanceCards();
-            this.loadTasks();
-            this.loadAchievements();
+            this.dashboardData = await response.json();
         } catch (error) {
             console.error('Error loading dashboard data:', error);
             this.showError('Erro ao carregar dados do dashboard');
@@ -63,244 +53,192 @@ class ChildDashboard {
     }
 
     updateUserDisplay() {
-        if (!this.user) return;
+        if (!this.userData) return;
         
-        const userNameEl = document.getElementById('userName');
-        const welcomeNameEl = document.getElementById('welcomeName');
-        const userAvatarEl = document.getElementById('userAvatar');
-        const mainAvatarEl = document.getElementById('mainAvatar');
+        const userNameElement = document.getElementById('user-name');
+        const userAvatarElement = document.getElementById('user-avatar');
         
-        const displayName = this.user.firstName || this.user.email || 'Jovem Financeiro';
-        
-        if (userNameEl) userNameEl.textContent = displayName;
-        if (welcomeNameEl) welcomeNameEl.textContent = displayName;
-        
-        const avatarUrl = this.user.profileImageUrl || this.getDefaultAvatar();
-        if (userAvatarEl) {
-            userAvatarEl.src = avatarUrl;
-            userAvatarEl.alt = `Avatar de ${displayName}`;
+        if (userNameElement) {
+            userNameElement.textContent = `${this.userData.firstName || 'Jovem'} ${this.userData.lastName || 'Investidor'}`.trim();
         }
-        if (mainAvatarEl) {
-            mainAvatarEl.src = avatarUrl;
-            mainAvatarEl.alt = `Avatar de ${displayName}`;
+        
+        if (userAvatarElement) {
+            userAvatarElement.src = this.userData.profileImageUrl || this.getDefaultAvatar();
         }
     }
 
     updateBalanceCards() {
-        // Update BitFun balance
-        const bitfunAccount = this.accounts.find(acc => acc.account_type === 'bitfun');
-        const bitfunBalanceEl = document.getElementById('bitfunBalance');
-        if (bitfunBalanceEl) {
-            const balance = bitfunAccount ? Math.floor(parseFloat(bitfunAccount.balance || 0)) : 0;
-            bitfunBalanceEl.textContent = balance.toLocaleString();
+        if (!this.dashboardData) return;
+        
+        const bitfunBalanceElement = document.getElementById('bitfun-balance');
+        const realBalanceElement = document.getElementById('real-balance');
+        
+        if (bitfunBalanceElement) {
+            bitfunBalanceElement.textContent = `${this.dashboardData.bitfunBalance} BFN`;
         }
-
-        // Update real balance
-        const realAccount = this.accounts.find(acc => acc.account_type === 'real');
-        const realBalanceEl = document.getElementById('realBalance');
-        if (realBalanceEl) {
-            const balance = realAccount ? parseFloat(realAccount.balance || 0) : 0;
-            realBalanceEl.textContent = `R$ ${balance.toFixed(2).replace('.', ',')}`;
-        }
-
-        // Update active goals (placeholder)
-        const activeGoalsEl = document.getElementById('activeGoals');
-        if (activeGoalsEl) {
-            activeGoalsEl.textContent = '2'; // Placeholder value
+        
+        if (realBalanceElement) {
+            realBalanceElement.textContent = `R$ ${this.dashboardData.realBalance.toFixed(2)}`;
         }
     }
 
     loadTasks() {
-        // Sample tasks for demonstration
-        this.tasks = [
+        const tasksContainer = document.getElementById('tasks-container');
+        if (!tasksContainer) return;
+        
+        // Mock tasks for demonstration
+        const mockTasks = [
             {
                 id: 1,
-                title: 'Ler sobre Poupança',
-                description: 'Complete a lição sobre como guardar dinheiro',
-                reward: 50,
-                icon: 'fas fa-book',
-                completed: false,
-                type: 'learning'
+                title: 'Leitura Diária',
+                description: 'Leia sobre poupança por 15 minutos',
+                reward: '10 BFN',
+                completed: false
             },
             {
                 id: 2,
-                title: 'Definir Meta de Economia',
-                description: 'Crie sua primeira meta de economia',
-                reward: 100,
-                icon: 'fas fa-target',
-                completed: false,
-                type: 'goal'
+                title: 'Economize Hoje',
+                description: 'Não gaste dinheiro desnecessário',
+                reward: '5 BFN',
+                completed: true
             },
             {
                 id: 3,
-                title: 'Jogar Quiz Financeiro',
-                description: 'Responda 5 perguntas sobre finanças',
-                reward: 75,
-                icon: 'fas fa-question-circle',
-                completed: true,
-                type: 'quiz'
+                title: 'Quiz Financeiro',
+                description: 'Complete o quiz sobre investimentos',
+                reward: '15 BFN',
+                completed: false
             }
         ];
-
-        this.renderTasks();
-        this.updateTaskProgress();
+        
+        this.renderTasks(mockTasks);
+        this.updateTaskProgress(mockTasks);
     }
 
-    renderTasks() {
-        const tasksGridEl = document.getElementById('tasksGrid');
-        if (!tasksGridEl) return;
-
-        const tasksHTML = this.tasks.map(task => `
-            <div class="task-card ${task.completed ? 'completed' : ''}" data-task-id="${task.id}">
-                <div class="task-header">
-                    <div class="task-icon">
-                        <i class="${task.icon}"></i>
-                    </div>
-                    <div class="task-info">
-                        <h4>${task.title}</h4>
-                        <p>${task.description}</p>
-                    </div>
+    renderTasks(tasks) {
+        const tasksContainer = document.getElementById('tasks-container');
+        if (!tasksContainer) return;
+        
+        tasksContainer.innerHTML = '';
+        
+        tasks.forEach(task => {
+            const taskItem = document.createElement('div');
+            taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
+            taskItem.innerHTML = `
+                <div class="task-info">
+                    <h4>${task.title}</h4>
+                    <p>${task.description}</p>
                 </div>
-                <div class="task-reward">
-                    <span class="reward-amount">+${task.reward} BitFun</span>
-                    <button class="task-complete-btn" 
-                            onclick="childDashboard.completeTask(${task.id})"
-                            ${task.completed ? 'disabled' : ''}>
-                        ${task.completed ? 'Completa!' : 'Fazer Agora'}
-                    </button>
+                <div class="task-actions">
+                    <span class="task-reward">${task.reward}</span>
+                    ${!task.completed ? `<button onclick="childDashboard.completeTask(${task.id})" class="complete-btn">Completar</button>` : '<span class="completed-badge">✓ Concluído</span>'}
                 </div>
-            </div>
-        `).join('');
-
-        tasksGridEl.innerHTML = tasksHTML;
+            `;
+            tasksContainer.appendChild(taskItem);
+        });
     }
 
-    updateTaskProgress() {
-        const completedTasks = this.tasks.filter(task => task.completed).length;
-        const totalTasks = this.tasks.length;
+    updateTaskProgress(tasks) {
+        const completedTasks = tasks.filter(task => task.completed).length;
+        const totalTasks = tasks.length;
+        const progressPercentage = (completedTasks / totalTasks) * 100;
         
-        const completedTasksEl = document.getElementById('completedTasks');
-        const totalTasksEl = document.getElementById('totalTasks');
+        const taskProgressElement = document.getElementById('task-progress');
+        const taskProgressFillElement = document.getElementById('task-progress-fill');
         
-        if (completedTasksEl) completedTasksEl.textContent = completedTasks;
-        if (totalTasksEl) totalTasksEl.textContent = totalTasks;
+        if (taskProgressElement) {
+            taskProgressElement.textContent = `${completedTasks}/${totalTasks}`;
+        }
+        
+        if (taskProgressFillElement) {
+            taskProgressFillElement.style.width = `${progressPercentage}%`;
+        }
     }
 
     loadAchievements() {
-        // Sample achievements for demonstration
-        this.achievements = [
+        const achievementsContainer = document.getElementById('achievements-container');
+        if (!achievementsContainer) return;
+        
+        // Mock achievements for demonstration
+        const mockAchievements = [
             {
                 id: 1,
-                title: 'Primeira Economia',
-                description: 'Guardou dinheiro pela primeira vez',
-                icon: 'fas fa-piggy-bank',
-                unlockedAt: new Date()
+                title: 'Primeiro Passo',
+                description: 'Primeira lição concluída',
+                icon: 'fas fa-trophy',
+                unlocked: true
             },
             {
                 id: 2,
-                title: 'Explorador',
-                description: 'Completou primeira lição',
-                icon: 'fas fa-compass',
-                unlockedAt: new Date()
+                title: 'Poupador',
+                description: 'Economizou por 7 dias',
+                icon: 'fas fa-piggy-bank',
+                unlocked: true
             },
             {
                 id: 3,
-                title: 'Quiz Master',
-                description: 'Acertou 10 perguntas seguidas',
-                icon: 'fas fa-brain',
-                unlockedAt: new Date()
+                title: 'Investidor Junior',
+                description: 'Completou módulo de investimentos',
+                icon: 'fas fa-chart-line',
+                unlocked: false
             }
         ];
-
-        this.renderAchievements();
+        
+        this.renderAchievements(mockAchievements);
     }
 
-    renderAchievements() {
-        const achievementsShowcaseEl = document.getElementById('achievementsShowcase');
-        if (!achievementsShowcaseEl) return;
-
-        if (this.achievements.length === 0) {
-            achievementsShowcaseEl.innerHTML = `
-                <div class="empty-achievements">
-                    <p>Complete suas primeiras tarefas para desbloquear conquistas!</p>
-                </div>
-            `;
-            return;
-        }
-
-        const achievementsHTML = this.achievements.map(achievement => `
-            <div class="achievement-badge" data-achievement-id="${achievement.id}">
+    renderAchievements(achievements) {
+        const achievementsContainer = document.getElementById('achievements-container');
+        if (!achievementsContainer) return;
+        
+        achievementsContainer.innerHTML = '';
+        
+        achievements.forEach(achievement => {
+            const achievementItem = document.createElement('div');
+            achievementItem.className = `achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}`;
+            achievementItem.innerHTML = `
                 <div class="achievement-icon">
                     <i class="${achievement.icon}"></i>
                 </div>
-                <h5>${achievement.title}</h5>
+                <h4>${achievement.title}</h4>
                 <p>${achievement.description}</p>
-            </div>
-        `).join('');
-
-        achievementsShowcaseEl.innerHTML = achievementsHTML;
+            `;
+            achievementsContainer.appendChild(achievementItem);
+        });
     }
 
     setupEventListeners() {
-        // Logout button
-        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutBtn = document.getElementById('logout-btn');
+        
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', this.logout.bind(this));
-        }
-
-        // Customize avatar button
-        const customizeAvatarBtn = document.getElementById('customizeAvatarBtn');
-        if (customizeAvatarBtn) {
-            customizeAvatarBtn.addEventListener('click', this.customizeAvatar.bind(this));
-        }
-
-        // Chat toggle
-        const chatToggle = document.getElementById('chatToggle');
-        if (chatToggle) {
-            chatToggle.addEventListener('click', this.toggleChat.bind(this));
+            logoutBtn.addEventListener('click', () => this.logout());
         }
     }
 
     initializeAvatarChat() {
-        // Rotate through different AI messages
-        const messages = [
-            'Olá! Como posso te ajudar hoje? 😊',
-            'Que tal completar mais uma tarefa?',
-            'Você está indo muito bem!',
-            'Lembre-se: economizar é um super poder!',
-            'Pronto para aprender algo novo?'
-        ];
+        const learningProgress = 45; // Mock learning progress
+        const learningPercentageElement = document.getElementById('learning-percentage');
+        const learningProgressFillElement = document.getElementById('learning-progress-fill');
         
-        let currentMessageIndex = 0;
-        const avatarMessageEl = document.getElementById('avatarMessage');
+        if (learningPercentageElement) {
+            learningPercentageElement.textContent = `${learningProgress}%`;
+        }
         
-        if (avatarMessageEl) {
-            setInterval(() => {
-                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-                avatarMessageEl.textContent = messages[currentMessageIndex];
-            }, 10000); // Change message every 10 seconds
+        if (learningProgressFillElement) {
+            learningProgressFillElement.style.width = `${learningProgress}%`;
         }
     }
 
-    // Action Methods
     async completeTask(taskId) {
-        const task = this.tasks.find(t => t.id === taskId);
-        if (!task || task.completed) return;
-
         try {
-            // Mark task as completed
-            task.completed = true;
+            // Mock task completion
+            alert(`Parabéns! Você completou a tarefa e ganhou BitFun!`);
             
-            // Award BitFun coins
-            await this.addBitfunTransaction(task.reward, 'earn', `Tarefa completada: ${task.title}`, 'task');
+            // In a real implementation, this would call the API
+            // await this.addBitfunTransaction(10, 'earned', 'Tarefa completada', 'task_' + taskId);
             
-            // Re-render tasks and update progress
-            this.renderTasks();
-            this.updateTaskProgress();
-            this.updateBalanceCards();
-            
-            // Show success message
-            this.showSuccess(`Parabéns! Você ganhou ${task.reward} BitFun!`);
+            // Reload tasks to update UI
+            this.loadTasks();
             
         } catch (error) {
             console.error('Error completing task:', error);
@@ -310,10 +248,10 @@ class ChildDashboard {
 
     async addBitfunTransaction(amount, type, description, source) {
         try {
-            const response = await fetch('/api/bitfun/transaction', {
+            const response = await fetch('http://localhost:3000/api/bitfun/transaction', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 credentials: 'include',
                 body: JSON.stringify({
@@ -328,7 +266,10 @@ class ChildDashboard {
                 throw new Error('Failed to add transaction');
             }
             
-            return await response.json();
+            // Reload dashboard data to update balances
+            await this.loadDashboardData();
+            this.updateBalanceCards();
+            
         } catch (error) {
             console.error('Error adding BitFun transaction:', error);
             throw error;
@@ -336,77 +277,144 @@ class ChildDashboard {
     }
 
     viewTransactions(accountType) {
-        alert(`Visualização de transações ${accountType} será implementada em breve.`);
+        alert(`Visualizar transações da conta: ${accountType}`);
     }
 
     viewGoals() {
-        alert('Sistema de metas será implementado em breve.');
+        alert('Visualizar metas será implementado em breve!');
     }
 
     continueLearning() {
-        alert('Módulos de aprendizado serão implementados em breve.');
+        alert('Continuar aprendizado será implementado em breve!');
     }
 
     viewAllAchievements() {
-        alert('Página de conquistas será implementada em breve.');
+        alert('Ver todas as conquistas será implementado em breve!');
     }
 
     customizeAvatar() {
-        alert('Customização de avatar será implementada em breve.');
+        alert('Personalizar avatar será implementado em breve!');
     }
 
     toggleChat() {
-        const chatBubble = document.querySelector('.chat-bubble');
-        if (chatBubble) {
-            chatBubble.style.opacity = chatBubble.style.opacity === '1' ? '0' : '1';
+        const chatWindow = document.getElementById('chat-window');
+        if (chatWindow) {
+            chatWindow.classList.toggle('hidden');
         }
     }
 
     async logout() {
         try {
-            window.location.href = '/api/logout';
+            const response = await fetch('http://localhost:3000/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                this.showError('Erro ao fazer logout');
+            }
         } catch (error) {
-            console.error('Error during logout:', error);
+            console.error('Logout error:', error);
             this.showError('Erro ao fazer logout');
         }
     }
 
     getDefaultAvatar() {
-        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjYwIiBmaWxsPSIjNDZGRTc3Ii8+CjxzdmcgeD0iMzAiIHk9IjMwIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0zMCAzMEMzMy4zMTM3IDMwIDM2IDI3LjMxMzcgMzYgMjRDMzYgMjAuNjg2MyAzMy4zMTM3IDE4IDMwIDE4QzI2LjY4NjMgMTggMjQgMjAuNjg2MyAyNCAyNEMyNCAyNy4zMTM3IDI2LjY4NjMgMzAgMzAgMzBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTggNDhDMTggNDEuMzcyNiAyMy4zNzI2IDM2IDMwIDM2QzM2LjYyNzQgMzYgNDIgNDEuMzcyNiA0MiA0OFY0OEgxOFY0OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo8L3N2Zz4K';
+        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0NkZFNzciLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xMiAxMkM3LjU4MTcyIDEyIDQgMTUuNTgxNyA0IDIwVjIySDIwVjIwQzIwIDE1LjU4MTcgMTYuNDE4MyAxMiAxMiAxMloiIGZpbGw9IiMwRDExMTciLz4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjMEQxMTE3Ii8+Cjwvc3ZnPgo8L3N2Zz4K';
     }
 
     hideLoadingScreen() {
-        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingScreen = document.getElementById('loading-screen');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        
         if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
+            loadingScreen.style.display = 'none';
+        }
+        
+        if (dashboardContainer) {
+            dashboardContainer.classList.remove('hidden');
         }
     }
 
     showSuccess(message) {
-        // Simple success display - can be enhanced with a proper toast system
-        console.log('Success:', message);
-        alert(message);
+        alert(`✅ ${message}`);
     }
 
     showError(message) {
-        // Simple error display - can be enhanced with a proper toast system
-        console.error(message);
-        alert(message);
+        alert(`❌ ${message}`);
     }
 }
 
+// Global instance and functions for event handlers
+let childDashboard = null;
+
+// Global functions for inline event handlers
+window.viewTransactions = function(accountType) {
+    if (childDashboard) {
+        childDashboard.viewTransactions(accountType);
+    }
+};
+
+window.viewGoals = function() {
+    if (childDashboard) {
+        childDashboard.viewGoals();
+    }
+};
+
+window.continueLearning = function() {
+    if (childDashboard) {
+        childDashboard.continueLearning();
+    }
+};
+
+window.viewAllAchievements = function() {
+    if (childDashboard) {
+        childDashboard.viewAllAchievements();
+    }
+};
+
+window.customizeAvatar = function() {
+    if (childDashboard) {
+        childDashboard.customizeAvatar();
+    }
+};
+
+window.toggleChat = function() {
+    if (childDashboard) {
+        childDashboard.toggleChat();
+    }
+};
+
+window.sendMessage = function() {
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+    
+    if (chatInput && chatMessages && chatInput.value.trim()) {
+        const userMessage = chatInput.value.trim();
+        
+        // Add user message
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.className = 'chat-message user';
+        userMessageDiv.innerHTML = `<p>${userMessage}</p>`;
+        chatMessages.appendChild(userMessageDiv);
+        
+        // Add bot response (mock)
+        setTimeout(() => {
+            const botMessageDiv = document.createElement('div');
+            botMessageDiv.className = 'chat-message bot';
+            botMessageDiv.innerHTML = `<p>Ótima pergunta! Continue explorando e aprendendo sobre finanças. Que tal completar uma tarefa hoje?</p>`;
+            chatMessages.appendChild(botMessageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+        
+        chatInput.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+};
+
 // Initialize dashboard when page loads
-let childDashboard;
 document.addEventListener('DOMContentLoaded', () => {
     childDashboard = new ChildDashboard();
-});
-
-// Handle authentication errors globally
-window.addEventListener('unhandledrejection', (event) => {
-    if (event.reason && event.reason.message && event.reason.message.includes('401')) {
-        window.location.href = '/api/login';
-    }
 });

@@ -1,38 +1,33 @@
-// Parent Dashboard JavaScript for FinanBoss
-
 class ParentDashboard {
     constructor() {
-        this.user = null;
-        this.family = [];
-        this.accounts = [];
+        this.userData = null;
+        this.dashboardData = null;
         this.init();
     }
 
     async init() {
+        console.log('Parent Dashboard initializing...');
         await this.loadUserData();
         await this.loadDashboardData();
+        this.updateUserDisplay();
+        this.updateDashboardStats();
+        this.renderFamilyGrid();
+        this.renderAccountsList();
         this.setupEventListeners();
         this.hideLoadingScreen();
     }
 
     async loadUserData() {
         try {
-            const response = await fetch('/api/auth/user', {
+            const response = await fetch('http://localhost:3000/api/auth/user', {
                 credentials: 'include'
             });
             
-            if (response.status === 401) {
-                // User not authenticated, redirect to login
-                window.location.href = '/api/login';
-                return;
-            }
-            
             if (!response.ok) {
-                throw new Error('Failed to load user data');
+                throw new Error('Failed to fetch user data');
             }
             
-            this.user = await response.json();
-            this.updateUserDisplay();
+            this.userData = await response.json();
         } catch (error) {
             console.error('Error loading user data:', error);
             this.showError('Erro ao carregar dados do usuário');
@@ -41,21 +36,15 @@ class ParentDashboard {
 
     async loadDashboardData() {
         try {
-            const response = await fetch('/api/dashboard/parent', {
+            const response = await fetch('http://localhost:3000/api/dashboard/parent', {
                 credentials: 'include'
             });
             
             if (!response.ok) {
-                throw new Error('Failed to load dashboard data');
+                throw new Error('Failed to fetch dashboard data');
             }
             
-            const data = await response.json();
-            this.family = data.family || [];
-            this.accounts = data.accounts || [];
-            
-            this.updateDashboardStats();
-            this.renderFamilyGrid();
-            this.renderAccountsList();
+            this.dashboardData = await response.json();
         } catch (error) {
             console.error('Error loading dashboard data:', error);
             this.showError('Erro ao carregar dados do dashboard');
@@ -63,192 +52,185 @@ class ParentDashboard {
     }
 
     updateUserDisplay() {
-        if (!this.user) return;
+        if (!this.userData) return;
         
-        const userNameEl = document.getElementById('userName');
-        const userAvatarEl = document.getElementById('userAvatar');
+        const userNameElement = document.getElementById('user-name');
+        const userAvatarElement = document.getElementById('user-avatar');
         
-        if (userNameEl) {
-            const displayName = this.user.firstName || this.user.email || 'Usuário';
-            userNameEl.textContent = displayName;
+        if (userNameElement) {
+            userNameElement.textContent = `${this.userData.firstName || 'Usuário'} ${this.userData.lastName || ''}`.trim();
         }
         
-        if (userAvatarEl && this.user.profileImageUrl) {
-            userAvatarEl.src = this.user.profileImageUrl;
-            userAvatarEl.alt = `Avatar de ${this.user.firstName || 'Usuário'}`;
-        } else if (userAvatarEl) {
-            // Default avatar
-            userAvatarEl.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0NkZFNzciLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDOS42NTY4NSA4IDExIDYuNjU2ODUgMTEgNUMxMSAzLjM0MzE1IDkuNjU2ODUgMiA4IDJDNi4zNDMxNSAyIDUgMy4zNDMxNSA1IDVDNSA2LjY1Njg1IDYuMzQzMTUgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMyAxNEMzIDExLjc5MDkgNC43OTA4NiAxMCA3IDEwSDlDMTEuMjA5MSAxMCAxMyAxMS43OTA5IDEzIDE0VjE0SDNWMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+';
+        if (userAvatarElement) {
+            userAvatarElement.src = this.userData.profileImageUrl || this.getDefaultAvatar();
         }
     }
 
     updateDashboardStats() {
-        // Update total children
-        const totalChildrenEl = document.getElementById('totalChildren');
-        if (totalChildrenEl) {
-            totalChildrenEl.textContent = this.family.length;
+        if (!this.dashboardData) return;
+        
+        // Update stats cards
+        const totalBalanceElement = document.getElementById('total-balance');
+        const childrenCountElement = document.getElementById('children-count');
+        const activeGoalsElement = document.getElementById('active-goals');
+        const completedTasksElement = document.getElementById('completed-tasks');
+        
+        if (totalBalanceElement) {
+            totalBalanceElement.textContent = `R$ ${this.dashboardData.totalBalance.toFixed(2)}`;
         }
-
-        // Calculate total BitFun (placeholder for now)
-        const totalBitfunEl = document.getElementById('totalBitfun');
-        if (totalBitfunEl) {
-            const totalBitfun = this.accounts
-                .filter(account => account.account_type === 'bitfun')
-                .reduce((sum, account) => sum + parseFloat(account.balance || 0), 0);
-            totalBitfunEl.textContent = Math.floor(totalBitfun);
+        
+        if (childrenCountElement) {
+            childrenCountElement.textContent = this.dashboardData.childrenCount.toString();
         }
-
-        // Total achievements (placeholder)
-        const totalAchievementsEl = document.getElementById('totalAchievements');
-        if (totalAchievementsEl) {
-            totalAchievementsEl.textContent = '0'; // Will be updated when achievements are implemented
+        
+        if (activeGoalsElement) {
+            activeGoalsElement.textContent = this.dashboardData.activeGoals.toString();
+        }
+        
+        if (completedTasksElement) {
+            completedTasksElement.textContent = this.dashboardData.completedTasks.toString();
         }
     }
 
     renderFamilyGrid() {
-        const familyGridEl = document.getElementById('familyGrid');
-        if (!familyGridEl) return;
-
-        if (this.family.length === 0) {
-            familyGridEl.innerHTML = `
-                <div class="empty-state">
-                    <div class="empty-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Nenhum filho conectado</h3>
-                    <p>Adicione seu primeiro filho para começar a jornada financeira em família</p>
-                    <button class="btn-primary" id="addFirstChildBtn">
-                        <i class="fas fa-plus"></i>
-                        Adicionar Primeiro Filho
-                    </button>
-                </div>
-            `;
-            return;
+        const familyGrid = document.getElementById('family-grid');
+        if (!familyGrid) return;
+        
+        // Clear existing content except add card
+        const addCard = familyGrid.querySelector('.add-family-card');
+        familyGrid.innerHTML = '';
+        if (addCard) {
+            familyGrid.appendChild(addCard);
         }
-
-        const familyHTML = this.family.map(member => `
-            <div class="family-member-card" data-child-id="${member.child_id}">
-                <img src="${member.child_avatar || this.getDefaultAvatar()}" 
-                     alt="Avatar de ${member.child_first_name}" 
-                     class="member-avatar">
-                <div class="member-name">${member.child_first_name} ${member.child_last_name || ''}</div>
-                <div class="member-status">
-                    <i class="fas fa-circle" style="color: #46FE77;"></i>
-                    Ativo
-                </div>
-                <div class="member-actions">
-                    <button class="btn-secondary" onclick="parentDashboard.viewChildDetails('${member.child_id}')">
-                        <i class="fas fa-eye"></i>
-                        Ver Detalhes
-                    </button>
-                </div>
-            </div>
-        `).join('');
-
-        familyGridEl.innerHTML = familyHTML;
+        
+        // Mock family members for demonstration
+        const mockChildren = [
+            { id: 1, name: 'Ana', age: 12, avatar: this.getDefaultAvatar() },
+            { id: 2, name: 'Carlos', age: 15, avatar: this.getDefaultAvatar() }
+        ];
+        
+        mockChildren.forEach(child => {
+            const childCard = document.createElement('div');
+            childCard.className = 'family-card';
+            childCard.innerHTML = `
+                <img src="${child.avatar}" alt="${child.name}" style="width: 60px; height: 60px; border-radius: 50%; margin-bottom: 1rem;">
+                <h4>${child.name}</h4>
+                <p>${child.age} anos</p>
+                <button onclick="parentDashboard.viewChildDetails(${child.id})" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: var(--gradient-primary); border: none; border-radius: 6px; cursor: pointer;">
+                    Ver Detalhes
+                </button>
+            `;
+            familyGrid.appendChild(childCard);
+        });
     }
 
     renderAccountsList() {
-        const accountsListEl = document.getElementById('accountsList');
-        if (!accountsListEl) return;
-
-        if (this.accounts.length === 0) {
-            accountsListEl.innerHTML = `
-                <div class="empty-accounts">
+        const accountsList = document.getElementById('accounts-list');
+        if (!accountsList || !this.dashboardData) return;
+        
+        accountsList.innerHTML = '';
+        
+        if (this.dashboardData.accounts.length === 0) {
+            accountsList.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: var(--text-secondary);">
+                    <i class="fas fa-wallet" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
                     <p>Nenhuma conta encontrada</p>
-                    <button class="btn-secondary" onclick="parentDashboard.createAccount()">
-                        <i class="fas fa-plus"></i>
-                        Criar Conta
-                    </button>
+                    <p>Crie a primeira conta da família</p>
                 </div>
             `;
             return;
         }
-
-        const accountsHTML = this.accounts.map(account => `
-            <div class="account-item">
+        
+        this.dashboardData.accounts.forEach(account => {
+            const accountItem = document.createElement('div');
+            accountItem.className = 'account-item';
+            accountItem.innerHTML = `
                 <div class="account-info">
-                    <div class="account-name">${account.account_name}</div>
-                    <div class="account-type">${account.account_type === 'real' ? 'Conta Real' : 'BitFun'}</div>
+                    <h4>${account.account_type === 'real' ? 'Conta Real' : 'Conta BitFun'}</h4>
+                    <p>Criada em ${new Date(account.created_at).toLocaleDateString('pt-BR')}</p>
                 </div>
                 <div class="account-balance">
-                    ${account.account_type === 'real' ? 'R$' : ''} ${parseFloat(account.balance || 0).toFixed(2)}
-                    ${account.account_type === 'bitfun' ? ' BF' : ''}
+                    ${account.account_type === 'real' ? 'R$ ' : ''}${parseFloat(account.balance).toFixed(2)}${account.account_type === 'bitfun' ? ' BFN' : ''}
                 </div>
-            </div>
-        `).join('');
-
-        accountsListEl.innerHTML = accountsHTML;
+            `;
+            accountsList.appendChild(accountItem);
+        });
     }
 
     setupEventListeners() {
-        // Logout button
-        const logoutBtn = document.getElementById('logoutBtn');
+        const logoutBtn = document.getElementById('logout-btn');
+        const addChildBtn = document.getElementById('add-child-btn');
+        const createAccountBtn = document.getElementById('create-account-btn');
+        
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', this.logout.bind(this));
+            logoutBtn.addEventListener('click', () => this.logout());
         }
-
-        // Add child button
-        const addChildBtn = document.getElementById('addChildBtn');
+        
         if (addChildBtn) {
-            addChildBtn.addEventListener('click', this.addChild.bind(this));
+            addChildBtn.addEventListener('click', () => this.addChild());
+        }
+        
+        if (createAccountBtn) {
+            createAccountBtn.addEventListener('click', () => this.createAccount());
         }
     }
 
     async logout() {
         try {
-            window.location.href = '/api/logout';
+            const response = await fetch('http://localhost:3000/api/auth/logout', {
+                method: 'POST',
+                credentials: 'include'
+            });
+            
+            if (response.ok) {
+                window.location.href = '/';
+            } else {
+                this.showError('Erro ao fazer logout');
+            }
         } catch (error) {
-            console.error('Error during logout:', error);
+            console.error('Logout error:', error);
             this.showError('Erro ao fazer logout');
         }
     }
 
     addChild() {
-        // For now, show a simple alert. This will be enhanced later
-        alert('Funcionalidade de adicionar filho será implementada em breve.\n\nPor enquanto, os filhos podem se registrar diretamente e você poderá conectá-los através do sistema familiar.');
+        alert('Funcionalidade de adicionar filho será implementada em breve!');
     }
 
     viewChildDetails(childId) {
-        // Navigate to child details view
-        window.location.href = `/dashboard/child?id=${childId}`;
+        alert(`Visualizar detalhes do filho ID: ${childId}`);
     }
 
     createAccount() {
-        // For now, show a simple alert
-        alert('Funcionalidade de criar conta será implementada em breve.');
+        alert('Funcionalidade de criar conta será implementada em breve!');
     }
 
     getDefaultAvatar() {
-        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiM0NkZFNzciLz4KPHN2ZyB4PSIyMCIgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIiBmaWxsPSJub25lIj4KPHN2ZyB4PSIxMCIgeT0iOCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjAgMjQiIGZpbGw9Im5vbmUiPgo8cGF0aCBkPSJNMTAgMTBDMTIuMjA5MSAxMCAxNCA3Ljc5MDg2IDE0IDVDMTQgMi4yMDkxNCAxMi4yMDkxIDAgMTAgMEM3Ljc5MDg2IDAgNiAyLjIwOTE0IDYgNUM2IDcuNzkwODYgNy43OTA4NiAxMCAxMCAxMFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yIDI0QzIgMTguNDc3MiA1LjU4MTcyIDE0IDEwIDE0QzE0LjQxODMgMTQgMTggMTguNDc3MiAxOCAyNFYyNEgyVjI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+CjwvcGF0aD4KPC9zdmc+Cjwvc3ZnPgo=';
+        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0NkZFNzciLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xMiAxMkM3LjU4MTcyIDEyIDQgMTUuNTgxNyA0IDIwVjIySDIwVjIwQzIwIDE1LjU4MTcgMTYuNDE4MyAxMiAxMiAxMloiIGZpbGw9IiMwRDExMTciLz4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjMEQxMTE3Ii8+Cjwvc3ZnPgo8L3N2Zz4K';
     }
 
     hideLoadingScreen() {
-        const loadingScreen = document.getElementById('loadingScreen');
+        const loadingScreen = document.getElementById('loading-screen');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        
         if (loadingScreen) {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
+            loadingScreen.style.display = 'none';
+        }
+        
+        if (dashboardContainer) {
+            dashboardContainer.classList.remove('hidden');
         }
     }
 
     showError(message) {
-        // Simple error display - can be enhanced with a proper toast system
-        console.error(message);
         alert(message);
     }
 }
 
+// Global instance for event handlers
+let parentDashboard = null;
+
 // Initialize dashboard when page loads
-let parentDashboard;
 document.addEventListener('DOMContentLoaded', () => {
     parentDashboard = new ParentDashboard();
-});
-
-// Handle authentication errors globally
-window.addEventListener('unhandledrejection', (event) => {
-    if (event.reason && event.reason.message && event.reason.message.includes('401')) {
-        window.location.href = '/api/login';
-    }
 });

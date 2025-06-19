@@ -117,7 +117,12 @@ class FinanFunAuth {
             this.showSuccess('Login realizado com sucesso!');
             setTimeout(() => {
                 this.closeModal();
-                this.updateUIForLoggedInUser(result.user);
+                // Redirect to appropriate dashboard
+                if (result.user.userType === 'parent') {
+                    window.location.href = 'http://localhost:3000/parent-dashboard';
+                } else {
+                    window.location.href = 'http://localhost:3000/child-dashboard';
+                }
             }, 1500);
             
         } catch (error) {
@@ -186,17 +191,21 @@ class FinanFunAuth {
     
     // Real API integration methods
     async realLogin(email, password) {
-        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/login`, {
+        const response = await fetch('http://localhost:3000/api/auth/mock-login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email, password }),
+            credentials: 'include',
+            body: JSON.stringify({ 
+                email, 
+                userType: 'parent' 
+            }),
         });
 
         if (!response.ok) {
             const error = await response.json();
-            throw new Error(error.error || 'Login failed');
+            throw new Error(error.message || 'Login failed');
         }
 
         return await response.json();
