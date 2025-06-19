@@ -2,20 +2,28 @@ class ChildDashboard {
     constructor() {
         this.userData = null;
         this.dashboardData = null;
-        this.init();
+        this.init().catch(error => {
+            console.error('Dashboard initialization error:', error);
+            this.hideLoadingScreen();
+        });
     }
 
     async init() {
-        console.log('Child Dashboard initializing...');
-        await this.loadUserData();
-        await this.loadDashboardData();
-        this.updateUserDisplay();
-        this.updateBalanceCards();
-        this.loadTasks();
-        this.loadAchievements();
-        this.setupEventListeners();
-        this.initializeAvatarChat();
-        this.hideLoadingScreen();
+        try {
+            console.log('Child Dashboard initializing...');
+            await this.loadUserData();
+            await this.loadDashboardData();
+            this.updateUserDisplay();
+            this.updateBalanceCards();
+            this.loadTasks();
+            this.loadAchievements();
+            this.setupEventListeners();
+            this.initializeAvatarChat();
+            this.hideLoadingScreen();
+        } catch (error) {
+            console.error('Init error:', error);
+            this.hideLoadingScreen();
+        }
     }
 
     async loadUserData() {
@@ -41,13 +49,26 @@ class ChildDashboard {
                 
                 console.log('User data loaded successfully:', this.userData);
             } else {
-                console.log('No session found, redirecting to login');
-                window.location.href = '../index.html';
-                return;
+                console.log('No session found, using demo data for child dashboard');
+                this.userData = {
+                    id: 'demo_child',
+                    firstName: 'Jovem',
+                    lastName: 'Investidor',
+                    email: 'jovem@finanfun.com',
+                    profileImageUrl: 'https://via.placeholder.com/150',
+                    userType: 'child'
+                };
             }
         } catch (error) {
             console.error('Error loading user data:', error);
-            window.location.href = '../index.html';
+            this.userData = {
+                id: 'demo_child',
+                firstName: 'Jovem',
+                lastName: 'Investidor',
+                email: 'jovem@finanfun.com',
+                profileImageUrl: 'https://via.placeholder.com/150',
+                userType: 'child'
+            };
         }
     }
 
