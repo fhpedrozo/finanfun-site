@@ -27,7 +27,7 @@
 
 /* FinanFun Brand Styling */
 .finanfun-brand .finan {
-    color: var(--primary-green);
+    color: var(--white);
 }
 
 .finanfun-brand .fun {
@@ -40,14 +40,6 @@
 
 .finanfun-brand.finanfun-white .finan {
     color: var(--white);
-}
-
-.finanfun-brand.finanfun-hero .finan {
-    color: var(--white);
-}
-
-.finanfun-brand.finanfun-hero .fun {
-    color: var(--primary-green);
 }
 
 /* Custom Coin Icon */
