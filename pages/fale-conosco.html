@@ -206,7 +206,7 @@
             padding: 12px 15px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(15, 20, 25, 0.8);
             color: var(--text-light);
             font-size: 1rem;
             box-sizing: border-box;
@@ -216,6 +216,27 @@
             outline: none;
             border-color: var(--primary-green);
             box-shadow: 0 0 0 2px rgba(70, 254, 119, 0.2);
+        }
+
+        .form-control option {
+            background: var(--dark-navy);
+            color: var(--text-light);
+            padding: 8px 12px;
+        }
+
+        .form-control option:first-child {
+            color: var(--text-gray);
+            font-style: italic;
+        }
+
+        select.form-control {
+            background: rgba(15, 20, 25, 0.9);
+            color: var(--text-light);
+            cursor: pointer;
+        }
+
+        select.form-control:invalid {
+            color: var(--text-gray);
         }
 
         textarea.form-control {
