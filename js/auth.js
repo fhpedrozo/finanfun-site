@@ -205,6 +205,7 @@ class FinanFunAuth {
             }
             
             const result = await this.realSocialLogin(provider, realName);
+            console.log('Login result:', result);
             
             if (result && result.success) {
                 this.showSuccess(result.message);
@@ -213,10 +214,19 @@ class FinanFunAuth {
                 localStorage.setItem('finanfun_session', result.session_token);
                 localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
                 
-                setTimeout(() => {
-                    this.closeModal();
-                    this.showDashboardSelection(result.user);
-                }, 1500);
+                console.log('Data stored, redirecting to dashboard selection');
+                
+                // Close modal and redirect directly to avoid loop
+                this.closeModal();
+                
+                // Create a simple redirect with direct user interaction
+                const userChoice = confirm('Escolha seu dashboard:\n\nOK = FinanBoss (Dashboard dos Pais)\nCancelar = FinanFun (Dashboard dos Filhos)');
+                
+                if (userChoice) {
+                    window.location.href = 'pages/parent-dashboard.html';
+                } else {
+                    window.location.href = 'pages/child-dashboard.html';
+                }
             } else {
                 throw new Error('Falha no login social');
             }
@@ -583,6 +593,8 @@ class FinanFunAuth {
     }
 
     showDashboardSelection(user) {
+        console.log('Showing dashboard selection for user:', user);
+        
         const selectionModal = document.createElement('div');
         selectionModal.className = 'auth-modal-overlay';
         selectionModal.innerHTML = `
@@ -592,7 +604,7 @@ class FinanFunAuth {
                     <p>Qual dashboard você gostaria de acessar?</p>
                 </div>
                 <div class="dashboard-selection">
-                    <div class="dashboard-option" onclick="finanfunAuth.selectDashboard('parent')">
+                    <div class="dashboard-option" onclick="window.finanfunAuth.selectDashboard('parent')">
                         <div class="dashboard-icon">
                             <i class="fas fa-users-cog"></i>
                         </div>
@@ -600,7 +612,7 @@ class FinanFunAuth {
                         <p>Dashboard dos Pais</p>
                         <small>Controle completo da família</small>
                     </div>
-                    <div class="dashboard-option" onclick="finanfunAuth.selectDashboard('child')">
+                    <div class="dashboard-option" onclick="window.finanfunAuth.selectDashboard('child')">
                         <div class="dashboard-icon">
                             <i class="fas fa-gamepad"></i>
                         </div>
@@ -666,16 +678,23 @@ class FinanFunAuth {
     }
 
     selectDashboard(type) {
+        console.log('Dashboard selected:', type);
+        
         const selectionModal = document.querySelector('.auth-modal-overlay');
         if (selectionModal) {
             selectionModal.remove();
         }
 
-        if (type === 'parent') {
-            window.location.href = 'pages/parent-dashboard.html';
-        } else {
-            window.location.href = 'pages/child-dashboard.html';
-        }
+        // Add a small delay to ensure data is saved
+        setTimeout(() => {
+            if (type === 'parent') {
+                console.log('Redirecting to parent dashboard');
+                window.location.href = 'pages/parent-dashboard.html';
+            } else {
+                console.log('Redirecting to child dashboard');
+                window.location.href = 'pages/child-dashboard.html';
+            }
+        }, 100);
     }
 }
 

@@ -241,6 +241,14 @@ Changelog:
   - ✅ "Interações Diárias" renamed to "Interações Periódicas" with personalized missions text
   - 📊 PROJECT STATUS: All updates applied and saved
 
+- June 19, 2025: Dashboard selection system and content refinements
+  - ✅ Login system updated with dashboard selection interface after authentication
+  - ✅ Users can now choose between FinanBoss (Parent Dashboard) and FinanFun (Child Dashboard)
+  - ✅ Login loop issues resolved with proper session handling
+  - ✅ Social login functionality working with real name capture
+  - ✅ "Nossa Missão" section refined - removed duplicate educational statement
+  - 🎯 CURRENT STATUS: Complete authentication flow with dashboard choice functionality
+
 - June 19, 2025: Authentication system debugging - persistent issues identified
   - 🔧 ISSUE: Dashboard not displaying real user names despite multiple login attempts
   - 🔧 ISSUE: API connectivity problems with port 8080 endpoints
