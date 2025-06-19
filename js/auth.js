@@ -203,11 +203,11 @@ class FinanFunAuth {
             
             setTimeout(() => {
                 this.closeModal();
-                // Redirect to appropriate dashboard
+                // Redirect to appropriate dashboard using relative URLs
                 if (result.user.userType === 'parent') {
-                    window.location.href = 'http://localhost:3000/parent-dashboard';
+                    window.location.href = 'pages/parent-dashboard.html';
                 } else {
-                    window.location.href = 'http://localhost:3000/child-dashboard';
+                    window.location.href = 'pages/child-dashboard.html';
                 }
             }, 1500);
             
@@ -257,48 +257,32 @@ class FinanFunAuth {
     }
     
     async realSocialLogin(provider) {
-        if (provider === 'google') {
-            // Use mock login for Google demonstration
-            const response = await fetch('http://localhost:3000/api/auth/mock-login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({ 
-                    email: 'usuario.google@gmail.com', 
-                    userType: 'parent' 
-                }),
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Erro no login social');
-            }
-
-            return await response.json();
-        }
+        // Simulate successful login for demonstration
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
         
-        if (provider === 'facebook') {
-            // Use mock login for Facebook demonstration
-            const response = await fetch('http://localhost:3000/api/auth/mock-login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({ 
-                    email: 'usuario.facebook@facebook.com', 
-                    userType: 'parent' 
-                }),
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.message || 'Erro no login social');
+        const mockUsers = {
+            google: {
+                id: 'google_user_123',
+                email: 'usuario.google@gmail.com',
+                name: 'Usuário Google',
+                avatar_url: 'https://via.placeholder.com/150',
+                userType: 'parent'
+            },
+            facebook: {
+                id: 'facebook_user_456', 
+                email: 'usuario.facebook@facebook.com',
+                name: 'Usuário Facebook',
+                avatar_url: 'https://via.placeholder.com/150',
+                userType: 'parent'
             }
+        };
 
-            return await response.json();
+        if (mockUsers[provider]) {
+            return {
+                message: 'Login realizado com sucesso',
+                user: mockUsers[provider],
+                session_token: 'mock_session_' + Date.now()
+            };
         }
         
         throw new Error(`Login com ${provider} ainda não implementado`);
