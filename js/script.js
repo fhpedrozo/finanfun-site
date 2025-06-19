@@ -10,18 +10,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
     
     // Mobile menu toggle
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
     
     // Close mobile menu when clicking on a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+    if (navLinks.length > 0 && hamburger && navMenu) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
         });
-    });
+    }
     
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
@@ -47,15 +51,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(15, 23, 42, 0.98)';
-            navbar.style.backdropFilter = 'blur(15px)';
-        } else {
-            navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-            navbar.style.backdropFilter = 'blur(10px)';
-        }
-    });
+    if (navbar) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 23, 42, 0.98)';
+                navbar.style.backdropFilter = 'blur(15px)';
+            } else {
+                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+    }
     
     // Active navigation link highlighting
     function updateActiveNavLink() {
@@ -82,36 +88,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Back to top button functionality
     const backToTopButton = document.getElementById('backToTop');
     
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            backToTopButton.classList.add('visible');
-        } else {
-            backToTopButton.classList.remove('visible');
-        }
-    });
-    
-    backToTopButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (backToTopButton) {
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
         });
-    });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
     
     // Feature showcase interaction
     const showcaseItems = document.querySelectorAll('.showcase-item');
     
-    showcaseItems.forEach(item => {
-        item.addEventListener('click', function() {
-            showcaseItems.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Add visual feedback
-            this.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 200);
+    if (showcaseItems.length > 0) {
+        showcaseItems.forEach(item => {
+            item.addEventListener('click', function() {
+                showcaseItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Add visual feedback
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
         });
-    });
+    }
     
     // Intersection Observer for animations
     const observerOptions = {
@@ -130,12 +140,14 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Observe elements for animation
     const animatedElements = document.querySelectorAll('.problem-item, .feature-card, .impact-card, .expansion-card, .principle-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+    if (animatedElements.length > 0) {
+        animatedElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    }
     
     // Counter animation for stats
     function animateCounters() {
