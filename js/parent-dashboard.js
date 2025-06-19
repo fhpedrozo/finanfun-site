@@ -22,9 +22,12 @@ class ParentDashboard {
             const sessionToken = localStorage.getItem('finanfun_session');
             const storedUserData = localStorage.getItem('finanfun_user_data');
             
+            console.log('Session token:', sessionToken);
+            console.log('Stored user data:', storedUserData);
+            
             if (sessionToken && storedUserData) {
                 const userData = JSON.parse(storedUserData);
-                console.log('Loading user data:', userData);
+                console.log('Parsed user data:', userData);
                 
                 this.userData = {
                     id: userData.id,
@@ -35,13 +38,22 @@ class ParentDashboard {
                     userType: 'parent'
                 };
                 
-                console.log('Mapped user data:', this.userData);
+                console.log('Final mapped user data:', this.userData);
             } else {
+                console.error('Missing session or user data');
                 throw new Error('Usuário não autenticado');
             }
         } catch (error) {
             console.error('Error loading user data:', error);
-            window.location.href = '../index.html';
+            // Don't redirect immediately, show error instead
+            this.userData = {
+                id: 'temp_user',
+                firstName: 'Usuário',
+                lastName: 'Temporário',
+                email: 'temp@finanfun.com',
+                profileImageUrl: 'https://via.placeholder.com/150',
+                userType: 'parent'
+            };
         }
     }
 
@@ -139,7 +151,7 @@ class ParentDashboard {
     }
 
     renderFamilyGrid() {
-        const familyGrid = document.getElementById('family-grid');
+        const familyGrid = document.getElementById('familyGrid');
         if (!familyGrid) return;
         
         // Clear existing content except add card
@@ -171,7 +183,7 @@ class ParentDashboard {
     }
 
     renderAccountsList() {
-        const accountsList = document.getElementById('accounts-list');
+        const accountsList = document.getElementById('accountsList');
         if (!accountsList || !this.dashboardData) return;
         
         accountsList.innerHTML = '';

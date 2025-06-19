@@ -212,12 +212,8 @@ class FinanFunAuth {
             
             setTimeout(() => {
                 this.closeModal();
-                // Redirect to appropriate dashboard using relative URLs
-                if (result.user.userType === 'parent') {
-                    window.location.href = 'pages/parent-dashboard.html';
-                } else {
-                    window.location.href = 'pages/child-dashboard.html';
-                }
+                // Always redirect to parent dashboard for demonstration
+                window.location.href = 'pages/parent-dashboard.html';
             }, 1500);
             
         } catch (error) {
