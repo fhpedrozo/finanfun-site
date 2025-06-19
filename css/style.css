@@ -38,6 +38,10 @@
     color: var(--white);
 }
 
+.finanfun-brand.finanfun-white .finan {
+    color: var(--white);
+}
+
 /* Custom Coin Icon */
 .coin-icon {
     width: 40px;
