@@ -258,6 +258,14 @@ Changelog:
   - ✅ Added error handling for API connection failures
   - 🔄 PENDING: Full resolution of authentication name display issue
   - 💾 RECOMMENDATION: Project restart needed to clear persistent cache issues
+
+- June 19, 2025: Cache and error handling improvements attempted
+  - ✅ Fixed child dashboard data loading to use localStorage instead of failed API calls
+  - ✅ Replaced API endpoints with mock data for demonstration purposes
+  - ✅ Updated logout functionality with proper session cleanup
+  - 🔧 PERSISTENT ISSUE: Unhandled promise rejections in child dashboard
+  - 🔧 PERSISTENT ISSUE: Authentication flow still showing errors despite login success
+  - 💾 BACKUP CREATED: FinanFun_Auth_Debug_2025-06-19.tar.gz for user restart
 ```
 
 ## User Preferences
