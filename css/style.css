@@ -34,6 +34,10 @@
     color: var(--primary-green);
 }
 
+.finanfun-brand .boss {
+    color: var(--white);
+}
+
 /* Custom Coin Icon */
 .coin-icon {
     width: 40px;
