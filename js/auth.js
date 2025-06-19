@@ -135,17 +135,13 @@ class FinanFunAuth {
             const result = await this.realLogin(email, password);
             
             // Store session token
-            localStorage.setItem('finanfun_session', result.session_token);
+            localStorage.setItem('finanfun_session', result.session_token || result.token);
             
             this.showSuccess('Login realizado com sucesso!');
             setTimeout(() => {
                 this.closeModal();
-                // Redirect to appropriate dashboard
-                if (result.user.userType === 'parent') {
-                    window.location.href = 'http://localhost:3000/parent-dashboard';
-                } else {
-                    window.location.href = 'http://localhost:3000/child-dashboard';
-                }
+                // Redirect to dashboard
+                window.location.href = 'pages/parent-dashboard.html';
             }, 1500);
             
         } catch (error) {
@@ -175,12 +171,13 @@ class FinanFunAuth {
             const result = await this.realSignup(name, email, password);
             
             // Store session token
-            localStorage.setItem('finanfun_session', result.session_token);
+            localStorage.setItem('finanfun_session', result.session_token || result.token);
             
             this.showSuccess('Conta criada com sucesso!');
             setTimeout(() => {
                 this.closeModal();
-                this.updateUIForLoggedInUser(result.user);
+                // Redirect to dashboard
+                window.location.href = 'pages/parent-dashboard.html';
             }, 1500);
             
         } catch (error) {
@@ -233,7 +230,7 @@ class FinanFunAuth {
     
     // Real API integration methods
     async realLogin(email, password) {
-        const response = await fetch('http://localhost:3000/api/auth/mock-login', {
+        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -241,7 +238,7 @@ class FinanFunAuth {
             credentials: 'include',
             body: JSON.stringify({ 
                 email, 
-                userType: 'parent' 
+                password 
             }),
         });
 
@@ -250,7 +247,14 @@ class FinanFunAuth {
             throw new Error(error.message || 'Login failed');
         }
 
-        return await response.json();
+        const result = await response.json();
+        
+        // Store user data for dashboard access
+        if (result.user) {
+            localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
+        }
+        
+        return result;
     }
     
     async realSignup(name, email, password) {
@@ -267,7 +271,14 @@ class FinanFunAuth {
             throw new Error(error.error || 'Registration failed');
         }
 
-        return await response.json();
+        const result = await response.json();
+        
+        // Store user data for dashboard access
+        if (result.user) {
+            localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
+        }
+        
+        return result;
     }
     
     async realSocialLogin(provider, userName = null) {

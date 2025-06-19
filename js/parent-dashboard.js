@@ -26,25 +26,55 @@ class ParentDashboard {
             if (sessionToken && storedUserData) {
                 const userData = JSON.parse(storedUserData);
                 
-                // Map the data from social login to our format
+                // Map the data from real login to our format
                 this.userData = {
                     id: userData.id,
-                    firstName: userData.name.split(' ')[0], // First name
-                    lastName: userData.name.split(' ').slice(1).join(' ') || '', // Rest as last name
+                    firstName: userData.name ? userData.name.split(' ')[0] : 'Usuário',
+                    lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
                     email: userData.email,
                     profileImageUrl: userData.picture || userData.avatar_url || 'https://via.placeholder.com/150',
                     userType: userData.userType || 'parent'
                 };
             } else if (sessionToken) {
-                // Fallback for sessions without stored user data
-                this.userData = {
-                    id: 'parent_user_123',
-                    firstName: 'Usuário',
-                    lastName: 'FinanFun',
-                    email: 'usuario@finanfun.com',
-                    profileImageUrl: 'https://via.placeholder.com/150',
-                    userType: 'parent'
-                };
+                // Try to fetch user data from API
+                try {
+                    const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/me`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': `Bearer ${sessionToken}`,
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include'
+                    });
+                    
+                    if (response.ok) {
+                        const userData = await response.json();
+                        this.userData = {
+                            id: userData.id,
+                            firstName: userData.name ? userData.name.split(' ')[0] : 'Usuário',
+                            lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
+                            email: userData.email,
+                            profileImageUrl: userData.avatar_url || 'https://via.placeholder.com/150',
+                            userType: 'parent'
+                        };
+                        
+                        // Store for future use
+                        localStorage.setItem('finanfun_user_data', JSON.stringify(userData));
+                    } else {
+                        throw new Error('Unable to fetch user data');
+                    }
+                } catch (apiError) {
+                    console.error('API Error:', apiError);
+                    // Fallback for sessions without stored user data
+                    this.userData = {
+                        id: 'parent_user_123',
+                        firstName: 'Usuário',
+                        lastName: 'FinanFun',
+                        email: 'usuario@finanfun.com',
+                        profileImageUrl: 'https://via.placeholder.com/150',
+                        userType: 'parent'
+                    };
+                }
             } else {
                 throw new Error('Usuário não autenticado');
             }
