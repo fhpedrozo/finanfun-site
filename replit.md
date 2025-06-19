@@ -218,6 +218,7 @@ Changelog:
   - ✅ CACHE ISSUES RESOLVED: All visual updates now displaying correctly after project restart
   - ✅ All content changes successfully implemented and visible
   - ✅ Website functioning perfectly with all updates applied
+  - ✅ New FAQ added: "Este app é gratuito?" with pricing explanation (basic features free, advanced features paid)
   - 🎯 COMPLETED: All branding consistency and text updates finalized and working
 ```
 
