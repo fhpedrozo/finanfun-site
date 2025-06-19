@@ -19,68 +19,28 @@ class ParentDashboard {
 
     async loadUserData() {
         try {
-            // Load user data from localStorage (set during login)
             const sessionToken = localStorage.getItem('finanfun_session');
             const storedUserData = localStorage.getItem('finanfun_user_data');
             
             if (sessionToken && storedUserData) {
                 const userData = JSON.parse(storedUserData);
+                console.log('Loading user data:', userData);
                 
-                // Map the data from real login to our format
                 this.userData = {
                     id: userData.id,
                     firstName: userData.name ? userData.name.split(' ')[0] : 'Usuário',
                     lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
                     email: userData.email,
-                    profileImageUrl: userData.picture || userData.avatar_url || 'https://via.placeholder.com/150',
-                    userType: userData.userType || 'parent'
+                    profileImageUrl: userData.avatar_url || userData.picture || 'https://via.placeholder.com/150',
+                    userType: 'parent'
                 };
-            } else if (sessionToken) {
-                // Try to fetch user data from API
-                try {
-                    const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/me`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${sessionToken}`,
-                            'Content-Type': 'application/json',
-                        },
-                        credentials: 'include'
-                    });
-                    
-                    if (response.ok) {
-                        const userData = await response.json();
-                        this.userData = {
-                            id: userData.id,
-                            firstName: userData.name ? userData.name.split(' ')[0] : 'Usuário',
-                            lastName: userData.name ? userData.name.split(' ').slice(1).join(' ') : '',
-                            email: userData.email,
-                            profileImageUrl: userData.avatar_url || 'https://via.placeholder.com/150',
-                            userType: 'parent'
-                        };
-                        
-                        // Store for future use
-                        localStorage.setItem('finanfun_user_data', JSON.stringify(userData));
-                    } else {
-                        throw new Error('Unable to fetch user data');
-                    }
-                } catch (apiError) {
-                    console.error('API Error:', apiError);
-                    // Fallback for sessions without stored user data
-                    this.userData = {
-                        id: 'parent_user_123',
-                        firstName: 'Usuário',
-                        lastName: 'FinanFun',
-                        email: 'usuario@finanfun.com',
-                        profileImageUrl: 'https://via.placeholder.com/150',
-                        userType: 'parent'
-                    };
-                }
+                
+                console.log('Mapped user data:', this.userData);
             } else {
                 throw new Error('Usuário não autenticado');
             }
         } catch (error) {
             console.error('Error loading user data:', error);
-            // Redirect to login if no session
             window.location.href = '../index.html';
         }
     }
@@ -133,11 +93,18 @@ class ParentDashboard {
     updateUserDisplay() {
         if (!this.userData) return;
         
-        const userNameElement = document.getElementById('user-name');
-        const userAvatarElement = document.getElementById('user-avatar');
+        const userNameElement = document.getElementById('userName');
+        const userEmailElement = document.getElementById('userEmail');
+        const userAvatarElement = document.getElementById('userAvatar');
         
         if (userNameElement) {
-            userNameElement.textContent = `${this.userData.firstName || 'Usuário'} ${this.userData.lastName || ''}`.trim();
+            const fullName = `${this.userData.firstName || 'Usuário'} ${this.userData.lastName || ''}`.trim();
+            userNameElement.textContent = fullName;
+            console.log('Dashboard: Updated user name to:', fullName);
+        }
+        
+        if (userEmailElement) {
+            userEmailElement.textContent = this.userData.email || 'usuario@email.com';
         }
         
         if (userAvatarElement) {
@@ -149,10 +116,10 @@ class ParentDashboard {
         if (!this.dashboardData) return;
         
         // Update stats cards
-        const totalBalanceElement = document.getElementById('total-balance');
-        const childrenCountElement = document.getElementById('children-count');
-        const activeGoalsElement = document.getElementById('active-goals');
-        const completedTasksElement = document.getElementById('completed-tasks');
+        const totalBalanceElement = document.getElementById('totalBalance');
+        const childrenCountElement = document.getElementById('totalChildren');
+        const activeGoalsElement = document.getElementById('completedGoals');
+        const completedTasksElement = document.getElementById('pendingTasks');
         
         if (totalBalanceElement) {
             totalBalanceElement.textContent = `R$ ${this.dashboardData.totalBalance.toFixed(2)}`;

@@ -230,8 +230,7 @@ class FinanFunAuth {
     
     // Real API integration methods
     async realLogin(email, password) {
-        // Local demonstration system with known user
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
         
         if (email === 'laura@uol.com.br') {
             const userData = {
