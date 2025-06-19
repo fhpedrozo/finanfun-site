@@ -65,9 +65,15 @@ class FinanFunAuth {
         // Social login buttons
         const socialButtons = document.querySelectorAll('.social-btn');
         socialButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const provider = button.dataset.provider;
-                this.handleSocialLogin(provider);
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const provider = button.getAttribute('data-provider');
+                console.log('Social login clicked:', provider); // Debug log
+                if (provider) {
+                    this.handleSocialLogin(provider);
+                } else {
+                    this.showError('Erro: Provider não identificado');
+                }
             });
         });
         
