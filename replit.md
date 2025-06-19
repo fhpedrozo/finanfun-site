@@ -220,6 +220,7 @@ Changelog:
   - ✅ Website functioning perfectly with all updates applied
   - ✅ New FAQ added: "Este app é gratuito?" with pricing explanation (basic features free, advanced features paid)
   - ✅ Values section reorganized in About page: "Inclusão", "Família", "Segurança", "Educação", "Diversão" and "Inovação"
+  - ✅ New FAQ added: "O FinanFun é seguro para as crianças?" with LGPD compliance and parental controls explanation
   - 🎯 COMPLETED: All branding consistency and text updates finalized and working
 ```
 
