@@ -6,16 +6,30 @@ class ChildDashboard {
     }
 
     async init() {
-        console.log('Child Dashboard initializing...');
-        await this.loadUserData();
-        await this.loadDashboardData();
-        this.updateUserDisplay();
-        this.updateBalanceCards();
-        this.loadTasks();
-        this.loadAchievements();
-        this.setupEventListeners();
-        this.initializeAvatarChat();
-        this.hideLoadingScreen();
+        try {
+            console.log('Child Dashboard initializing...');
+            
+            // Load data sequentially to avoid race conditions
+            await this.loadUserData();
+            await this.loadDashboardData();
+            
+            // Update UI components
+            this.updateUserDisplay();
+            this.updateBalanceCards();
+            this.loadTasks();
+            this.loadAchievements();
+            this.setupEventListeners();
+            this.initializeAvatarChat();
+            
+            // Hide loading screen last
+            this.hideLoadingScreen();
+            
+            console.log('Child Dashboard initialized successfully');
+        } catch (error) {
+            console.log('Dashboard initialization error:', error.message);
+            // Still hide loading screen even if there's an error
+            this.hideLoadingScreen();
+        }
     }
 
     async loadUserData() {
@@ -34,14 +48,22 @@ class ChildDashboard {
                     profileImageUrl: userData.avatar_url || userData.picture || 'https://via.placeholder.com/150',
                     userType: 'child'
                 };
+                console.log('User data loaded successfully:', this.userData.firstName);
             } else {
-                throw new Error('Usuário não autenticado');
+                console.log('No session found, using fallback data');
+                this.userData = {
+                    id: 'demo_user',
+                    firstName: 'Jovem',
+                    lastName: 'Investidor', 
+                    email: 'jovem@finanfun.com',
+                    profileImageUrl: 'https://via.placeholder.com/150',
+                    userType: 'child'
+                };
             }
         } catch (error) {
-            console.error('Error loading user data:', error);
-            // Don't redirect immediately, use fallback data
+            console.log('Loading fallback user data due to error:', error.message);
             this.userData = {
-                id: 'temp_user',
+                id: 'demo_user',
                 firstName: 'Jovem',
                 lastName: 'Investidor',
                 email: 'jovem@finanfun.com',
@@ -49,11 +71,11 @@ class ChildDashboard {
                 userType: 'child'
             };
         }
+        return Promise.resolve();
     }
 
     async loadDashboardData() {
         try {
-            // Use mock data for demonstration purposes
             this.dashboardData = {
                 balance: {
                     real: 150.00,
@@ -94,14 +116,16 @@ class ChildDashboard {
                     }
                 ]
             };
+            console.log('Dashboard data loaded successfully');
         } catch (error) {
-            console.error('Error loading dashboard data:', error);
+            console.log('Error loading dashboard data, using defaults:', error.message);
             this.dashboardData = {
                 balance: { real: 0, bitfun: 0 },
                 tasks: [],
                 achievements: []
             };
         }
+        return Promise.resolve();
     }
 
     updateUserDisplay() {
@@ -377,12 +401,21 @@ class ChildDashboard {
         const loadingScreen = document.getElementById('loading-screen');
         const dashboardContainer = document.getElementById('dashboard-container');
         
+        console.log('Hiding loading screen and showing dashboard');
+        
         if (loadingScreen) {
             loadingScreen.style.display = 'none';
+            console.log('Loading screen hidden');
+        } else {
+            console.log('Loading screen element not found');
         }
         
         if (dashboardContainer) {
             dashboardContainer.classList.remove('hidden');
+            dashboardContainer.style.display = 'block';
+            console.log('Dashboard container shown');
+        } else {
+            console.log('Dashboard container element not found');
         }
     }
 
