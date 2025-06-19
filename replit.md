@@ -126,7 +126,9 @@ Changelog:
   - New order: Adaptação por Faixa Etária → Adoção Familiar → Ambiente Seguro → Ecosistema Educacional → Tecnologia Aplicada → Parcerias Estratégicas
   - Updated partnership text to include online stores and focus on experience
   - Color palette updated: Green primary (#46FE77), Blue secondary (#181D4E), maintained purple accent and dark backgrounds
-  - User feedback: "ficou ótimo agora" - satisfied with color scheme and content organization
+  - Added "Lojas Online" as fifth potential partner with shopping cart icon
+  - Layout updated to display 5 partners in single row (responsive: 2 columns on mobile)
+  - User feedback: "ficou ótimo agora" and "ótimo... era isso mesmo!" - satisfied with all updates
 ```
 
 ## User Preferences

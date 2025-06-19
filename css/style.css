@@ -25,6 +25,15 @@
     --font-secondary: 'Arial', sans-serif;
 }
 
+/* FinanFun Brand Styling */
+.finanfun-brand .finan {
+    color: var(--white);
+}
+
+.finanfun-brand .fun {
+    color: var(--primary-green);
+}
+
 /* Global Styles */
 * {
     margin: 0;
