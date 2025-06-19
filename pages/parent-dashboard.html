@@ -4,154 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinanBoss - Painel de Controle dos Pais</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dashboard-body">
-    <!-- Navigation -->
-    <nav class="dashboard-nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2 class="finanboss-brand"><span class="finan">Finan</span><span class="boss">Boss</span></h2>
+<body>
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="finan-text">Finan</span><span class="boss-text">Boss</span>
             </div>
-            <div class="nav-actions">
-                <div class="user-info" id="userInfo">
-                    <img src="" alt="Avatar" class="user-avatar" id="userAvatar">
-                    <span class="user-name" id="userName">Carregando...</span>
+            <div class="loading-spinner"></div>
+            <p>Carregando seu painel...</p>
+        </div>
+    </div>
+
+    <div id="dashboard-container" class="dashboard-container hidden">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="finan-text">Finan</span><span class="boss-text">Boss</span>
                 </div>
-                <button class="logout-btn" id="logoutBtn">
+                <h1>Painel de Controle dos Pais</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <img id="user-avatar" src="" alt="Avatar" class="user-avatar">
+                    <div class="user-details">
+                        <span id="user-name" class="user-name"></span>
+                        <span class="user-role">Responsável</span>
+                    </div>
+                </div>
+                <button id="logout-btn" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </button>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <!-- Main Dashboard -->
-    <main class="dashboard-main">
-        <div class="dashboard-container">
-            
-            <!-- Dashboard Header -->
-            <section class="dashboard-header">
-                <div class="welcome-section">
-                    <h1>Bem-vindo ao <span class="finanboss-brand"><span class="finan">Finan</span><span class="boss">Boss</span></span></h1>
-                    <p>Painel completo de controle, gerenciamento e acompanhamento dos filhos</p>
-                </div>
-                <div class="quick-stats">
-                    <div class="stat-card">
+        <main class="dashboard-main">
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="stats-section">
+                    <div class="stats-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Saldo Total da Família</h3>
+                            <p id="total-balance" class="stat-value">R$ 0,00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
                         <div class="stat-icon">
                             <i class="fas fa-users"></i>
                         </div>
-                        <div class="stat-info">
-                            <h3 id="totalChildren">0</h3>
-                            <p>Filhos Conectados</p>
+                        <div class="stat-content">
+                            <h3>Filhos Cadastrados</h3>
+                            <p id="children-count" class="stat-value">0</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    
+                    <div class="stats-card">
                         <div class="stat-icon">
-                            <i class="fas fa-coins"></i>
+                            <i class="fas fa-target"></i>
                         </div>
-                        <div class="stat-info">
-                            <h3 id="totalBitfun">0</h3>
-                            <p>BitFun Total</p>
+                        <div class="stat-content">
+                            <h3>Metas Ativas</h3>
+                            <p id="active-goals" class="stat-value">0</p>
                         </div>
                     </div>
-                    <div class="stat-card">
+                    
+                    <div class="stats-card">
                         <div class="stat-icon">
-                            <i class="fas fa-trophy"></i>
+                            <i class="fas fa-check-circle"></i>
                         </div>
-                        <div class="stat-info">
-                            <h3 id="totalAchievements">0</h3>
-                            <p>Conquistas</p>
+                        <div class="stat-content">
+                            <h3>Tarefas Concluídas</h3>
+                            <p id="completed-tasks" class="stat-value">0</p>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Family Management -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-users"></i> Gerenciamento Familiar</h2>
-                    <button class="btn-primary" id="addChildBtn">
-                        <i class="fas fa-plus"></i>
-                        Adicionar Filho
-                    </button>
+                <!-- Family Management -->
+                <div class="family-section">
+                    <div class="section-header">
+                        <h2>Gerenciamento Familiar</h2>
+                        <button id="add-child-btn" class="add-btn">
+                            <i class="fas fa-plus"></i>
+                            Adicionar Filho
+                        </button>
+                    </div>
+                    <div id="family-grid" class="family-grid">
+                        <div class="family-card add-family-card">
+                            <div class="add-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <p>Adicionar Novo Filho</p>
+                        </div>
+                        <!-- Family members will be loaded here -->
+                    </div>
                 </div>
-                <div class="family-grid" id="familyGrid">
-                    <!-- Family members will be loaded here -->
-                </div>
-            </section>
 
-            <!-- Financial Overview -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-chart-line"></i> Visão Financeira</h2>
-                </div>
-                <div class="financial-overview">
-                    <div class="account-summary">
-                        <h3>Contas Familiares</h3>
-                        <div id="accountsList">
-                            <!-- Accounts will be loaded here -->
-                        </div>
+                <!-- Accounts Management -->
+                <div class="accounts-section">
+                    <div class="section-header">
+                        <h2>Contas e Saldos</h2>
+                        <button id="create-account-btn" class="add-btn">
+                            <i class="fas fa-plus"></i>
+                            Criar Conta
+                        </button>
                     </div>
-                    <div class="recent-transactions">
-                        <h3>Transações Recentes</h3>
-                        <div id="transactionsList">
-                            <!-- Transactions will be loaded here -->
-                        </div>
+                    <div id="accounts-list" class="accounts-list">
+                        <!-- Accounts will be loaded here -->
                     </div>
                 </div>
-            </section>
 
-            <!-- Controls and Settings -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-cog"></i> Controles e Configurações</h2>
-                </div>
-                <div class="controls-grid">
-                    <div class="control-card">
-                        <div class="control-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h4>Tempo de Uso</h4>
-                        <p>Defina limites de tempo para cada filho</p>
-                        <button class="btn-secondary">Configurar</button>
+                <!-- Recent Activity -->
+                <div class="activity-section">
+                    <div class="section-header">
+                        <h2>Atividade Recente</h2>
+                        <button class="view-all-btn">Ver Todas</button>
                     </div>
-                    <div class="control-card">
-                        <div class="control-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h4>Controle de Conteúdo</h4>
-                        <p>Gerencie o acesso a recursos e módulos</p>
-                        <button class="btn-secondary">Configurar</button>
-                    </div>
-                    <div class="control-card">
-                        <div class="control-icon">
-                            <i class="fas fa-bell"></i>
-                        </div>
-                        <h4>Notificações</h4>
-                        <p>Configure alertas e relatórios</p>
-                        <button class="btn-secondary">Configurar</button>
-                    </div>
-                    <div class="control-card">
-                        <div class="control-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h4>Relatórios</h4>
-                        <p>Acompanhe o progresso educacional</p>
-                        <button class="btn-secondary">Ver Relatórios</button>
+                    <div id="recent-transactions" class="activity-list">
+                        <!-- Recent transactions will be loaded here -->
                     </div>
                 </div>
-            </section>
-
-        </div>
-    </main>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <p>Carregando dashboard...</p>
+            </div>
+        </main>
     </div>
 
     <script src="../js/parent-dashboard.js"></script>

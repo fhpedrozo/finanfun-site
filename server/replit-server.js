@@ -4,8 +4,6 @@ const { setupAuth, isAuthenticated } = require('./replit-auth.js');
 const { storage } = require('./replit-storage.js');
 const path = require('path');
 
-const __dirname = path.dirname(__filename);
-
 const app = express();
 
 // Middleware

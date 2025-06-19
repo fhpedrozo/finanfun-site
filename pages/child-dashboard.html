@@ -3,215 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FinanFun - Meu Painel Financeiro</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>FinanFun - Painel dos Filhos</title>
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/child-dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="dashboard-body child-dashboard">
-    <!-- Navigation -->
-    <nav class="dashboard-nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2 class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></h2>
+<body class="child-theme">
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <span class="finan-text">FinanFun</span>
             </div>
-            <div class="nav-actions">
-                <div class="user-info" id="userInfo">
-                    <img src="" alt="Avatar" class="user-avatar" id="userAvatar">
-                    <span class="user-name" id="userName">Carregando...</span>
+            <div class="loading-spinner"></div>
+            <p>Carregando sua aventura financeira...</p>
+        </div>
+    </div>
+
+    <div id="dashboard-container" class="dashboard-container hidden">
+        <header class="dashboard-header child-header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="finan-text">FinanFun</span>
                 </div>
-                <button class="logout-btn" id="logoutBtn">
+                <h1>Minha Jornada Financeira</h1>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <img id="user-avatar" src="" alt="Avatar" class="user-avatar">
+                    <div class="user-details">
+                        <span id="user-name" class="user-name"></span>
+                        <span class="user-role">Jovem Investidor</span>
+                    </div>
+                </div>
+                <button id="logout-btn" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
                 </button>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <!-- Main Dashboard -->
-    <main class="dashboard-main">
-        <div class="dashboard-container">
-            
-            <!-- Welcome Section -->
-            <section class="welcome-hero">
-                <div class="hero-content">
-                    <div class="avatar-section">
-                        <div class="avatar-container">
-                            <img src="" alt="Meu Avatar" class="main-avatar" id="mainAvatar">
-                            <div class="avatar-status">
-                                <i class="fas fa-circle"></i>
-                            </div>
-                        </div>
-                        <button class="customize-avatar-btn" id="customizeAvatarBtn">
-                            <i class="fas fa-palette"></i>
-                            Customizar
-                        </button>
-                    </div>
-                    <div class="welcome-text">
-                        <h1>Olá, <span id="welcomeName">Jovem Financeiro</span>!</h1>
-                        <p>Bem-vindo ao seu painel financeiro personalizado</p>
-                        <div class="level-badge">
-                            <i class="fas fa-star"></i>
-                            <span>Nível 1 - Iniciante</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Quick Stats -->
-            <section class="quick-overview">
-                <div class="balance-cards">
+        <main class="dashboard-main">
+            <div class="dashboard-grid child-grid">
+                <!-- Balance Cards -->
+                <div class="balance-section">
                     <div class="balance-card bitfun-card">
-                        <div class="card-icon">
+                        <div class="balance-icon">
                             <i class="fas fa-coins"></i>
                         </div>
-                        <div class="card-content">
-                            <h3 id="bitfunBalance">0</h3>
-                            <p>BitFun Coins</p>
-                        </div>
-                        <div class="card-action">
-                            <button class="mini-btn" onclick="childDashboard.viewTransactions('bitfun')">
-                                Ver Histórico
-                            </button>
+                        <div class="balance-content">
+                            <h3>BitFun (Moeda Virtual)</h3>
+                            <p id="bitfun-balance" class="balance-value">0 BFN</p>
+                            <div class="balance-actions">
+                                <button class="action-btn" onclick="viewTransactions('bitfun')">
+                                    <i class="fas fa-history"></i>
+                                    Histórico
+                                </button>
+                                <button class="action-btn" onclick="viewGoals()">
+                                    <i class="fas fa-target"></i>
+                                    Metas
+                                </button>
+                            </div>
                         </div>
                     </div>
                     
                     <div class="balance-card real-card">
-                        <div class="card-icon">
-                            <i class="fas fa-piggy-bank"></i>
+                        <div class="balance-icon">
+                            <i class="fas fa-wallet"></i>
                         </div>
-                        <div class="card-content">
-                            <h3 id="realBalance">R$ 0,00</h3>
-                            <p>Conta Poupança</p>
+                        <div class="balance-content">
+                            <h3>Conta Real</h3>
+                            <p id="real-balance" class="balance-value">R$ 0,00</p>
+                            <div class="balance-actions">
+                                <button class="action-btn" onclick="viewTransactions('real')">
+                                    <i class="fas fa-history"></i>
+                                    Extrato
+                                </button>
+                                <button class="action-btn" onclick="continueLearning()">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    Aprender
+                                </button>
+                            </div>
                         </div>
-                        <div class="card-action">
-                            <button class="mini-btn" onclick="childDashboard.viewTransactions('real')">
-                                Ver Extrato
+                    </div>
+                </div>
+
+                <!-- Tasks Section -->
+                <div class="tasks-section">
+                    <div class="section-header">
+                        <h2>Minhas Tarefas</h2>
+                        <div class="progress-indicator">
+                            <span id="task-progress">0/0</span>
+                            <div class="progress-bar">
+                                <div id="task-progress-fill" class="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tasks-container" class="tasks-container">
+                        <!-- Tasks will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Achievements Section -->
+                <div class="achievements-section">
+                    <div class="section-header">
+                        <h2>Conquistas</h2>
+                        <button class="view-all-btn" onclick="viewAllAchievements()">Ver Todas</button>
+                    </div>
+                    <div id="achievements-container" class="achievements-container">
+                        <!-- Achievements will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- AI Avatar Chat -->
+                <div class="avatar-section">
+                    <div class="avatar-container">
+                        <div class="avatar-image">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="avatar-info">
+                            <h3>Seu Assistente FinanFun</h3>
+                            <p>Estou aqui para te ajudar a aprender sobre dinheiro!</p>
+                            <button id="chat-toggle" class="chat-btn" onclick="toggleChat()">
+                                <i class="fas fa-comments"></i>
+                                Conversar
                             </button>
                         </div>
                     </div>
                     
-                    <div class="balance-card goals-card">
-                        <div class="card-icon">
-                            <i class="fas fa-target"></i>
+                    <div id="chat-window" class="chat-window hidden">
+                        <div class="chat-header">
+                            <span>Chat com IA</span>
+                            <button onclick="toggleChat()">
+                                <i class="fas fa-times"></i>
+                            </button>
                         </div>
-                        <div class="card-content">
-                            <h3 id="activeGoals">0</h3>
-                            <p>Metas Ativas</p>
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="chat-message bot">
+                                <p>Olá! Sou seu assistente financeiro. Como posso te ajudar hoje?</p>
+                            </div>
                         </div>
-                        <div class="card-action">
-                            <button class="mini-btn" onclick="childDashboard.viewGoals()">
-                                Ver Metas
+                        <div class="chat-input">
+                            <input type="text" id="chat-input" placeholder="Digite sua pergunta...">
+                            <button onclick="sendMessage()">
+                                <i class="fas fa-paper-plane"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-            </section>
 
-            <!-- Daily Tasks -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-tasks"></i> Tarefas de Hoje</h2>
-                    <div class="progress-indicator">
-                        <span id="completedTasks">0</span>/<span id="totalTasks">0</span> completas
+                <!-- Learning Progress -->
+                <div class="learning-section">
+                    <div class="section-header">
+                        <h2>Progresso de Aprendizado</h2>
+                        <span id="learning-percentage" class="progress-percentage">0%</span>
                     </div>
-                </div>
-                <div class="tasks-grid" id="tasksGrid">
-                    <!-- Tasks will be loaded here -->
-                </div>
-            </section>
-
-            <!-- Learning Progress -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-graduation-cap"></i> Meu Aprendizado</h2>
-                    <button class="btn-primary" onclick="childDashboard.continueLearning()">
-                        <i class="fas fa-play"></i>
-                        Continuar Aprendendo
-                    </button>
-                </div>
-                <div class="learning-modules">
-                    <div class="module-card" data-module="savings">
-                        <div class="module-icon">
-                            <i class="fas fa-piggy-bank"></i>
+                    <div class="learning-progress">
+                        <div class="progress-bar large">
+                            <div id="learning-progress-fill" class="progress-fill"></div>
                         </div>
-                        <div class="module-info">
-                            <h4>Economizar Dinheiro</h4>
-                            <div class="module-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 25%"></div>
-                                </div>
-                                <span>25% completo</span>
+                        <div class="learning-topics">
+                            <div class="topic completed">
+                                <i class="fas fa-check"></i>
+                                <span>Básico sobre Dinheiro</span>
+                            </div>
+                            <div class="topic current">
+                                <i class="fas fa-play"></i>
+                                <span>Poupança e Investimentos</span>
+                            </div>
+                            <div class="topic">
+                                <i class="fas fa-lock"></i>
+                                <span>Empreendedorismo</span>
                             </div>
                         </div>
-                        <button class="module-btn">Continuar</button>
-                    </div>
-                    
-                    <div class="module-card locked" data-module="investing">
-                        <div class="module-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="module-info">
-                            <h4>Investimentos Básicos</h4>
-                            <div class="module-progress">
-                                <span>Desbloqueie completando "Economizar"</span>
-                            </div>
-                        </div>
-                        <button class="module-btn" disabled>Bloqueado</button>
-                    </div>
-                    
-                    <div class="module-card locked" data-module="budgeting">
-                        <div class="module-icon">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                        <div class="module-info">
-                            <h4>Planejamento Financeiro</h4>
-                            <div class="module-progress">
-                                <span>Desbloqueie completando módulos anteriores</span>
-                            </div>
-                        </div>
-                        <button class="module-btn" disabled>Bloqueado</button>
                     </div>
                 </div>
-            </section>
 
-            <!-- Recent Achievements -->
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2><i class="fas fa-trophy"></i> Conquistas Recentes</h2>
-                    <button class="btn-secondary" onclick="childDashboard.viewAllAchievements()">
-                        Ver Todas
-                    </button>
-                </div>
-                <div class="achievements-showcase" id="achievementsShowcase">
-                    <!-- Achievements will be loaded here -->
-                </div>
-            </section>
-
-            <!-- Avatar Chat -->
-            <div class="avatar-chat" id="avatarChat">
-                <div class="chat-avatar">
-                    <img src="../images/ai-avatar.svg" alt="Avatar IA">
-                    <div class="chat-status">
-                        <i class="fas fa-circle"></i>
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Ações Rápidas</h3>
+                    <div class="action-buttons">
+                        <button class="quick-action-btn" onclick="customizeAvatar()">
+                            <i class="fas fa-user-edit"></i>
+                            <span>Personalizar Avatar</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="viewGoals()">
+                            <i class="fas fa-bullseye"></i>
+                            <span>Minhas Metas</span>
+                        </button>
+                        <button class="quick-action-btn" onclick="continueLearning()">
+                            <i class="fas fa-book"></i>
+                            <span>Continuar Aprendendo</span>
+                        </button>
                     </div>
                 </div>
-                <div class="chat-bubble">
-                    <p id="avatarMessage">Olá! Como posso te ajudar hoje? 😊</p>
-                </div>
-                <button class="chat-toggle" id="chatToggle">
-                    <i class="fas fa-comment"></i>
-                </button>
             </div>
-
-        </div>
-    </main>
-
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <p>Carregando seu painel...</p>
+        </main>
     </div>
 
     <script src="../js/child-dashboard.js"></script>

@@ -1,7 +1,7 @@
 const { pool } = require('./db.js');
 
 // Interface for storage operations compatible with Replit Auth
-export class ReplitStorage {
+class ReplitStorage {
   // User operations - mandatory for Replit Auth
   async getUser(id) {
     try {
@@ -210,4 +210,9 @@ export class ReplitStorage {
   }
 }
 
-export const storage = new ReplitStorage();
+const storage = new ReplitStorage();
+
+module.exports = {
+  ReplitStorage,
+  storage
+};
