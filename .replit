@@ -25,10 +25,6 @@ args = "FinanFun Auth Server"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "FinanFun No-Cache Server"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
 args = "FinanFun Website"
 
 [[workflows.workflow]]
@@ -57,15 +53,6 @@ author = "agent"
 task = "shell.exec"
 args = "node server/simple-replit-auth.js"
 waitForPort = 3000
-
-[[workflows.workflow]]
-name = "FinanFun No-Cache Server"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python3 no-cache-server.py"
-waitForPort = 5000
 
 [[workflows.workflow]]
 name = "FinanFun Website"
