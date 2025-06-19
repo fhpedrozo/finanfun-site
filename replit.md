@@ -128,7 +128,7 @@ Preferred communication style: Simple, everyday language.
 ## Technical Notes
 
 ### Design System
-- **Color Palette**: Green primary (#00ff88), blue secondary (#1a5cff), purple accent (#8b5cf6)
+- **Color Palette**: Blue primary (#181D4E), blue secondary (#1a5cff), purple accent (#8b5cf6)
 - **Typography**: System fonts with fallbacks
 - **Responsive Breakpoints**: Flexible grid system adapting to screen sizes
 - **Theme**: Dark background with gradient overlays
