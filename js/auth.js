@@ -180,7 +180,12 @@ class FinanFunAuth {
             
             setTimeout(() => {
                 this.closeModal();
-                this.updateUIForLoggedInUser(result.user);
+                // Redirect to appropriate dashboard
+                if (result.user.userType === 'parent') {
+                    window.location.href = 'http://localhost:3000/parent-dashboard';
+                } else {
+                    window.location.href = 'http://localhost:3000/child-dashboard';
+                }
             }, 1500);
             
         } catch (error) {
@@ -230,72 +235,44 @@ class FinanFunAuth {
     
     async realSocialLogin(provider) {
         if (provider === 'google') {
-            // Simulate Google login with user input
-            const email = prompt('Digite seu email do Google:');
-            const name = prompt('Digite seu nome:');
-            
-            if (!email || !name) {
-                throw new Error('Email e nome são obrigatórios');
-            }
-            
-            // Validate email format
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                throw new Error('Email inválido');
-            }
-            
-            // Create or login user via API
-            const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/social-login`, {
+            // Use mock login for Google demonstration
+            const response = await fetch('http://localhost:3000/api/auth/mock-login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    email: email,
-                    name: name,
-                    provider: 'google',
-                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=00ff88&color=000&size=128`
+                credentials: 'include',
+                body: JSON.stringify({ 
+                    email: 'usuario.google@gmail.com', 
+                    userType: 'parent' 
                 }),
             });
 
             if (!response.ok) {
                 const error = await response.json();
-                throw new Error(error.error || 'Erro no login social');
+                throw new Error(error.message || 'Erro no login social');
             }
 
             return await response.json();
         }
         
         if (provider === 'facebook') {
-            // Simulate Facebook login
-            const email = prompt('Digite seu email do Facebook:');
-            const name = prompt('Digite seu nome:');
-            
-            if (!email || !name) {
-                throw new Error('Email e nome são obrigatórios');
-            }
-            
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                throw new Error('Email inválido');
-            }
-            
-            const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/social-login`, {
+            // Use mock login for Facebook demonstration
+            const response = await fetch('http://localhost:3000/api/auth/mock-login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    email: email,
-                    name: name,
-                    provider: 'facebook',
-                    avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=1877f2&color=fff&size=128`
+                credentials: 'include',
+                body: JSON.stringify({ 
+                    email: 'usuario.facebook@facebook.com', 
+                    userType: 'parent' 
                 }),
             });
 
             if (!response.ok) {
                 const error = await response.json();
-                throw new Error(error.error || 'Erro no login social');
+                throw new Error(error.message || 'Erro no login social');
             }
 
             return await response.json();
