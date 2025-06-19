@@ -117,6 +117,16 @@ Changelog:
     * Poucas Ferramentas Práticas, Cursos Caros e Limitados
     * Desinteresse no Aprendizado Financeiro, Falta de Responsabilidade Financeira
   - User feedback: "Ficou ótimo" - satisfied with recent updates
+
+- June 19, 2025: Content reorganization and color palette update
+  - Expansion section reorganized with new items and specific order
+  - "Programas Educacionais" changed to "Ecosistema Educacional"
+  - Added "Ambiente Seguro" focusing on parental controls
+  - Added "Tecnologia Aplicada" highlighting AI and BitFun virtual currency
+  - New order: Adaptação por Faixa Etária → Adoção Familiar → Ambiente Seguro → Ecosistema Educacional → Tecnologia Aplicada → Parcerias Estratégicas
+  - Updated partnership text to include online stores and focus on experience
+  - Color palette updated: Green primary (#46FE77), Blue secondary (#181D4E), maintained purple accent and dark backgrounds
+  - User feedback: "ficou ótimo agora" - satisfied with color scheme and content organization
 ```
 
 ## User Preferences

@@ -798,8 +798,8 @@ body {
 
 .logo-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
 }
 
 .partner-placeholder {
@@ -1194,6 +1194,12 @@ body {
     /* Apps Comparison */
     .apps-comparison {
         flex-direction: column;
+        gap: 1rem;
+    }
+
+    /* Partnership Logos */
+    .logo-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
