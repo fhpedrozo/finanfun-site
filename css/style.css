@@ -42,6 +42,14 @@
     color: var(--white);
 }
 
+.finanfun-brand.finanfun-hero .finan {
+    color: var(--white);
+}
+
+.finanfun-brand.finanfun-hero .fun {
+    color: var(--primary-green);
+}
+
 /* Custom Coin Icon */
 .coin-icon {
     width: 40px;
