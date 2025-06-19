@@ -212,8 +212,7 @@ class FinanFunAuth {
             
             setTimeout(() => {
                 this.closeModal();
-                // Always redirect to parent dashboard for demonstration
-                window.location.href = 'pages/parent-dashboard.html';
+                this.showDashboardSelection(result.user);
             }, 1500);
             
         } catch (error) {
@@ -556,6 +555,102 @@ class FinanFunAuth {
         setTimeout(() => {
             notification.remove();
         }, 4000);
+    }
+
+    showDashboardSelection(user) {
+        const selectionModal = document.createElement('div');
+        selectionModal.className = 'auth-modal-overlay';
+        selectionModal.innerHTML = `
+            <div class="auth-modal">
+                <div class="modal-header">
+                    <h2>Escolha seu Dashboard</h2>
+                    <p>Qual dashboard você gostaria de acessar?</p>
+                </div>
+                <div class="dashboard-selection">
+                    <div class="dashboard-option" onclick="finanfunAuth.selectDashboard('parent')">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h3>FinanBoss</h3>
+                        <p>Dashboard dos Pais</p>
+                        <small>Controle completo da família</small>
+                    </div>
+                    <div class="dashboard-option" onclick="finanfunAuth.selectDashboard('child')">
+                        <div class="dashboard-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>FinanFun</h3>
+                        <p>Dashboard dos Filhos</p>
+                        <small>Aventura financeira gamificada</small>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(selectionModal);
+
+        // Add CSS for dashboard selection
+        const style = document.createElement('style');
+        style.textContent = `
+            .dashboard-selection {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+                margin-top: 1.5rem;
+            }
+            .dashboard-option {
+                background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+                border: 2px solid transparent;
+                border-radius: 12px;
+                padding: 2rem 1.5rem;
+                text-align: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: white;
+            }
+            .dashboard-option:hover {
+                border-color: var(--primary-green);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(70, 254, 119, 0.3);
+            }
+            .dashboard-icon {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+                color: var(--primary-green);
+            }
+            .dashboard-option h3 {
+                margin: 0.5rem 0;
+                font-size: 1.5rem;
+            }
+            .dashboard-option p {
+                margin: 0.5rem 0;
+                font-size: 1.1rem;
+                font-weight: 500;
+            }
+            .dashboard-option small {
+                color: rgba(255, 255, 255, 0.8);
+                font-size: 0.9rem;
+            }
+            @media (max-width: 768px) {
+                .dashboard-selection {
+                    grid-template-columns: 1fr;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    selectDashboard(type) {
+        const selectionModal = document.querySelector('.auth-modal-overlay');
+        if (selectionModal) {
+            selectionModal.remove();
+        }
+
+        if (type === 'parent') {
+            window.location.href = 'pages/parent-dashboard.html';
+        } else {
+            window.location.href = 'pages/child-dashboard.html';
+        }
     }
 }
 
