@@ -210,7 +210,7 @@ Changelog:
   - ✅ Consistent navigation links updated across all pages
   - ✅ Standard footer implementation with FinanFun branding
   - ✅ Login links added to footer "Links Rápidos" sections
-  - ✅ Mission text updated: "Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro dos jovens através da tecnologia e inovação."
+  - ✅ Mission text updated: "Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação."
   - ✅ Gamification text updated: "Transformamos o aprendizado em uma aventura lúdica e divertida, usando metas, recompensas, jogos e inteligência artificial para manter as crianças engajadas."
   - ✅ Family text updated: "Fortalecemos os laços familiares através de ferramentas que promovem conversas educativas e saudáveis sobre dinheiro e investimentos."
   - ✅ Contact page FinanFun branding corrected to standard pattern: "Finan" in white, "Fun" in green
