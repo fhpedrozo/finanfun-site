@@ -219,6 +219,7 @@ Changelog:
   - ✅ All content changes successfully implemented and visible
   - ✅ Website functioning perfectly with all updates applied
   - ✅ New FAQ added: "Este app é gratuito?" with pricing explanation (basic features free, advanced features paid)
+  - ✅ Values section reorganized in About page: "Inclusão", "Família", "Segurança", "Educação", "Diversão" and "Inovação"
   - 🎯 COMPLETED: All branding consistency and text updates finalized and working
 ```
 
