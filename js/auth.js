@@ -205,15 +205,21 @@ class FinanFunAuth {
             }
             
             const result = await this.realSocialLogin(provider, realName);
-            this.showSuccess(result.message);
             
-            // Store session token
-            localStorage.setItem('finanfun_session', result.session_token);
-            
-            setTimeout(() => {
-                this.closeModal();
-                this.showDashboardSelection(result.user);
-            }, 1500);
+            if (result && result.success) {
+                this.showSuccess(result.message);
+                
+                // Store session token and user data
+                localStorage.setItem('finanfun_session', result.session_token);
+                localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
+                
+                setTimeout(() => {
+                    this.closeModal();
+                    this.showDashboardSelection(result.user);
+                }, 1500);
+            } else {
+                throw new Error('Falha no login social');
+            }
             
         } catch (error) {
             this.showError(error.message || `Erro ao conectar com ${provider}.`);
@@ -312,8 +318,6 @@ class FinanFunAuth {
         }
 
         if (userData) {
-            localStorage.setItem('finanfun_user_data', JSON.stringify(userData));
-            
             return {
                 success: true,
                 user: userData,
@@ -481,14 +485,35 @@ class FinanFunAuth {
     }
     
     showLoading(button) {
+        if (!button) return;
         button.disabled = true;
-        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando...';
+        
+        // Handle social login buttons
+        if (button.classList.contains('social-btn')) {
+            const provider = button.getAttribute('data-provider');
+            const icon = provider === 'google' ? 'fab fa-google' : 'fab fa-facebook-f';
+            button.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Conectando...`;
+        } else {
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Carregando...';
+        }
     }
     
     hideLoading(button) {
+        if (!button) return;
         button.disabled = false;
-        const isLogin = button.closest('#loginForm');
-        button.innerHTML = isLogin ? 'Entrar' : 'Criar Conta';
+        
+        // Handle social login buttons
+        if (button.classList.contains('social-btn')) {
+            const provider = button.getAttribute('data-provider');
+            if (provider === 'google') {
+                button.innerHTML = '<i class="fab fa-google"></i> Continuar com Google';
+            } else if (provider === 'facebook') {
+                button.innerHTML = '<i class="fab fa-facebook-f"></i> Continuar com Facebook';
+            }
+        } else {
+            const isLogin = button.closest('#loginForm');
+            button.innerHTML = isLogin ? 'Entrar' : 'Criar Conta';
+        }
     }
     
     showSuccess(message) {
