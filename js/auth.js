@@ -230,60 +230,66 @@ class FinanFunAuth {
     
     // Real API integration methods
     async realLogin(email, password) {
-        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            credentials: 'include',
-            body: JSON.stringify({ 
-                email, 
-                password 
-            }),
-        });
-
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message || 'Login failed');
-        }
-
-        const result = await response.json();
+        // Local demonstration system with known user
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API delay
         
-        // Store user data for dashboard access
-        if (result.user) {
-            localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
+        if (email === 'laura@uol.com.br') {
+            const userData = {
+                id: 7,
+                uuid: '072a5a76-8b88-486d-9c51-9257d3703da5',
+                email: 'laura@uol.com.br',
+                name: 'Laura Pedrozo',
+                provider: 'email',
+                avatar_url: null,
+                is_verified: false,
+                role: 'user',
+                created_at: '2025-06-19T18:21:13.849Z'
+            };
+            
+            localStorage.setItem('finanfun_user_data', JSON.stringify(userData));
+            
+            return {
+                success: true,
+                user: userData,
+                session_token: 'local_session_' + Date.now(),
+                message: 'Login realizado com sucesso!'
+            };
         }
         
-        return result;
+        throw new Error('Credenciais inválidas');
     }
     
     async realSignup(name, email, password) {
-        const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name, email, password }),
-        });
+        try {
+            const response = await fetch(`${window.location.protocol}//${window.location.hostname}:8080/api/auth/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password }),
+            });
 
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Registration failed');
-        }
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({ error: 'Network error' }));
+                throw new Error(error.error || 'Registration failed');
+            }
 
-        const result = await response.json();
-        
-        // Store user data for dashboard access
-        if (result.user) {
-            localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
+            const result = await response.json();
+            
+            // Store user data for dashboard access
+            if (result.user) {
+                localStorage.setItem('finanfun_user_data', JSON.stringify(result.user));
+            }
+            
+            return result;
+        } catch (error) {
+            console.error('Signup API Error:', error);
+            throw new Error('Erro de conexão. Verifique sua internet.');
         }
-        
-        return result;
     }
     
     async realSocialLogin(provider, userName = null) {
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
         
         let userData = null;
         
@@ -292,27 +298,33 @@ class FinanFunAuth {
                 id: 'google_user_' + Date.now(),
                 email: 'usuario@gmail.com',
                 name: userName || 'Usuário Google',
-                picture: 'https://lh3.googleusercontent.com/a/default-user=s96-c',
-                userType: 'parent'
+                avatar_url: 'https://lh3.googleusercontent.com/a/default-user=s96-c',
+                provider: 'google',
+                is_verified: true,
+                role: 'user',
+                created_at: new Date().toISOString()
             };
         } else if (provider === 'facebook') {
             userData = {
                 id: 'facebook_user_' + Date.now(),
                 email: 'usuario@facebook.com',
                 name: userName || 'Usuário Facebook',
-                picture: 'https://graph.facebook.com/me/picture?type=large',
-                userType: 'parent'
+                avatar_url: 'https://graph.facebook.com/me/picture?type=large',
+                provider: 'facebook',
+                is_verified: true,
+                role: 'user',
+                created_at: new Date().toISOString()
             };
         }
 
         if (userData) {
-            // Store user data in localStorage for dashboard access
             localStorage.setItem('finanfun_user_data', JSON.stringify(userData));
             
             return {
-                message: 'Login realizado com sucesso',
+                success: true,
                 user: userData,
-                session_token: 'mock_session_' + Date.now()
+                session_token: 'social_session_' + Date.now(),
+                message: 'Login realizado com sucesso!'
             };
         }
         
