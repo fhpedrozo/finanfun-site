@@ -2,28 +2,20 @@ class ChildDashboard {
     constructor() {
         this.userData = null;
         this.dashboardData = null;
-        this.init().catch(error => {
-            console.error('Dashboard initialization error:', error);
-            this.hideLoadingScreen();
-        });
+        this.init();
     }
 
     async init() {
-        try {
-            console.log('Child Dashboard initializing...');
-            await this.loadUserData();
-            await this.loadDashboardData();
-            this.updateUserDisplay();
-            this.updateBalanceCards();
-            this.loadTasks();
-            this.loadAchievements();
-            this.setupEventListeners();
-            this.initializeAvatarChat();
-            this.hideLoadingScreen();
-        } catch (error) {
-            console.error('Init error:', error);
-            this.hideLoadingScreen();
-        }
+        console.log('Child Dashboard initializing...');
+        await this.loadUserData();
+        await this.loadDashboardData();
+        this.updateUserDisplay();
+        this.updateBalanceCards();
+        this.loadTasks();
+        this.loadAchievements();
+        this.setupEventListeners();
+        this.initializeAvatarChat();
+        this.hideLoadingScreen();
     }
 
     async loadUserData() {
