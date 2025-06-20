@@ -281,6 +281,12 @@ Changelog:
   - ✅ Cleared browser caches and restarted web server
   - 💾 BACKUP CREATED: FinanFun_ChildDashboard_Fixed_2025-06-20.tar.gz
   - 🎯 STATUS: Child dashboard should now load properly with same pattern as parent dashboard
+
+- June 20, 2025: Homepage text update completed
+  - ✅ Updated main description text to emphasize customization and AI features
+  - ✅ Changed "gamificação" to "atividades práticas" as requested
+  - ✅ Added "customizável" to highlight app personalization capabilities
+  - ✅ Text now reads: "O primeiro aplicativo customizável de controle e educação financeira especialmente desenvolvido para crianças e adolescentes, combinando atividades práticas com inteligência artificial para ensinar sobre dinheiro de forma prática e divertida."
 ```
 
 ## User Preferences
