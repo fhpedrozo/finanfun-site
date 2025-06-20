@@ -305,6 +305,9 @@ Changelog:
   - ✅ Updated cache-busting on: index.html, sobre.html, contato.html, parent-dashboard.html, child-dashboard.html
   - ✅ Server restarted and all pages loading with fresh cache
   - 💾 BACKUP CREATED: FinanFun_Final_Updated_2025-06-20.tar.gz with all latest changes
+  - ✅ Footer text updated in index.html: "Construindo o futuro financeiro" changed to "Formando futuros investidores"
+  - ✅ Cache refresh applied (v=20250620-0235) and server restarted
+  - ✅ Text consistency verified across all pages: sobre.html and contato.html already had correct text
 ```
 
 ## User Preferences
