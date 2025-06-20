@@ -301,6 +301,10 @@ Changelog:
   - ✅ CSS updated (v=20250620-0220) for better image presentation and professional appearance
   - ✅ App mockup image updated again with enhanced interface showing Isabela Silva (R$342,00, 280 BitFun, complete menu, Nina avatar)
   - ✅ Cache refresh applied (v=20250620-0225) and server restarted
+  - ✅ Complete cache cleanup applied to all pages with timestamp 20250620-0230
+  - ✅ Updated cache-busting on: index.html, sobre.html, contato.html, parent-dashboard.html, child-dashboard.html
+  - ✅ Server restarted and all pages loading with fresh cache
+  - 💾 BACKUP CREATED: FinanFun_Final_Updated_2025-06-20.tar.gz with all latest changes
 ```
 
 ## User Preferences
