@@ -292,6 +292,7 @@ Changelog:
   - ✅ About page values section updated: "Orientamos nosso trabalho por valores que refletem nosso compromisso com a educação de qualidade e transformação financeira."
   - ✅ Cache issues resolved by updating CSS version timestamps and restarting web server
   - 💡 CACHE FIX COMMAND: Update CSS links with new timestamp (e.g., ?v=20250620-HHMM) + restart workflow to force browser cache refresh
+  - ✅ Applied cache fix to all pages: index.html, sobre.html, contato.html, parent-dashboard.html, child-dashboard.html with timestamp 20250620-0201
 ```
 
 ## User Preferences
