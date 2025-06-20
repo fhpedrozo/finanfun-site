@@ -289,6 +289,7 @@ Changelog:
   - ✅ Updated expansion section text to include "faixas etárias" specification
   - ✅ Hero section text: "O primeiro aplicativo customizável de controle e educação financeira especialmente desenvolvido para crianças e adolescentes, combinando atividades práticas com inteligência artificial para ensinar sobre dinheiro de forma prática e divertida."
   - ✅ Expansion section text: "O FinanFun foi projetado para crescer e se adaptar às necessidades de diferentes públicos, faixas etárias e contextos educacionais."
+  - ✅ About page values section updated: "Orientamos nosso trabalho por valores que refletem nosso compromisso com a educação de qualidade e transformação financeira."
 ```
 
 ## User Preferences
