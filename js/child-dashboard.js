@@ -2,41 +2,33 @@ class ChildDashboard {
     constructor() {
         this.userData = null;
         this.dashboardData = null;
-        
-        // Use setTimeout to avoid promise rejection issues
-        setTimeout(() => {
-            this.init();
-        }, 100);
+        this.init();
     }
 
-    init() {
+    async init() {
         console.log('Child Dashboard initializing...');
-        
-        // Load data synchronously
-        this.loadUserData();
-        this.loadDashboardData();
-        
-        // Update UI components
+        await this.loadUserData();
+        await this.loadDashboardData();
         this.updateUserDisplay();
         this.updateBalanceCards();
         this.loadTasks();
         this.loadAchievements();
         this.setupEventListeners();
         this.initializeAvatarChat();
-        
-        // Hide loading screen
         this.hideLoadingScreen();
-        
-        console.log('Child Dashboard initialized successfully');
     }
 
-    loadUserData() {
+    async loadUserData() {
         try {
             const sessionToken = localStorage.getItem('finanfun_session');
             const storedUserData = localStorage.getItem('finanfun_user_data');
             
+            console.log('Session token:', sessionToken);
+            console.log('Stored user data:', storedUserData);
+            
             if (sessionToken && storedUserData) {
                 const userData = JSON.parse(storedUserData);
+                console.log('Parsed user data:', userData);
                 
                 this.userData = {
                     id: userData.id,
@@ -46,22 +38,23 @@ class ChildDashboard {
                     profileImageUrl: userData.avatar_url || userData.picture || 'https://via.placeholder.com/150',
                     userType: 'child'
                 };
-                console.log('User data loaded successfully:', this.userData.firstName);
+                
+                console.log('User data loaded successfully:', this.userData);
             } else {
-                console.log('No session found, using demo data');
+                console.log('No session found, using demo data for child dashboard');
                 this.userData = {
-                    id: 'demo_user',
+                    id: 'demo_child',
                     firstName: 'Jovem',
-                    lastName: 'Investidor', 
+                    lastName: 'Investidor',
                     email: 'jovem@finanfun.com',
                     profileImageUrl: 'https://via.placeholder.com/150',
                     userType: 'child'
                 };
             }
         } catch (error) {
-            console.log('Loading demo user data due to error:', error.message);
+            console.error('Error loading user data:', error);
             this.userData = {
-                id: 'demo_user',
+                id: 'demo_child',
                 firstName: 'Jovem',
                 lastName: 'Investidor',
                 email: 'jovem@finanfun.com',
@@ -71,8 +64,9 @@ class ChildDashboard {
         }
     }
 
-    loadDashboardData() {
+    async loadDashboardData() {
         try {
+            // Mock data for child dashboard
             this.dashboardData = {
                 balance: {
                     real: 150.00,
@@ -113,9 +107,8 @@ class ChildDashboard {
                     }
                 ]
             };
-            console.log('Dashboard data loaded successfully');
         } catch (error) {
-            console.log('Error loading dashboard data, using defaults:', error.message);
+            console.error('Error loading dashboard data:', error);
             this.dashboardData = {
                 balance: { real: 0, bitfun: 0 },
                 tasks: [],
@@ -140,80 +133,57 @@ class ChildDashboard {
     }
 
     updateBalanceCards() {
-        if (!this.dashboardData) return;
+        if (!this.dashboardData || !this.dashboardData.balance) return;
         
-        const bitfunBalanceElement = document.getElementById('bitfun-balance');
         const realBalanceElement = document.getElementById('real-balance');
-        
-        if (bitfunBalanceElement) {
-            bitfunBalanceElement.textContent = `${this.dashboardData.bitfunBalance} BFN`;
-        }
+        const bitfunBalanceElement = document.getElementById('bitfun-balance');
         
         if (realBalanceElement) {
-            realBalanceElement.textContent = `R$ ${this.dashboardData.realBalance.toFixed(2)}`;
+            const realBalance = this.dashboardData.balance.real || 0;
+            realBalanceElement.textContent = `R$ ${realBalance.toFixed(2)}`;
+        }
+        
+        if (bitfunBalanceElement) {
+            const bitfunBalance = this.dashboardData.balance.bitfun || 0;
+            bitfunBalanceElement.textContent = `${bitfunBalance} BFN`;
         }
     }
 
     loadTasks() {
         const tasksContainer = document.getElementById('tasks-container');
-        if (!tasksContainer) return;
-        
-        // Mock tasks for demonstration
-        const mockTasks = [
-            {
-                id: 1,
-                title: 'Leitura Diária',
-                description: 'Leia sobre poupança por 15 minutos',
-                reward: '10 BFN',
-                completed: false
-            },
-            {
-                id: 2,
-                title: 'Economize Hoje',
-                description: 'Não gaste dinheiro desnecessário',
-                reward: '5 BFN',
-                completed: true
-            },
-            {
-                id: 3,
-                title: 'Quiz Financeiro',
-                description: 'Complete o quiz sobre investimentos',
-                reward: '15 BFN',
-                completed: false
-            }
-        ];
-        
-        this.renderTasks(mockTasks);
-        this.updateTaskProgress(mockTasks);
-    }
-
-    renderTasks(tasks) {
-        const tasksContainer = document.getElementById('tasks-container');
-        if (!tasksContainer) return;
+        if (!tasksContainer || !this.dashboardData.tasks) return;
         
         tasksContainer.innerHTML = '';
         
-        tasks.forEach(task => {
+        this.dashboardData.tasks.forEach(task => {
             const taskItem = document.createElement('div');
             taskItem.className = `task-item ${task.completed ? 'completed' : ''}`;
             taskItem.innerHTML = `
                 <div class="task-info">
                     <h4>${task.title}</h4>
                     <p>${task.description}</p>
+                    <div class="task-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${task.progress}%"></div>
+                        </div>
+                        <span>${task.progress}%</span>
+                    </div>
                 </div>
-                <div class="task-actions">
-                    <span class="task-reward">${task.reward}</span>
-                    ${!task.completed ? `<button onclick="childDashboard.completeTask(${task.id})" class="complete-btn">Completar</button>` : '<span class="completed-badge">✓ Concluído</span>'}
+                <div class="task-reward">
+                    <span>+${task.reward} BFN</span>
+                    ${!task.completed ? '<button class="complete-btn" onclick="completeTask(' + task.id + ')">Completar</button>' : '<span class="completed-badge">✓</span>'}
                 </div>
             `;
             tasksContainer.appendChild(taskItem);
         });
+        
+        this.updateTaskProgress(this.dashboardData.tasks);
     }
 
     updateTaskProgress(tasks) {
         const completedTasks = tasks.filter(task => task.completed).length;
         const totalTasks = tasks.length;
-        const progressPercentage = (completedTasks / totalTasks) * 100;
+        const progressPercentage = totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0;
         
         const taskProgressElement = document.getElementById('task-progress');
         const taskProgressFillElement = document.getElementById('task-progress-fill');
@@ -231,7 +201,8 @@ class ChildDashboard {
         const achievementsContainer = document.getElementById('achievements-container');
         if (!achievementsContainer) return;
         
-        // Mock achievements for demonstration
+        achievementsContainer.innerHTML = '';
+        
         const mockAchievements = [
             {
                 id: 1,
@@ -249,23 +220,14 @@ class ChildDashboard {
             },
             {
                 id: 3,
-                title: 'Investidor Junior',
-                description: 'Completou módulo de investimentos',
+                title: 'Investidor',
+                description: 'Primeiro investimento',
                 icon: 'fas fa-chart-line',
                 unlocked: false
             }
         ];
         
-        this.renderAchievements(mockAchievements);
-    }
-
-    renderAchievements(achievements) {
-        const achievementsContainer = document.getElementById('achievements-container');
-        if (!achievementsContainer) return;
-        
-        achievementsContainer.innerHTML = '';
-        
-        achievements.forEach(achievement => {
+        mockAchievements.forEach(achievement => {
             const achievementItem = document.createElement('div');
             achievementItem.className = `achievement-item ${achievement.unlocked ? 'unlocked' : 'locked'}`;
             achievementItem.innerHTML = `
@@ -288,7 +250,7 @@ class ChildDashboard {
     }
 
     initializeAvatarChat() {
-        const learningProgress = 45; // Mock learning progress
+        const learningProgress = 45;
         const learningPercentageElement = document.getElementById('learning-percentage');
         const learningProgressFillElement = document.getElementById('learning-progress-fill');
         
@@ -303,57 +265,20 @@ class ChildDashboard {
 
     async completeTask(taskId) {
         try {
-            // Mock task completion
             alert(`Parabéns! Você completou a tarefa e ganhou BitFun!`);
-            
-            // In a real implementation, this would call the API
-            // await this.addBitfunTransaction(10, 'earned', 'Tarefa completada', 'task_' + taskId);
-            
-            // Reload tasks to update UI
             this.loadTasks();
-            
         } catch (error) {
             console.error('Error completing task:', error);
             this.showError('Erro ao completar tarefa');
         }
     }
 
-    async addBitfunTransaction(amount, type, description, source) {
-        try {
-            const response = await fetch('http://localhost:3000/api/bitfun/transaction', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    amount,
-                    type,
-                    description,
-                    source
-                })
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to add transaction');
-            }
-            
-            // Reload dashboard data to update balances
-            await this.loadDashboardData();
-            this.updateBalanceCards();
-            
-        } catch (error) {
-            console.error('Error adding BitFun transaction:', error);
-            throw error;
-        }
-    }
-
     viewTransactions(accountType) {
-        alert(`Visualizar transações da conta: ${accountType}`);
+        alert(`Ver transações ${accountType} será implementado em breve!`);
     }
 
     viewGoals() {
-        alert('Visualizar metas será implementado em breve!');
+        alert('Ver metas será implementado em breve!');
     }
 
     continueLearning() {
@@ -377,11 +302,8 @@ class ChildDashboard {
 
     async logout() {
         try {
-            // Clear local session data
             localStorage.removeItem('finanfun_session');
             localStorage.removeItem('finanfun_user_data');
-            
-            // Redirect to home page
             window.location.href = '../index.html';
         } catch (error) {
             console.error('Logout error:', error);
@@ -390,28 +312,19 @@ class ChildDashboard {
     }
 
     getDefaultAvatar() {
-        return 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0NkZFNzciLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik0xMiAxMkM3LjU4MTcyIDEyIDQgMTUuNTgxNyA0IDIwVjIySDIwVjIwQzIwIDE1LjU4MTcgMTYuNDE4MyAxMiAxMiAxMloiIGZpbGw9IiMwRDExMTciLz4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjMEQxMTE3Ii8+Cjwvc3ZnPgo8L3N2Zz4K';
+        return 'https://via.placeholder.com/80x80/46FE77/ffffff?text=👤';
     }
 
     hideLoadingScreen() {
         const loadingScreen = document.getElementById('loading-screen');
         const dashboardContainer = document.getElementById('dashboard-container');
         
-        console.log('Hiding loading screen and showing dashboard');
-        
         if (loadingScreen) {
             loadingScreen.style.display = 'none';
-            console.log('Loading screen hidden');
-        } else {
-            console.log('Loading screen element not found');
         }
         
         if (dashboardContainer) {
             dashboardContainer.classList.remove('hidden');
-            dashboardContainer.style.display = 'block';
-            console.log('Dashboard container shown');
-        } else {
-            console.log('Dashboard container element not found');
         }
     }
 
@@ -424,10 +337,9 @@ class ChildDashboard {
     }
 }
 
-// Global instance and functions for event handlers
+// Global functions for inline event handlers
 let childDashboard = null;
 
-// Global functions for inline event handlers
 window.viewTransactions = function(accountType) {
     if (childDashboard) {
         childDashboard.viewTransactions(accountType);
@@ -464,34 +376,13 @@ window.toggleChat = function() {
     }
 };
 
-window.sendMessage = function() {
-    const chatInput = document.getElementById('chat-input');
-    const chatMessages = document.getElementById('chat-messages');
-    
-    if (chatInput && chatMessages && chatInput.value.trim()) {
-        const userMessage = chatInput.value.trim();
-        
-        // Add user message
-        const userMessageDiv = document.createElement('div');
-        userMessageDiv.className = 'chat-message user';
-        userMessageDiv.innerHTML = `<p>${userMessage}</p>`;
-        chatMessages.appendChild(userMessageDiv);
-        
-        // Add bot response (mock)
-        setTimeout(() => {
-            const botMessageDiv = document.createElement('div');
-            botMessageDiv.className = 'chat-message bot';
-            botMessageDiv.innerHTML = `<p>Ótima pergunta! Continue explorando e aprendendo sobre finanças. Que tal completar uma tarefa hoje?</p>`;
-            chatMessages.appendChild(botMessageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
-        
-        chatInput.value = '';
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+window.completeTask = function(taskId) {
+    if (childDashboard) {
+        childDashboard.completeTask(taskId);
     }
 };
 
-// Initialize dashboard when page loads
-document.addEventListener('DOMContentLoaded', () => {
+// Initialize dashboard when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
     childDashboard = new ChildDashboard();
 });
