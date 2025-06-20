@@ -299,6 +299,8 @@ Changelog:
   - ✅ Image cache-busting applied (v=20250620-0216) and server restarted
   - ✅ App mockup styling improved: black background, optimized padding, centered layout, minimized white spaces
   - ✅ CSS updated (v=20250620-0220) for better image presentation and professional appearance
+  - ✅ App mockup image updated again with enhanced interface showing Isabela Silva (R$342,00, 280 BitFun, complete menu, Nina avatar)
+  - ✅ Cache refresh applied (v=20250620-0225) and server restarted
 ```
 
 ## User Preferences
