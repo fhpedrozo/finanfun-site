@@ -297,6 +297,8 @@ Changelog:
   - ✅ Cache refresh applied with timestamp 20250620-0209 and server restart
   - ✅ App mockup image updated with new FinanFun interface screenshot showing Pedro user with R$35,90 and 185 BitFun
   - ✅ Image cache-busting applied (v=20250620-0216) and server restarted
+  - ✅ App mockup styling improved: black background, optimized padding, centered layout, minimized white spaces
+  - ✅ CSS updated (v=20250620-0220) for better image presentation and professional appearance
 ```
 
 ## User Preferences

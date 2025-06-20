@@ -300,15 +300,21 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    background: #000000;
+    border-radius: 35px;
+    padding: 20px;
+    max-width: 340px;
+    margin: 0 auto;
 }
 
 .phone-mockup {
-    max-width: 300px;
+    max-width: 100%;
     height: auto;
     border-radius: 25px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     transition: transform 0.3s ease;
-    object-fit: cover;
+    object-fit: contain;
+    background: #000000;
 }
 
 /* Section Styles */
