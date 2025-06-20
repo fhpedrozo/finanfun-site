@@ -295,6 +295,8 @@ Changelog:
   - ✅ Applied cache fix to all pages: index.html, sobre.html, contato.html, parent-dashboard.html, child-dashboard.html with timestamp 20250620-0201
   - ✅ Footer text updated across pages: "Educação financeira divertida para crianças e adolescentes. Formando futuros investidores através da tecnologia e inovação."
   - ✅ Cache refresh applied with timestamp 20250620-0209 and server restart
+  - ✅ App mockup image updated with new FinanFun interface screenshot showing Pedro user with R$35,90 and 185 BitFun
+  - ✅ Image cache-busting applied (v=20250620-0216) and server restarted
 ```
 
 ## User Preferences
