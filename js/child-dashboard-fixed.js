@@ -141,17 +141,19 @@ class ChildDashboard {
     }
 
     updateBalanceCards() {
-        if (!this.dashboardData) return;
+        if (!this.dashboardData || !this.dashboardData.balance) return;
         
         const realBalanceElement = document.getElementById('real-balance');
         const bitfunBalanceElement = document.getElementById('bitfun-balance');
         
         if (realBalanceElement) {
-            realBalanceElement.textContent = `R$ ${this.dashboardData.balance.real.toFixed(2)}`;
+            const realBalance = this.dashboardData.balance.real || 0;
+            realBalanceElement.textContent = `R$ ${realBalance.toFixed(2)}`;
         }
         
         if (bitfunBalanceElement) {
-            bitfunBalanceElement.textContent = `${this.dashboardData.balance.bitfun} BFN`;
+            const bitfunBalance = this.dashboardData.balance.bitfun || 0;
+            bitfunBalanceElement.textContent = `${bitfunBalance} BFN`;
         }
     }
 
