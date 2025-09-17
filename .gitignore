@@ -1,0 +1,5 @@
+*.tar.gz
+attached_assets/
+backup_checkpoint_2025-06-19/
+node_modules/
+.env
