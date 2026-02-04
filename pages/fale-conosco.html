@@ -91,6 +91,21 @@
             color: var(--primary-green);
         }
 
+        .nav-link.login-btn {
+            background: var(--primary-green);
+            color: var(--dark-bg);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link.login-btn:hover {
+            background: transparent;
+            color: var(--primary-green);
+            box-shadow: inset 0 0 0 2px var(--primary-green);
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -314,14 +329,9 @@
                 <li><a href="../index.html" class="nav-link">Voltar ao Início</a></li>
                 <li><a href="../index.html#problema" class="nav-link">O Problema</a></li>
                 <li><a href="../index.html#solucao" class="nav-link">Solução</a></li>
-                <li><a href="../index.html#funcionalidades" class="nav-link">Como Funciona</a></li>
                 <li><a href="sobre.html" class="nav-link">Sobre</a></li>
-                <li>
-                    <button id="login-btn" class="btn btn-primary">
-                        <i class="fas fa-user" style="margin-right: 0.5rem;"></i>
-                        Login
-                    </button>
-                </li>
+                <li><a href="../blog.html" class="nav-link login-btn">Blog</a></li>
+                <li><a href="../educa.html" class="nav-link login-btn">Educa</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
