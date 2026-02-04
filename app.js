@@ -257,8 +257,8 @@ app.get('/api/health', async (req, res) => {
 // Serve static files (HTML, CSS, JS)
 app.use(express.static('.'));
 
-// Catch-all handler for SPA routes
-app.get('*', (req, res) => {
+// Catch-all handler for SPA routes (Express 5 syntax)
+app.get('/{*path}', (req, res) => {
   // Skip API routes
   if (req.path.startsWith('/api/')) {
     return res.status(404).json({ error: 'API endpoint not found' });

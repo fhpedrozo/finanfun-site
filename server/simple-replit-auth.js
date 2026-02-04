@@ -42,23 +42,13 @@ app.use(session({
 // Initialize database tables
 async function initializeDatabase() {
   try {
-    await pool.query(`
-      CREATE TABLE IF NOT EXISTS users (
-        id VARCHAR PRIMARY KEY,
-        email VARCHAR UNIQUE,
-        first_name VARCHAR,
-        last_name VARCHAR,
-        profile_image_url VARCHAR,
-        user_type VARCHAR DEFAULT 'parent',
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-
+    // Note: users table already exists with id as INTEGER, so we skip creation
+    // and create auxiliary tables that reference the existing structure
+    
     await pool.query(`
       CREATE TABLE IF NOT EXISTS user_profiles (
         id SERIAL PRIMARY KEY,
-        user_id VARCHAR REFERENCES users(id) ON DELETE CASCADE,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
         display_name VARCHAR,
         age INTEGER,
         avatar_url VARCHAR,
@@ -71,7 +61,7 @@ async function initializeDatabase() {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS accounts (
         id SERIAL PRIMARY KEY,
-        user_id VARCHAR REFERENCES users(id) ON DELETE CASCADE,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
         account_type VARCHAR NOT NULL,
         balance DECIMAL(10,2) DEFAULT 0.00,
         currency VARCHAR DEFAULT 'BRL',
@@ -83,7 +73,7 @@ async function initializeDatabase() {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS bitfun_transactions (
         id SERIAL PRIMARY KEY,
-        user_id VARCHAR REFERENCES users(id) ON DELETE CASCADE,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
         amount DECIMAL(10,2) NOT NULL,
         transaction_type VARCHAR NOT NULL,
         description TEXT,
