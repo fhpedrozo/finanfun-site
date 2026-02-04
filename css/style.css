@@ -231,11 +231,22 @@ body {
 .hero-title {
     font-size: 4rem;
     font-weight: bold;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     margin-bottom: 1rem;
+}
+
+.hero-title.finanfun-brand {
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+}
+
+.hero-title.finanfun-brand .finan {
+    color: var(--white);
+}
+
+.hero-title.finanfun-brand .fun {
+    color: var(--primary-green);
 }
 
 .hero-subtitle {
