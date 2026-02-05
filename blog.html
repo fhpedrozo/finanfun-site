@@ -3,16 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Blog - FinanFun</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #46FE77;
+            --dark-bg: #0f172a;
+            --dark-navy: #0a1628;
+            --text-light: #ffffff;
+            --text-gray: #94a3b8;
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-navy);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo h2 a {
+            text-decoration: none;
+        }
+
+        .finan-text {
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .fun-text {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .main-content {
+            padding-top: 120px;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-placeholder {
+            text-align: center;
+            color: white;
+        }
+
+        .blog-placeholder h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-placeholder p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #46FE77, #2DD4BF);
+            color: #0a1628;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-voltar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(70, 254, 119, 0.4);
+        }
+
+        .newsletter-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(70, 254, 119, 0.1) 0%, transparent 50%);
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(70, 254, 119, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            white-space: nowrap;
+            background: var(--primary-green);
+            color: var(--dark-bg);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #38cc5f;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            padding: 2rem 0;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section h4 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(15, 20, 25, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .newsletter-input-group {
+                flex-direction: column;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--dark-navy, #0a1628);">
-        <div style="text-align: center; color: white;">
-            <h1 style="font-size: 3rem; margin-bottom: 1rem;">Blog</h1>
-            <p style="font-size: 1.2rem; opacity: 0.8;">Em breve...</p>
-            <a href="/" style="display: inline-block; margin-top: 2rem; padding: 12px 30px; background: linear-gradient(135deg, #46FE77, #2DD4BF); color: #0a1628; text-decoration: none; border-radius: 25px; font-weight: bold;">Voltar ao Início</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html">
+                    <span class="finan-text">Finan</span><span class="fun-text">Fun</span>
+                </a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
+                <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="blog-placeholder">
+            <h1>Blog</h1>
+            <p>Em breve...</p>
+            <a href="index.html" class="btn-voltar">Voltar ao Início</a>
+        </div>
+    </main>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Digite seu e-mail" required class="newsletter-input" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn">Enviar</button>
+                    </div>
+                </form>
+                <p class="newsletter-message" id="newsletterMessage" style="display: none;"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--gradient-dark); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 3rem 0;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
+                    <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="educa.html">Educa</a></li>
+                        <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="color: var(--text-gray); margin: 0;">
+                    &copy; 2025 <span style="color: var(--text-light); font-weight: 600;">Finan</span><span style="color: var(--primary-green); font-weight: 600;">Fun</span>. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
