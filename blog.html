@@ -453,12 +453,8 @@
                 começou.
             </p>
             <div class="blog-filters">
-                <button class="filter-btn active">Todos</button>
-                <button class="filter-btn">Educação Financeira</button>
-                <button class="filter-btn">Investimentos</button>
-                <button class="filter-btn">Empreendedorismo</button>
-                <button class="filter-btn">Dicas Práticas</button>
-                <button class="filter-btn">Tecnologia</button>
+                <button class="filter-btn active" data-category="">Todos</button>
+                <!-- Categorias serão carregadas dinamicamente pelo JavaScript -->
             </div>
             
             <div class="blog-search">
@@ -469,49 +465,7 @@
         
         <section class="blog-articles">
             <div class="articles-grid">
-                <article class="article-card">
-                    <div class="article-image">
-                        <div class="placeholder-image"></div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Título do artigo em breve</h3>
-                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
-                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                
-                <article class="article-card">
-                    <div class="article-image">
-                        <div class="placeholder-image"></div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Título do artigo em breve</h3>
-                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
-                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                
-                <article class="article-card">
-                    <div class="article-image">
-                        <div class="placeholder-image"></div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Título do artigo em breve</h3>
-                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
-                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-                
-                <article class="article-card">
-                    <div class="article-image">
-                        <div class="placeholder-image"></div>
-                    </div>
-                    <div class="article-content">
-                        <h3 class="article-title">Título do artigo em breve</h3>
-                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
-                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
+                <!-- Posts serão carregados dinamicamente pelo JavaScript -->
             </div>
             
             <div class="load-more-container">
@@ -563,6 +517,7 @@
         </div>
     </footer>
 
+    <!-- Script do menu hamburguer -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -576,5 +531,8 @@
             }
         });
     </script>
+    
+    <!-- Script de integração com WordPress -->
+    <script src="js/blog.js"></script>
 </body>
 </html>
