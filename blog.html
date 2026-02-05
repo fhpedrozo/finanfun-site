@@ -103,41 +103,71 @@
         .main-content {
             padding-top: 120px;
             min-height: 60vh;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .blog-header {
+            margin-bottom: 3rem;
+        }
+
+        .blog-title {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
 
-        .blog-placeholder {
-            text-align: center;
-            color: white;
+        .blog-icon {
+            font-size: 1.8rem;
+            color: var(--primary-green);
         }
 
-        .blog-placeholder h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+        .blog-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
         }
 
-        .blog-placeholder p {
-            font-size: 1.2rem;
-            opacity: 0.8;
+        .blog-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-gray);
             margin-bottom: 2rem;
         }
 
-        .btn-voltar {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #46FE77, #2DD4BF);
-            color: #0a1628;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
+        .blog-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
         }
 
-        .btn-voltar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(70, 254, 119, 0.4);
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--text-light);
+        }
+
+        .filter-btn:hover {
+            background: rgba(70, 254, 119, 0.1);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: #0a1628;
+            border-color: var(--primary-green);
+        }
+
+        .blog-posts {
+            margin-top: 2rem;
         }
 
         .newsletter-section {
@@ -267,10 +297,29 @@
     </nav>
 
     <main class="main-content">
-        <div class="blog-placeholder">
-            <h1>Blog</h1>
-            <p>Em breve...</p>
-            <a href="index.html" class="btn-voltar">Voltar ao Início</a>
+        <div class="blog-header">
+            <div class="blog-title">
+                <i class="far fa-check-square blog-icon"></i>
+                <h1><span class="finan-text">Finan</span><span class="fun-text">Fun</span> Blog</h1>
+            </div>
+            <p class="blog-description">
+                Dicas valiosas, tutoriais práticos, tendências e ferramentas para você dominar a 
+                educação financeira e aplicar no seu dia a dia com clareza, velocidade e impacto 
+                real. Aprenda com cases, explore novas ideias e fique por dentro do futuro que já 
+                começou.
+            </p>
+            <div class="blog-filters">
+                <button class="filter-btn active">Todos</button>
+                <button class="filter-btn">Educação Financeira</button>
+                <button class="filter-btn">Investimentos</button>
+                <button class="filter-btn">Empreendedorismo</button>
+                <button class="filter-btn">Dicas Práticas</button>
+                <button class="filter-btn">Tecnologia</button>
+            </div>
+        </div>
+        
+        <div class="blog-posts">
+            <!-- Área para posts do blog -->
         </div>
     </main>
 
