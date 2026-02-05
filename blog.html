@@ -166,8 +166,152 @@
             border-color: var(--primary-green);
         }
 
-        .blog-posts {
+        .blog-search {
             margin-top: 2rem;
+            position: relative;
+            max-width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3rem;
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .blog-articles {
+            margin-top: 3rem;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .article-summary {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: gap 0.3s ease;
+        }
+
+        .article-link:hover {
+            gap: 0.75rem;
+        }
+
+        .load-more-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .load-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(70, 254, 119, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .newsletter-section {
@@ -316,11 +460,66 @@
                 <button class="filter-btn">Dicas Práticas</button>
                 <button class="filter-btn">Tecnologia</button>
             </div>
+            
+            <div class="blog-search">
+                <input type="text" placeholder="Pesquise no blog" class="search-input" id="blogSearch">
+                <i class="fas fa-search search-icon"></i>
+            </div>
         </div>
         
-        <div class="blog-posts">
-            <!-- Área para posts do blog -->
-        </div>
+        <section class="blog-articles">
+            <div class="articles-grid">
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="placeholder-image"></div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Título do artigo em breve</h3>
+                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
+                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="placeholder-image"></div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Título do artigo em breve</h3>
+                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
+                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="placeholder-image"></div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Título do artigo em breve</h3>
+                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
+                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                
+                <article class="article-card">
+                    <div class="article-image">
+                        <div class="placeholder-image"></div>
+                    </div>
+                    <div class="article-content">
+                        <h3 class="article-title">Título do artigo em breve</h3>
+                        <p class="article-summary">Resumo do artigo será inserido aqui. Uma breve descrição do conteúdo para atrair o leitor.</p>
+                        <a href="#" class="article-link">Leia mais <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+            
+            <div class="load-more-container">
+                <button class="load-more-btn">
+                    <i class="fas fa-sync-alt"></i> Carregar mais
+                </button>
+            </div>
+        </section>
     </main>
 
     <section class="newsletter-section">
