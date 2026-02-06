@@ -209,9 +209,19 @@ function filterByCategory(categoryId) {
  * Filtra posts por busca
  */
 function filterBySearch(searchTerm) {
-    blogState.currentSearch = searchTerm.toLowerCase();
+    blogState.currentSearch = normalizeString(searchTerm);
     blogState.currentPage = 1;
     applyFilters();
+}
+
+/**
+ * Normaliza string removendo acentos e convertendo para minúsculas
+ */
+function normalizeString(str) {
+    return str
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, ''); // Remove acentos
 }
 
 /**
@@ -230,9 +240,9 @@ function applyFilters() {
     // Filtrar por busca
     if (blogState.currentSearch) {
         filteredPosts = filteredPosts.filter(post => {
-            const title = post.title.rendered.toLowerCase();
-            const content = stripHtml(post.content.rendered).toLowerCase();
-            const excerpt = stripHtml(post.excerpt.rendered).toLowerCase();
+            const title = normalizeString(post.title.rendered);
+            const content = normalizeString(stripHtml(post.content.rendered));
+            const excerpt = normalizeString(stripHtml(post.excerpt.rendered));
             
             return title.includes(blogState.currentSearch) ||
                    content.includes(blogState.currentSearch) ||
@@ -276,9 +286,9 @@ function updateLoadMoreButton() {
     
     if (blogState.currentSearch) {
         totalFilteredPosts = blogState.allPosts.filter(post => {
-            const title = post.title.rendered.toLowerCase();
-            const content = stripHtml(post.content.rendered).toLowerCase();
-            const excerpt = stripHtml(post.excerpt.rendered).toLowerCase();
+            const title = normalizeString(post.title.rendered);
+            const content = normalizeString(stripHtml(post.content.rendered));
+            const excerpt = normalizeString(stripHtml(post.excerpt.rendered));
             
             return title.includes(blogState.currentSearch) ||
                    content.includes(blogState.currentSearch) ||
