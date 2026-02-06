@@ -6,8 +6,8 @@
 // Configuração da API
 const API_CONFIG = {
     baseUrl: 'https://finanfun.com.br/wp-json/wp/v2',
-    postsPerPage: 6,
-    postsPerLoad: 4
+    postsPerPage: 4,      // ← 4 posts iniciais
+    postsPerLoad: 4       // ← 4 posts ao clicar "Carregar mais"
 };
 
 // Estado global da aplicação
