@@ -1,327 +1,565 @@
-/**
- * FinanFun Blog - WordPress Integration v2
- * Agora com Data e Categoria nos cards!
- */
-
-// Configuração da API
-const API_CONFIG = {
-    baseUrl: 'https://finanfun.com.br/wp-json/wp/v2',
-    postsPerPage: 4,
-    postsPerLoad: 4
-};
-
-// Estado da aplicação
-let currentPosts = [];
-let displayedPosts = [];
-let categories = [];
-let currentCategory = '';
-let currentSearchTerm = '';
-let isLoading = false;
-
-// Elementos DOM
-const articlesGrid = document.querySelector('.articles-grid');
-const loadMoreBtn = document.querySelector('.load-more-btn');
-const searchInput = document.getElementById('blogSearch');
-const filtersContainer = document.querySelector('.blog-filters');
-
-// Mapeamento de meses em português
-const mesesPT = {
-    0: 'Jan', 1: 'Fev', 2: 'Mar', 3: 'Abr', 4: 'Mai', 5: 'Jun',
-    6: 'Jul', 7: 'Ago', 8: 'Set', 9: 'Out', 10: 'Nov', 11: 'Dez'
-};
-
-// Função para formatar data
-function formatarData(dateString) {
-    const data = new Date(dateString);
-    const dia = data.getDate();
-    const mes = mesesPT[data.getMonth()];
-    const ano = data.getFullYear().toString().slice(-2); // Últimos 2 dígitos
-    return `${dia} ${mes} ${ano}`;
-}
-
-// Função para obter nome da categoria
-function getNomeCategoria(categoryId) {
-    const categoria = categories.find(cat => cat.id === categoryId);
-    return categoria ? categoria.name : '';
-}
-
-// Função para normalizar strings (remove acentos)
-function normalizeString(str) {
-    return str
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-}
-
-// Função para buscar posts do WordPress
-async function loadPosts() {
-    try {
-        isLoading = true;
-        showLoadingState();
-
-        const response = await fetch(
-            `${API_CONFIG.baseUrl}/posts?per_page=100&_embed`
-        );
-
-        if (!response.ok) {
-            throw new Error('Erro ao carregar posts');
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Blog - FinanFun</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #46FE77;
+            --dark-bg: #0f172a;
+            --dark-navy: #0a1628;
+            --text-light: #ffffff;
+            --text-gray: #94a3b8;
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
 
-        const posts = await response.json();
-        currentPosts = posts;
-        
-        applyFilters();
-        
-    } catch (error) {
-        console.error('Erro ao carregar posts:', error);
-        showError();
-    } finally {
-        isLoading = false;
-    }
-}
-
-// Função para buscar categorias
-async function loadCategories() {
-    try {
-        const response = await fetch(
-            `${API_CONFIG.baseUrl}/categories?per_page=100`
-        );
-
-        if (!response.ok) {
-            throw new Error('Erro ao carregar categorias');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        const allCategories = await response.json();
-        categories = allCategories.filter(cat => cat.count > 0);
-        
-        renderCategories();
-        
-    } catch (error) {
-        console.error('Erro ao carregar categorias:', error);
-    }
-}
-
-// Função para renderizar categorias
-function renderCategories() {
-    const existingButtons = filtersContainer.querySelectorAll('.filter-btn:not(:first-child)');
-    existingButtons.forEach(btn => btn.remove());
-
-    categories.forEach(category => {
-        const button = document.createElement('button');
-        button.className = 'filter-btn';
-        button.textContent = category.name;
-        button.dataset.category = category.id;
-        button.addEventListener('click', () => filterByCategory(category.id));
-        filtersContainer.appendChild(button);
-    });
-}
-
-// Função para filtrar por categoria
-function filterByCategory(categoryId) {
-    currentCategory = categoryId;
-    
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => {
-        btn.classList.remove('active');
-        if (btn.dataset.category === String(categoryId) || (!categoryId && btn.dataset.category === '')) {
-            btn.classList.add('active');
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-navy);
+            color: var(--text-light);
+            min-height: 100vh;
         }
-    });
 
-    applyFilters();
-}
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-// Função para filtrar por busca
-function filterBySearch(searchTerm) {
-    currentSearchTerm = searchTerm;
-    applyFilters();
-}
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-// Função para aplicar todos os filtros
-function applyFilters() {
-    let filteredPosts = [...currentPosts];
+        .nav-logo h2 a {
+            text-decoration: none;
+        }
 
-    if (currentCategory) {
-        filteredPosts = filteredPosts.filter(post => 
-            post.categories.includes(parseInt(currentCategory))
-        );
-    }
+        .finan-text {
+            color: var(--text-light);
+            font-weight: 700;
+        }
 
-    if (currentSearchTerm) {
-        const normalizedSearch = normalizeString(currentSearchTerm);
-        filteredPosts = filteredPosts.filter(post => {
-            const title = normalizeString(post.title.rendered);
-            const content = normalizeString(post.content.rendered);
-            const excerpt = normalizeString(post.excerpt.rendered);
-            
-            return title.includes(normalizedSearch) || 
-                   content.includes(normalizedSearch) || 
-                   excerpt.includes(normalizedSearch);
-        });
-    }
+        .fun-text {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
 
-    displayedPosts = [];
-    renderPosts(filteredPosts);
-}
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
 
-// Função para renderizar posts
-function renderPosts(posts) {
-    const postsToShow = posts.slice(0, displayedPosts.length + API_CONFIG.postsPerPage);
-    displayedPosts = postsToShow;
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
 
-    articlesGrid.innerHTML = '';
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
 
-    if (postsToShow.length === 0) {
-        showEmptyState();
-        return;
-    }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
 
-    postsToShow.forEach(post => {
-        const card = createArticleCard(post);
-        articlesGrid.appendChild(card);
-    });
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
 
-    updateLoadMoreButton(posts.length);
-}
+        .main-content {
+            padding-top: 120px;
+            min-height: 60vh;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
 
-// Função para criar card de artigo
-function createArticleCard(post) {
-    const card = document.createElement('article');
-    card.className = 'article-card';
+        .blog-header {
+            margin-bottom: 3rem;
+        }
 
-    // Extrair imagem destacada
-    let imageUrl = '';
-    if (post._embedded && post._embedded['wp:featuredmedia']) {
-        imageUrl = post._embedded['wp:featuredmedia'][0].source_url;
-    }
+        .blog-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
 
-    // Extrair excerpt limpo
-    const excerpt = post.excerpt.rendered
-        .replace(/<[^>]*>/g, '')
-        .substring(0, 150) + '...';
+        .blog-icon {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+        }
 
-    // Formatar data
-    const dataFormatada = formatarData(post.date);
+        .blog-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
 
-    // Obter primeira categoria
-    const primeiraCategoria = post.categories[0];
-    const nomeCategoria = getNomeCategoria(primeiraCategoria);
+        .blog-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
 
-    card.innerHTML = `
-        <div class="article-image">
-            ${imageUrl ? 
-                `<img src="${imageUrl}" alt="${post.title.rendered}" loading="lazy">` :
-                '<div class="placeholder-image"></div>'
+        .blog-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--text-light);
+        }
+
+        .filter-btn:hover {
+            background: rgba(70, 254, 119, 0.1);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: #0a1628;
+            border-color: var(--primary-green);
+        }
+
+        .blog-search {
+            margin-top: 2rem;
+            position: relative;
+            max-width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3rem;
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .blog-articles {
+            margin-top: 3rem;
+            min-height: 500px;
+            margin-bottom: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .article-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-image img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .article-category {
+            color: var(--primary-green);
+        }
+
+        .article-date-separator {
+            color: var(--text-gray);
+        }
+
+        .article-date {
+            color: var(--text-gray);
+        }
+
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .article-summary {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: gap 0.3s ease;
+        }
+
+        .article-link:hover {
+            gap: 0.75rem;
+        }
+
+        .load-more-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem !important;
+            min-height: 60px;
+        }
+
+        .load-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(70, 254, 119, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .articles-grid {
+                grid-template-columns: 1fr;
             }
-        </div>
-        <div class="article-content">
-            <div class="article-meta">
-                <span class="article-category">${nomeCategoria.toUpperCase()}</span>
-                <span class="article-date-separator">•</span>
-                <span class="article-date">${dataFormatada}</span>
+        }
+
+        .newsletter-section {
+            margin-top: 2rem !important;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(70, 254, 119, 0.1) 0%, transparent 50%);
+        }
+
+        .newsletter-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid rgba(70, 254, 119, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .newsletter-input:focus {
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .newsletter-btn {
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            white-space: nowrap;
+            background: var(--primary-green);
+            color: var(--dark-bg);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: #38cc5f;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(15, 20, 25, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .newsletter-input-group {
+                flex-direction: column;
+            }
+
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html">
+                    <span class="finan-text">Finan</span><span class="fun-text">Fun</span>
+                </a></h2>
             </div>
-            <h3 class="article-title">${post.title.rendered}</h3>
-            <p class="article-summary">${excerpt}</p>
-            <a href="${post.link}" class="article-link">
-                Leia mais <i class="fas fa-arrow-right"></i>
-            </a>
+            <ul class="nav-menu">
+                <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
+                <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-    `;
+    </nav>
 
-    return card;
-}
-
-// Função para carregar mais posts
-function loadMore() {
-    const allFilteredPosts = [...currentPosts];
-    
-    let filteredPosts = allFilteredPosts;
-    
-    if (currentCategory) {
-        filteredPosts = filteredPosts.filter(post => 
-            post.categories.includes(parseInt(currentCategory))
-        );
-    }
-
-    if (currentSearchTerm) {
-        const normalizedSearch = normalizeString(currentSearchTerm);
-        filteredPosts = filteredPosts.filter(post => {
-            const title = normalizeString(post.title.rendered);
-            const content = normalizeString(post.content.rendered);
-            const excerpt = normalizeString(post.excerpt.rendered);
+    <main class="main-content">
+        <div class="blog-header">
+            <div class="blog-title">
+                <i class="fas fa-file-pen blog-icon"></i>
+                <h1><span class="finan-text">Finan</span><span class="fun-text">Fun</span> Blog</h1>
+            </div>
+            <p class="blog-description">
+                Dicas valiosas, tutoriais práticos, tendências e ferramentas para você dominar a 
+                educação financeira e aplicar no seu dia a dia com clareza, velocidade e impacto 
+                real. Aprenda com cases, explore novas ideias e fique por dentro do futuro que já 
+                começou.
+            </p>
+            <div class="blog-filters">
+                <button class="filter-btn active" data-category="">Todos</button>
+                <!-- Categorias serão carregadas dinamicamente pelo JavaScript -->
+            </div>
             
-            return title.includes(normalizedSearch) || 
-                   content.includes(normalizedSearch) || 
-                   excerpt.includes(normalizedSearch);
+            <div class="blog-search">
+                <input type="text" placeholder="Pesquise no blog" class="search-input" id="blogSearch">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+        
+        <section class="blog-articles">
+            <div class="articles-grid">
+                <!-- Posts serão carregados dinamicamente pelo JavaScript -->
+            </div>
+            
+            <div class="load-more-container">
+                <button class="load-more-btn">
+                    <i class="fas fa-sync-alt"></i> Carregar mais
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Digite seu e-mail" required class="newsletter-input" id="newsletterEmail">
+                        <button type="submit" class="newsletter-btn">Enviar</button>
+                    </div>
+                </form>
+                <p class="newsletter-message" id="newsletterMessage" style="display: none;"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--gradient-dark); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 3rem 0;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
+                    <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="educa.html">Educa</a></li>
+                        <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="color: var(--text-gray); margin: 0;">
+                    &copy; 2026 <span style="color: var(--text-light); font-weight: 600;">Finan</span><span style="color: var(--primary-green); font-weight: 600;">Fun</span>. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script do menu hamburguer -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
         });
-    }
-
-    renderPosts(filteredPosts);
-}
-
-// Função para atualizar botão "Carregar mais"
-function updateLoadMoreButton(totalPosts) {
-    if (displayedPosts.length >= totalPosts) {
-        loadMoreBtn.style.display = 'none';
-    } else {
-        loadMoreBtn.style.display = 'inline-flex';
-    }
-}
-
-// Função para mostrar estado de carregamento
-function showLoadingState() {
-    articlesGrid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-green);"></i>
-            <p style="margin-top: 1rem; color: var(--text-gray);">Carregando posts...</p>
-        </div>
-    `;
-}
-
-// Função para mostrar estado vazio
-function showEmptyState() {
-    articlesGrid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-            <i class="fas fa-search" style="font-size: 2rem; color: var(--text-gray);"></i>
-            <p style="margin-top: 1rem; color: var(--text-gray);">
-                Nenhum post encontrado${currentSearchTerm ? ` para "${currentSearchTerm}"` : ''}.
-            </p>
-        </div>
-    `;
-    loadMoreBtn.style.display = 'none';
-}
-
-// Função para mostrar erro
-function showError() {
-    articlesGrid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ef4444;"></i>
-            <p style="margin-top: 1rem; color: var(--text-gray);">
-                Erro ao carregar posts. Tente novamente mais tarde.
-            </p>
-        </div>
-    `;
-    loadMoreBtn.style.display = 'none';
-}
-
-// Event Listeners
-loadMoreBtn.addEventListener('click', loadMore);
-
-let searchTimeout;
-searchInput.addEventListener('input', (e) => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(() => {
-        filterBySearch(e.target.value);
-    }, 500);
-});
-
-// Inicializar
-document.addEventListener('DOMContentLoaded', () => {
-    loadCategories();
-    loadPosts();
-
-    const allButton = document.querySelector('.filter-btn[data-category=""]');
-    if (allButton) {
-        allButton.addEventListener('click', () => filterByCategory(''));
-    }
-});
+    </script>
+    
+    <!-- Script de integração com WordPress -->
+    <script src="js/blog.js"></script>
+</body>
+</html>
