@@ -525,13 +525,18 @@
             const message = document.getElementById('newsletterMessage');
             const email = emailInput.value;
             
+            console.log('📧 Iniciando envio...', email);
+            
             // Desabilita botão durante envio
             submitBtn.disabled = true;
             submitBtn.textContent = 'Enviando...';
             message.className = 'newsletter-message';
             message.style.display = 'none';
+            message.textContent = '';
             
             try {
+                console.log('🔵 Chamando /api/newsletter...');
+                
                 // Chama a serverless function
                 const response = await fetch('/api/newsletter', {
                     method: 'POST',
@@ -541,26 +546,36 @@
                     body: JSON.stringify({ email })
                 });
                 
+                console.log('📥 Resposta recebida:', response.status);
+                
                 const data = await response.json();
+                console.log('📦 Dados:', data);
                 
                 if (data.success) {
                     // Sucesso!
+                    console.log('✅ Sucesso!');
                     message.className = 'newsletter-message success';
                     message.textContent = data.message;
+                    message.style.display = 'block';
                     emailInput.value = '';
                 } else {
                     // Erro
+                    console.log('❌ Erro do servidor');
                     message.className = 'newsletter-message error';
                     message.textContent = data.message;
+                    message.style.display = 'block';
                 }
             } catch (error) {
                 // Erro de rede
+                console.error('❌ Erro:', error);
                 message.className = 'newsletter-message error';
                 message.textContent = 'Ocorreu um erro ao tentar assinar. Tente novamente.';
+                message.style.display = 'block';
             } finally {
                 // Reabilita botão
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Enviar';
+                console.log('🔄 Botão reabilitado');
             }
         });
     </script>
