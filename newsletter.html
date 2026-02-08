@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Newsletters - FinanFun</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-39RE1PVHEL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-39RE1PVHEL');
+    </script>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-green: #46FE77;
+            --dark-bg: #0f172a;
+            --dark-navy: #0a1628;
+            --text-light: #ffffff;
+            --text-gray: #94a3b8;
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --gradient-primary: linear-gradient(135deg, #46FE77, #181D4E);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-navy);
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo h2 a {
+            text-decoration: none;
+        }
+
+        .finan-text {
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        .fun-text {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-green);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .main-content {
+            padding-top: 120px;
+            min-height: 60vh;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .newsletter-header {
+            margin-bottom: 3rem;
+        }
+
+        .newsletter-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-icon {
+            font-size: 1.8rem;
+            color: var(--primary-green);
+        }
+
+        .newsletter-title h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .newsletter-description {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: 1px solid var(--primary-green);
+            color: var(--text-light);
+        }
+
+        .filter-btn:hover {
+            background: rgba(70, 254, 119, 0.1);
+        }
+
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: #0a1628;
+            border-color: var(--primary-green);
+        }
+
+        .newsletter-search {
+            margin-top: 2rem;
+            position: relative;
+            max-width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3rem;
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-gray);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+        }
+
+        .newsletters-section {
+            margin-top: 3rem;
+            min-height: 500px;
+            margin-bottom: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        .newsletters-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .newsletter-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .newsletter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .newsletter-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .newsletter-card-content {
+            padding: 1.5rem;
+        }
+
+        .newsletter-card-date {
+            color: var(--primary-green);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .newsletter-card-excerpt {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-card-link {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .newsletter-card-link:hover {
+            gap: 0.75rem;
+        }
+
+        .load-more-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            margin-bottom: 3rem !important;
+            min-height: 60px;
+        }
+
+        .load-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 14px 40px;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(70, 254, 119, 0.3);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+
+        .no-newsletters {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+
+        @media (max-width: 768px) {
+            .newsletters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(15, 20, 25, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                backdrop-filter: blur(10px);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        .signup-section {
+            margin-top: 2rem !important;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(70, 254, 119, 0.1) 0%, transparent 50%);
+        }
+
+        .signup-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* FORMULÁRIO NEWSLETTER */
+        .signup-form {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .signup-input-group {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .signup-input {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border: 2px solid rgba(70, 254, 119, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-input::placeholder {
+            color: var(--text-gray);
+        }
+        
+        .signup-input:focus {
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .signup-btn {
+            padding: 0.875rem 2rem;
+            border-radius: 30px;
+            white-space: nowrap;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .signup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
+        }
+        
+        .signup-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .signup-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: none;
+        }
+        
+        .signup-message.success {
+            background: rgba(70, 254, 119, 0.1);
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            color: #46FE77;
+            display: block;
+        }
+        
+        .signup-message.error {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            color: #ff4d4d;
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .signup-input-group {
+                flex-direction: column;
+            }
+            
+            .signup-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html">
+                    <span class="finan-text">Finan</span><span class="fun-text">Fun</span>
+                </a></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
+                <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="newsletter-header">
+            <div class="newsletter-title">
+                <i class="fas fa-envelope-open-text newsletter-icon"></i>
+                <h1>Arquivo de <span class="fun-text">Newsletters</span></h1>
+            </div>
+            <p class="newsletter-description">
+                Explore todas as nossas newsletters anteriores! Conteúdos exclusivos sobre educação financeira, 
+                dicas práticas, novidades do FinanFun e muito mais. Cada edição foi cuidadosamente preparada 
+                para você e sua família aprenderem sobre dinheiro de forma divertida e acessível.
+            </p>
+            <div class="newsletter-filters">
+                <button class="filter-btn active" data-year="">Todas</button>
+                <button class="filter-btn" data-year="2026">2026</button>
+                <button class="filter-btn" data-year="2025">2025</button>
+            </div>
+            
+            <div class="newsletter-search">
+                <input type="text" placeholder="Pesquisar newsletters" class="search-input" id="newsletterSearch">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+        
+        <section class="newsletters-section">
+            <div class="newsletters-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary-green);"></i>
+                    <p style="margin-top: 1rem;">Carregando newsletters...</p>
+                </div>
+            </div>
+            
+            <div class="load-more-container" style="display: none;">
+                <button class="load-more-btn">
+                    <i class="fas fa-sync-alt"></i> Carregar mais
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- SIGNUP SECTION -->
+    <section class="signup-section">
+        <div class="container">
+            <div class="signup-content">
+                <h2 class="section-title">Receba nossas Newsletters</h2>
+                <form class="signup-form" id="signupForm">
+                    <div class="signup-input-group">
+                        <input type="email" 
+                               placeholder="Digite seu e-mail" 
+                               required 
+                               class="signup-input" 
+                               id="signupEmail"
+                               name="EMAIL">
+                        <button type="submit" class="signup-btn" id="submitBtn">Enviar</button>
+                    </div>
+                </form>
+                <p class="signup-message" id="signupMessage"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer style="background: var(--gradient-dark); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 3rem 0;">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
+                    <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="newsletter.html">Newsletters</a></li>
+                        <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="color: var(--text-gray); margin: 0;">
+                    &copy; 2026 <span style="color: var(--text-light); font-weight: 600;">Finan</span><span style="color: var(--primary-green); font-weight: 600;">Fun</span>. Todos os direitos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu hamburguer
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+        
+        // FORMULÁRIO SIGNUP - CHAMA SERVERLESS FUNCTION
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('signupEmail');
+            const submitBtn = document.getElementById('submitBtn');
+            const message = document.getElementById('signupMessage');
+            const email = emailInput.value;
+            
+            console.log('📧 Iniciando envio...', email);
+            
+            // Desabilita botão durante envio
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            message.className = 'signup-message';
+            message.style.display = 'none';
+            message.textContent = '';
+            
+            try {
+                console.log('🔵 Chamando /api/newsletter...');
+                
+                // Chama a serverless function
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                console.log('📥 Resposta recebida:', response.status);
+                
+                const data = await response.json();
+                console.log('📦 Dados:', data);
+                
+                if (data.success) {
+                    // Sucesso!
+                    console.log('✅ Sucesso!');
+                    message.className = 'signup-message success';
+                    message.textContent = data.message;
+                    message.style.display = 'block';
+                    emailInput.value = '';
+                } else {
+                    // Erro
+                    console.log('❌ Erro do servidor');
+                    message.className = 'signup-message error';
+                    message.textContent = data.message;
+                    message.style.display = 'block';
+                }
+            } catch (error) {
+                // Erro de rede
+                console.error('❌ Erro:', error);
+                message.className = 'signup-message error';
+                message.textContent = 'Ocorreu um erro ao tentar assinar. Tente novamente.';
+                message.style.display = 'block';
+            } finally {
+                // Reabilita botão
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar';
+                console.log('🔄 Botão reabilitado');
+            }
+        });
+    </script>
+    
+    <script src="js/newsletters.js"></script>
+</body>
+</html>
