@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Brevo Form Styles - ORIGINAL -->
+    <!-- Brevo Form Styles -->
     <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
     
-    <!-- Custom FinanFun Styles - SOBRESCREVE BREVO -->
     <style>
         :root {
             --primary-green: #46FE77;
@@ -22,6 +21,7 @@
             --text-light: #ffffff;
             --text-gray: #94a3b8;
             --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --gradient-primary: linear-gradient(135deg, #46FE77 0%, #00D9FF 100%);
         }
 
         * {
@@ -368,194 +368,102 @@
             padding: 0 2rem;
         }
         
-        /* ========================================= */
-        /* CUSTOMIZAÇÃO BREVO - FORÇA MÁXIMA        */
-        /* ========================================= */
+        /* RESETAR TODOS OS ESTILOS BREVO */
+        .sib-form * {
+            all: unset !important;
+            display: revert !important;
+        }
         
-        /* Esconder título padrão do Brevo */
-        .sib-form-block p,
-        #sib-container .sib-form-block p {
+        .sib-form-block p {
             display: none !important;
         }
         
-        /* Container principal - Background transparente */
-        .sib-form,
-        div.sib-form {
-            background-color: transparent !important;
-            text-align: center !important;
+        .sib-form {
+            background: transparent !important;
         }
         
         #sib-form-container,
-        div#sib-form-container {
-            background-color: transparent !important;
+        #sib-container {
+            all: unset !important;
+            display: block !important;
+            background: transparent !important;
         }
         
-        #sib-container,
-        div#sib-container,
-        .sib-container--large,
-        .sib-container--vertical {
-            background-color: transparent !important;
-            border: none !important;
-            border-radius: 0 !important;
-            max-width: 100% !important;
-            padding: 0 !important;
-            box-shadow: none !important;
-        }
-        
-        /* Mensagens de erro/sucesso */
         #error-message,
-        div#error-message {
-            background-color: rgba(255, 77, 77, 0.1) !important;
-            border: 1px solid rgba(255, 77, 77, 0.3) !important;
-            border-radius: 8px !important;
-            color: #ff4d4d !important;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            margin-top: 1rem !important;
-            padding: 1rem !important;
-        }
-        
-        #success-message,
-        div#success-message {
-            background-color: rgba(70, 254, 119, 0.1) !important;
+        #success-message {
+            background: rgba(70, 254, 119, 0.1) !important;
             border: 1px solid rgba(70, 254, 119, 0.3) !important;
             border-radius: 8px !important;
             color: #46FE77 !important;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            margin-top: 1rem !important;
             padding: 1rem !important;
+            margin-top: 1rem !important;
+            font-family: 'Segoe UI' !important;
+            font-size: 1rem !important;
         }
         
-        /* Layout do formulário */
-        .sib-form-block,
-        div.sib-form-block {
-            padding: 0 !important;
-            margin: 0 !important;
-            background: transparent !important;
+        #error-message {
+            background: rgba(255, 77, 77, 0.1) !important;
+            border-color: rgba(255, 77, 77, 0.3) !important;
+            color: #ff4d4d !important;
         }
         
-        .sib-input.sib-form-block,
-        div.sib-input.sib-form-block {
-            text-align: center !important;
-            background: transparent !important;
-        }
-        
-        .form__entry.entry_block,
-        div.form__entry.entry_block {
-            margin: 0 !important;
-            background: transparent !important;
-        }
-        
-        .form__label-row,
-        div.form__label-row {
-            width: 100% !important;
-            background: transparent !important;
-        }
-        
-        .entry__field,
-        div.entry__field {
+        .entry__field {
             display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
             gap: 1rem !important;
             max-width: 500px !important;
             margin: 0 auto !important;
-            background: transparent !important;
         }
         
-        /* INPUT DE EMAIL - FORÇA MÁXIMA! */
-        #sib-container input.input,
-        #sib-container input[type="text"],
-        #sib-container .input,
-        input#EMAIL,
-        input[name="EMAIL"],
-        .sib-input input,
-        #sib-form input.input {
+        /* INPUT - EXATAMENTE COMO NO INDEX.HTML */
+        #EMAIL {
+            all: unset !important;
             flex: 1 !important;
-            padding: 1rem 1.5rem !important;
+            min-width: 0 !important;
+            padding: 0.875rem 1.5rem !important;
             border: 2px solid rgba(70, 254, 119, 0.3) !important;
             border-radius: 30px !important;
-            background-color: rgba(255, 255, 255, 0.05) !important;
             background: rgba(255, 255, 255, 0.05) !important;
-            color: #ffffff !important;
-            font-size: 1rem !important;
+            color: white !important;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            outline: none !important;
-            transition: all 0.3s ease !important;
-            box-shadow: none !important;
-            text-align: left !important;
+            font-size: 1rem !important;
         }
         
-        #sib-container input.input:focus,
-        #sib-container input[type="text"]:focus,
-        #sib-container .input:focus,
-        input#EMAIL:focus,
-        input[name="EMAIL"]:focus,
-        .sib-input input:focus,
-        #sib-form input.input:focus {
-            border-color: #46FE77 !important;
-            background-color: rgba(255, 255, 255, 0.1) !important;
-            background: rgba(255, 255, 255, 0.1) !important;
-            box-shadow: none !important;
-        }
-        
-        #sib-container input::placeholder,
-        #sib-container input::-webkit-input-placeholder,
-        #sib-container input:-ms-input-placeholder,
-        input#EMAIL::placeholder,
-        input[name="EMAIL"]::placeholder {
+        #EMAIL::placeholder {
             color: #94a3b8 !important;
-            opacity: 1 !important;
         }
         
-        /* BOTÃO ENVIAR - FORÇA MÁXIMA! */
-        #sib-container button.sib-form-block__button,
-        #sib-container .sib-form-block__button,
-        button.sib-form-block__button,
-        .sib-form-block__button-with-loader,
-        #sib-form button[type="submit"] {
-            padding: 1rem 2rem !important;
+        #EMAIL:focus {
+            border-color: #46FE77 !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            outline: none !important;
+        }
+        
+        /* BOTÃO - COM GRADIENTE IGUAL AO INDEX.HTML */
+        .sib-form-block__button {
+            all: unset !important;
+            padding: 0.875rem 2rem !important;
             border-radius: 30px !important;
-            background-color: #46FE77 !important;
-            background: #46FE77 !important;
-            color: #0f172a !important;
-            border: none !important;
+            background: linear-gradient(135deg, #46FE77 0%, #00D9FF 100%) !important;
+            color: #0a1628 !important;
             font-weight: 600 !important;
-            font-size: 1rem !important;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 1rem !important;
             cursor: pointer !important;
-            transition: all 0.3s ease !important;
             white-space: nowrap !important;
-            box-shadow: none !important;
-            text-transform: none !important;
+            transition: all 0.3s ease !important;
         }
         
-        #sib-container button.sib-form-block__button:hover,
-        #sib-container .sib-form-block__button:hover,
-        button.sib-form-block__button:hover,
-        .sib-form-block__button-with-loader:hover,
-        #sib-form button[type="submit"]:hover {
-            background-color: #38cc5f !important;
-            background: #38cc5f !important;
+        .sib-form-block__button:hover {
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
         }
         
-        /* Esconder elementos não usados */
         .entry__error,
-        label.entry__error {
-            display: none !important;
-        }
-        
         .input--hidden,
-        input.input--hidden {
+        .progress-indicator__icon {
             display: none !important;
         }
         
-        .progress-indicator__icon,
-        svg.progress-indicator__icon {
-            display: none !important;
-        }
-        
-        /* Mobile responsivo */
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
@@ -579,14 +487,11 @@
                 display: flex;
             }
             
-            .entry__field,
-            div.entry__field {
+            .entry__field {
                 flex-direction: column !important;
             }
             
-            #sib-container button.sib-form-block__button,
-            #sib-container .sib-form-block__button,
-            button.sib-form-block__button {
+            .sib-form-block__button {
                 width: 100% !important;
             }
         }
@@ -626,7 +531,6 @@
             </p>
             <div class="blog-filters">
                 <button class="filter-btn active" data-category="">Todos</button>
-                <!-- Categorias serão carregadas dinamicamente pelo JavaScript -->
             </div>
             
             <div class="blog-search">
@@ -648,71 +552,40 @@
         </section>
     </main>
 
-    <!-- NEWSLETTER SECTION COM BREVO COMPLETO -->
     <section class="newsletter-section">
         <div class="container">
             <div class="newsletter-content">
                 <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
                 
-                <!-- Begin Brevo Form - CÓDIGO ORIGINAL COMPLETO -->
-                <div class="sib-form" style="text-align: center;">
-                  <div id="sib-form-container" class="sib-form-container">
-                    <div id="error-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;max-width:540px;">
-                      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-                        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
-                          <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
-                        </svg>
-                        <span class="sib-form-message-panel__inner-text">
-                          Ocorreu um erro ao tentar assinar. Tente novamente.
-                        </span>
-                      </div>
+                <!-- Brevo Form -->
+                <div class="sib-form">
+                  <div id="sib-form-container">
+                    <div id="error-message" style="display:none;">
+                      Ocorreu um erro ao tentar assinar. Tente novamente.
                     </div>
-                    <div></div>
-                    <div id="success-message" class="sib-form-message-panel" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#085229; background-color:#e7faf0; border-radius:3px; border-color:#13ce66;max-width:540px;">
-                      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
-                        <svg viewBox="0 0 512 512" class="sib-icon sib-notification__icon">
-                          <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
-                        </svg>
-                        <span class="sib-form-message-panel__inner-text">
-                          Você está cadastrado na nossa newsletter!
-                        </span>
-                      </div>
+                    <div id="success-message" style="display:none;">
+                      Você está cadastrado na nossa newsletter!
                     </div>
-                    <div></div>
-                    <div id="sib-container" class="sib-container--large sib-container--vertical" style="text-align:center; background-color:rgba(255,255,255,1); max-width:540px; border-radius:3px; border-width:1px; border-color:#C0CCD9; border-style:solid; direction:ltr">
+                    <div id="sib-container">
                       <form id="sib-form" method="POST" action="https://057ec3c1.sibforms.com/serve/MUIFACp2rDm2qMkW3rMsWRc91lRWNugmQizIS9SMckLJ0OwkH4XJevYu5cKINQU-c1KHAxLrh43rW46JZWTcCMFL6vriLDSQpRPATUPXpgYjLvvS8myXNzmddqY997JTXc2e1KE9rHdi4EQxLxYfcawo6sfTwtzA0pj5z8wtLEs9ML9rb7W9ta6dF5vHQZ7SS1vTX2tb8KCzO2CLtg==" data-type="subscription">
-                        <div style="padding: 8px 0;">
-                          <div class="sib-form-block" style="font-size:32px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#3C4858; background-color:transparent; text-align:center">
-                            <p>Newsletter</p>
-                          </div>
-                        </div>
-                        <div style="padding: 8px 0;">
-                          <div class="sib-input sib-form-block">
-                            <div class="form__entry entry_block">
-                              <div class="form__label-row ">
-                                <div class="entry__field">
-                                  <input class="input " type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Digite seu e-mail" data-required="true" required />
-                                  <button class="sib-form-block__button sib-form-block__button-with-loader" style="font-size:16px; text-align:center; font-weight:700; font-family:Helvetica, sans-serif; color:#FFFFFF; background-color:#3E4857; border-radius:3px; border-width:0px;" form="sib-form" type="submit">
-                                    <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
-                                      <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
-                                    </svg>
-                                    Enviar
-                                  </button>
-                                </div>
+                        <div class="sib-input sib-form-block">
+                          <div class="form__entry entry_block">
+                            <div class="form__label-row">
+                              <div class="entry__field">
+                                <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Digite seu e-mail" data-required="true" required />
+                                <button class="sib-form-block__button" form="sib-form" type="submit">
+                                  Enviar
+                                </button>
                               </div>
-                              <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left; font-family:Helvetica, sans-serif; color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
-                              </label>
                             </div>
                           </div>
                         </div>
-
                         <input type="text" name="email_address_check" value="" class="input--hidden">
                         <input type="hidden" name="locale" value="pt">
                       </form>
                     </div>
                   </div>
                 </div>
-                <!-- End Brevo Form -->
                 
             </div>
         </div>
@@ -744,9 +617,9 @@
         </div>
     </footer>
 
-    <!-- Script do menu hamburguer -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Menu hamburguer
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             
@@ -756,10 +629,47 @@
                     navMenu.classList.toggle('active');
                 });
             }
+            
+            // FORÇA ESTILOS DO FORMULÁRIO BREVO
+            setTimeout(function() {
+                const container = document.getElementById('sib-container');
+                const input = document.getElementById('EMAIL');
+                const button = document.querySelector('.sib-form-block__button');
+                
+                if (container) {
+                    container.style.background = 'transparent';
+                    container.style.border = 'none';
+                    container.style.boxShadow = 'none';
+                    container.style.maxWidth = '100%';
+                    container.style.padding = '0';
+                }
+                
+                if (input) {
+                    input.style.background = 'rgba(255, 255, 255, 0.05)';
+                    input.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+                    input.style.border = '2px solid rgba(70, 254, 119, 0.3)';
+                    input.style.borderRadius = '30px';
+                    input.style.color = '#ffffff';
+                    input.style.padding = '0.875rem 1.5rem';
+                    input.style.fontFamily = 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
+                    input.style.fontSize = '1rem';
+                }
+                
+                if (button) {
+                    button.style.background = 'linear-gradient(135deg, #46FE77 0%, #00D9FF 100%)';
+                    button.style.color = '#0a1628';
+                    button.style.border = 'none';
+                    button.style.borderRadius = '30px';
+                    button.style.padding = '0.875rem 2rem';
+                    button.style.fontWeight = '600';
+                    button.style.fontFamily = 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
+                    button.style.fontSize = '1rem';
+                }
+            }, 100);
         });
     </script>
     
-    <!-- Brevo Form Scripts - ORIGINAIS COMPLETOS -->
+    <!-- Brevo Scripts -->
     <script>
       window.REQUIRED_CODE_ERROR_MESSAGE = 'Escolha um código de país';
       window.LOCALE = 'pt';
@@ -778,7 +688,6 @@
     </script>
     <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
     
-    <!-- Script de integração com WordPress -->
     <script src="js/blog.js"></script>
 </body>
 </html>
