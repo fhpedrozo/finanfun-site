@@ -188,6 +188,30 @@
             background: var(--dark-navy);
             padding: 0 1rem;
         }
+        
+        /* Newsletter Messages */
+        .newsletter-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: none;
+            text-align: center;
+        }
+        
+        .newsletter-message.success {
+            background: rgba(70, 254, 119, 0.1);
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            color: #46FE77;
+            display: block;
+        }
+        
+        .newsletter-message.error {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            color: #ff4d4d;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -716,7 +740,7 @@
                 <div class="footer-section">
                     <h4>Contato</h4>
                     <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> contato@finanfun.com.br</p>
+                        <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86e5e9e8f2e7f2e9c6e0efe8e7e8e0f3e8a8e5e9eba8e4f4">[email&#160;protected]</a></p>
                         <p style="display: none;"><i class="fas fa-phone"></i> (43) 1234-5678</p>
                         <p style="display: none;"><i class="fas fa-map-marker-alt"></i> Londrina, PR</p>
                     </div>
@@ -831,7 +855,71 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
-    <script src="js/auth.js"></script>
+    <!-- Newsletter Form JavaScript -->
+    <script>
+        // FORMULÁRIO NEWSLETTER - CHAMA SERVERLESS FUNCTION
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const emailInput = document.getElementById('newsletterEmail');
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const message = document.getElementById('newsletterMessage');
+            const email = emailInput.value;
+            
+            console.log('📧 Iniciando envio...', email);
+            
+            // Desabilita botão durante envio
+            submitBtn.disabled = true;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Enviando...';
+            message.className = 'newsletter-message';
+            message.style.display = 'none';
+            message.textContent = '';
+            
+            try {
+                console.log('🔵 Chamando /api/newsletter...');
+                
+                // Chama a serverless function
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                console.log('📥 Resposta recebida:', response.status);
+                
+                const data = await response.json();
+                console.log('📦 Dados:', data);
+                
+                if (data.success) {
+                    // Sucesso!
+                    console.log('✅ Sucesso!');
+                    message.className = 'newsletter-message success';
+                    message.textContent = data.message;
+                    message.style.display = 'block';
+                    emailInput.value = '';
+                } else {
+                    // Erro
+                    console.log('❌ Erro do servidor');
+                    message.className = 'newsletter-message error';
+                    message.textContent = data.message;
+                    message.style.display = 'block';
+                }
+            } catch (error) {
+                // Erro de rede
+                console.error('❌ Erro:', error);
+                message.className = 'newsletter-message error';
+                message.textContent = 'Ocorreu um erro ao tentar assinar. Tente novamente.';
+                message.style.display = 'block';
+            } finally {
+                // Reabilita botão
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                console.log('🔄 Botão reabilitado');
+            }
+        });
+    </script>
 </body>
 </html>
