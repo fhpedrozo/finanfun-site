@@ -286,7 +286,7 @@
             padding: 0 2rem;
         }
         
-        /* FORMULÁRIO NEWSLETTER - 100% CUSTOMIZADO */
+        /* FORMULÁRIO NEWSLETTER */
         .newsletter-form {
             display: flex;
             justify-content: center;
@@ -455,7 +455,7 @@
         </section>
     </main>
 
-    <!-- NEWSLETTER SECTION - 100% CUSTOMIZADO -->
+    <!-- NEWSLETTER SECTION -->
     <section class="newsletter-section">
         <div class="container">
             <div class="newsletter-content">
@@ -516,7 +516,7 @@
             }
         });
         
-        // FORMULÁRIO NEWSLETTER - ENVIA PARA BREVO
+        // FORMULÁRIO NEWSLETTER - CHAMA SERVERLESS FUNCTION
         document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -532,29 +532,29 @@
             message.style.display = 'none';
             
             try {
-                // Envia para o endpoint do Brevo
-                const response = await fetch('https://057ec3c1.sibforms.com/serve/MUIFACp2rDm2qMkW3rMsWRc91lRWNugmQizIS9SMckLJ0OwkH4XJevYu5cKINQU-c1KHAxLrh43rW46JZWTcCMFL6vriLDSQpRPATUPXpgYjLvvS8myXNzmddqY997JTXc2e1KE9rHdi4EQxLxYfcawo6sfTwtzA0pj5z8wtLEs9ML9rb7W9ta6dF5vHQZ7SS1vTX2tb8KCzO2CLtg==', {
+                // Chama a serverless function
+                const response = await fetch('/api/newsletter', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json',
                     },
-                    body: new URLSearchParams({
-                        'EMAIL': email,
-                        'email_address_check': '',
-                        'locale': 'pt'
-                    })
+                    body: JSON.stringify({ email })
                 });
                 
-                if (response.ok) {
-                    // Sucesso
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Sucesso!
                     message.className = 'newsletter-message success';
-                    message.textContent = 'Você está cadastrado na nossa newsletter!';
+                    message.textContent = data.message;
                     emailInput.value = '';
                 } else {
-                    throw new Error('Erro ao enviar');
+                    // Erro
+                    message.className = 'newsletter-message error';
+                    message.textContent = data.message;
                 }
             } catch (error) {
-                // Erro
+                // Erro de rede
                 message.className = 'newsletter-message error';
                 message.textContent = 'Ocorreu um erro ao tentar assinar. Tente novamente.';
             } finally {
