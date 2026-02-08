@@ -11,50 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Brevo Form Styles - ORIGINAL -->
-    <style>
-      @font-face {
-        font-display: block;
-        font-family: Roboto;
-        src: url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/7529907e9eaf8ebb5220c5f9850e3811.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/normal/normal/25c678feafdc175a70922a116c9be3e7.woff) format("woff")
-      }
-
-      @font-face {
-        font-display: fallback;
-        font-family: Roboto;
-        font-weight: 600;
-        src: url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/6e9caeeafb1f3491be3e32744bc30440.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/medium/normal/71501f0d8d5aa95960f6475d5487d4c2.woff) format("woff")
-      }
-
-      @font-face {
-        font-display: fallback;
-        font-family: Roboto;
-        font-weight: 700;
-        src: url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/3ef7cf158f310cf752d5ad08cd0e7e60.woff2) format("woff2"), url(https://assets.brevo.com/font/Roboto/Latin/bold/normal/ece3a1d82f18b60bcce0211725c476aa.woff) format("woff")
-      }
-
-      #sib-container input:-ms-input-placeholder {
-        text-align: left;
-        font-family: "Segoe UI", Helvetica, sans-serif;
-        color: #94a3b8;
-      }
-
-      #sib-container input::placeholder {
-        text-align: left;
-        font-family: "Segoe UI", Helvetica, sans-serif;
-        color: #94a3b8;
-      }
-
-      #sib-container textarea::placeholder {
-        text-align: left;
-        font-family: "Segoe UI", Helvetica, sans-serif;
-        color: #94a3b8;
-      }
-
-      #sib-container a {
-        text-decoration: underline;
-        color: #46FE77;
-      }
-    </style>
     <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
     
     <!-- Custom FinanFun Styles - SOBRESCREVE BREVO -->
@@ -412,33 +368,43 @@
             padding: 0 2rem;
         }
         
-        /* CUSTOMIZAÇÃO BREVO - MANTÉM DESIGN FINANFUN */
+        /* ========================================= */
+        /* CUSTOMIZAÇÃO BREVO - FORÇA MÁXIMA        */
+        /* ========================================= */
         
         /* Esconder título padrão do Brevo */
-        .sib-form-block p {
+        .sib-form-block p,
+        #sib-container .sib-form-block p {
             display: none !important;
         }
         
-        /* Container principal */
-        .sib-form {
+        /* Container principal - Background transparente */
+        .sib-form,
+        div.sib-form {
             background-color: transparent !important;
             text-align: center !important;
         }
         
-        #sib-form-container {
+        #sib-form-container,
+        div#sib-form-container {
             background-color: transparent !important;
         }
         
-        #sib-container {
+        #sib-container,
+        div#sib-container,
+        .sib-container--large,
+        .sib-container--vertical {
             background-color: transparent !important;
             border: none !important;
             border-radius: 0 !important;
             max-width: 100% !important;
             padding: 0 !important;
+            box-shadow: none !important;
         }
         
         /* Mensagens de erro/sucesso */
-        #error-message {
+        #error-message,
+        div#error-message {
             background-color: rgba(255, 77, 77, 0.1) !important;
             border: 1px solid rgba(255, 77, 77, 0.3) !important;
             border-radius: 8px !important;
@@ -448,7 +414,8 @@
             padding: 1rem !important;
         }
         
-        #success-message {
+        #success-message,
+        div#success-message {
             background-color: rgba(70, 254, 119, 0.1) !important;
             border: 1px solid rgba(70, 254, 119, 0.3) !important;
             border-radius: 8px !important;
@@ -459,58 +426,96 @@
         }
         
         /* Layout do formulário */
-        .sib-form-block {
+        .sib-form-block,
+        div.sib-form-block {
             padding: 0 !important;
-        }
-        
-        .sib-input.sib-form-block {
-            text-align: center !important;
-        }
-        
-        .form__entry.entry_block {
             margin: 0 !important;
+            background: transparent !important;
         }
         
-        .form__label-row {
+        .sib-input.sib-form-block,
+        div.sib-input.sib-form-block {
+            text-align: center !important;
+            background: transparent !important;
+        }
+        
+        .form__entry.entry_block,
+        div.form__entry.entry_block {
+            margin: 0 !important;
+            background: transparent !important;
+        }
+        
+        .form__label-row,
+        div.form__label-row {
             width: 100% !important;
+            background: transparent !important;
         }
         
-        .entry__field {
+        .entry__field,
+        div.entry__field {
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
             gap: 1rem !important;
             max-width: 500px !important;
             margin: 0 auto !important;
+            background: transparent !important;
         }
         
-        /* Input de email */
-        #sib-container .input {
+        /* INPUT DE EMAIL - FORÇA MÁXIMA! */
+        #sib-container input.input,
+        #sib-container input[type="text"],
+        #sib-container .input,
+        input#EMAIL,
+        input[name="EMAIL"],
+        .sib-input input,
+        #sib-form input.input {
             flex: 1 !important;
             padding: 1rem 1.5rem !important;
             border: 2px solid rgba(70, 254, 119, 0.3) !important;
             border-radius: 30px !important;
+            background-color: rgba(255, 255, 255, 0.05) !important;
             background: rgba(255, 255, 255, 0.05) !important;
             color: #ffffff !important;
             font-size: 1rem !important;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
             outline: none !important;
             transition: all 0.3s ease !important;
+            box-shadow: none !important;
+            text-align: left !important;
         }
         
-        #sib-container .input:focus {
+        #sib-container input.input:focus,
+        #sib-container input[type="text"]:focus,
+        #sib-container .input:focus,
+        input#EMAIL:focus,
+        input[name="EMAIL"]:focus,
+        .sib-input input:focus,
+        #sib-form input.input:focus {
             border-color: #46FE77 !important;
+            background-color: rgba(255, 255, 255, 0.1) !important;
             background: rgba(255, 255, 255, 0.1) !important;
+            box-shadow: none !important;
         }
         
-        #sib-container .input::placeholder {
+        #sib-container input::placeholder,
+        #sib-container input::-webkit-input-placeholder,
+        #sib-container input:-ms-input-placeholder,
+        input#EMAIL::placeholder,
+        input[name="EMAIL"]::placeholder {
             color: #94a3b8 !important;
+            opacity: 1 !important;
         }
         
-        /* Botão */
-        #sib-container .sib-form-block__button {
+        /* BOTÃO ENVIAR - FORÇA MÁXIMA! */
+        #sib-container button.sib-form-block__button,
+        #sib-container .sib-form-block__button,
+        button.sib-form-block__button,
+        .sib-form-block__button-with-loader,
+        #sib-form button[type="submit"] {
             padding: 1rem 2rem !important;
             border-radius: 30px !important;
+            background-color: #46FE77 !important;
             background: #46FE77 !important;
             color: #0f172a !important;
             border: none !important;
@@ -520,23 +525,33 @@
             cursor: pointer !important;
             transition: all 0.3s ease !important;
             white-space: nowrap !important;
+            box-shadow: none !important;
+            text-transform: none !important;
         }
         
-        #sib-container .sib-form-block__button:hover {
+        #sib-container button.sib-form-block__button:hover,
+        #sib-container .sib-form-block__button:hover,
+        button.sib-form-block__button:hover,
+        .sib-form-block__button-with-loader:hover,
+        #sib-form button[type="submit"]:hover {
+            background-color: #38cc5f !important;
             background: #38cc5f !important;
             transform: translateY(-2px);
         }
         
         /* Esconder elementos não usados */
-        .entry__error {
+        .entry__error,
+        label.entry__error {
             display: none !important;
         }
         
-        .input--hidden {
+        .input--hidden,
+        input.input--hidden {
             display: none !important;
         }
         
-        .progress-indicator__icon {
+        .progress-indicator__icon,
+        svg.progress-indicator__icon {
             display: none !important;
         }
         
@@ -564,11 +579,14 @@
                 display: flex;
             }
             
-            .entry__field {
+            .entry__field,
+            div.entry__field {
                 flex-direction: column !important;
             }
             
-            #sib-container .sib-form-block__button {
+            #sib-container button.sib-form-block__button,
+            #sib-container .sib-form-block__button,
+            button.sib-form-block__button {
                 width: 100% !important;
             }
         }
