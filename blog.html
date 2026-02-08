@@ -9,6 +9,64 @@
     <title>Blog - FinanFun</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Brevo Form Styles - Customizado para FinanFun -->
+    <style>
+        /* Estilos Brevo invisíveis/sobrescritos */
+        #sib-container input::placeholder {
+            color: #94a3b8 !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        
+        #sib-container a {
+            text-decoration: none !important;
+            color: #46FE77 !important;
+        }
+        
+        /* Esconder elementos padrão do Brevo */
+        .sib-form-block p {
+            display: none !important;
+        }
+        
+        /* Customizar mensagens de erro/sucesso do Brevo */
+        #error-message {
+            background: rgba(255, 77, 77, 0.1) !important;
+            border: 1px solid rgba(255, 77, 77, 0.3) !important;
+            border-radius: 8px !important;
+            padding: 1rem !important;
+            margin-top: 1rem !important;
+            color: #ff4d4d !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        
+        #success-message {
+            background: rgba(70, 254, 119, 0.1) !important;
+            border: 1px solid rgba(70, 254, 119, 0.3) !important;
+            border-radius: 8px !important;
+            padding: 1rem !important;
+            margin-top: 1rem !important;
+            color: #46FE77 !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+        }
+        
+        /* Resetar estilos do container Brevo */
+        #sib-container {
+            background: transparent !important;
+            border: none !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        .sib-form {
+            background: transparent !important;
+            text-align: center !important;
+        }
+        
+        #sib-form-container {
+            background: transparent !important;
+        }
+    </style>
+    
     <style>
         :root {
             --primary-green: #46FE77;
@@ -278,16 +336,15 @@
 
         .article-title {
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-light);
             margin-bottom: 0.75rem;
+            color: var(--text-light);
             line-height: 1.4;
         }
 
-        .article-summary {
+        .article-excerpt {
             font-size: 0.9rem;
-            color: var(--text-gray);
             line-height: 1.6;
+            color: var(--text-gray);
             margin-bottom: 1rem;
         }
 
@@ -370,41 +427,49 @@
             max-width: 500px;
         }
 
-        .newsletter-input {
+        .newsletter-input,
+        #sib-container .input {
             flex: 1;
-            padding: 1rem 1.5rem;
-            border: 2px solid rgba(70, 254, 119, 0.3);
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-light);
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
+            padding: 1rem 1.5rem !important;
+            border: 2px solid rgba(70, 254, 119, 0.3) !important;
+            border-radius: 30px !important;
+            background: rgba(255, 255, 255, 0.05) !important;
+            color: var(--text-light) !important;
+            font-size: 1rem !important;
+            outline: none !important;
+            transition: all 0.3s ease !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
         }
 
-        .newsletter-input::placeholder {
-            color: var(--text-gray);
+        .newsletter-input::placeholder,
+        #sib-container .input::placeholder {
+            color: var(--text-gray) !important;
         }
 
-        .newsletter-input:focus {
-            border-color: var(--primary-green);
-            background: rgba(255, 255, 255, 0.1);
+        .newsletter-input:focus,
+        #sib-container .input:focus {
+            border-color: var(--primary-green) !important;
+            background: rgba(255, 255, 255, 0.1) !important;
         }
 
-        .newsletter-btn {
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            white-space: nowrap;
-            background: var(--primary-green);
-            color: var(--dark-bg);
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        .newsletter-btn,
+        #sib-container .sib-form-block__button {
+            padding: 1rem 2rem !important;
+            border-radius: 30px !important;
+            white-space: nowrap !important;
+            background: var(--primary-green) !important;
+            color: var(--dark-bg) !important;
+            border: none !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+            font-size: 1rem !important;
         }
 
-        .newsletter-btn:hover {
-            background: #38cc5f;
+        .newsletter-btn:hover,
+        #sib-container .sib-form-block__button:hover {
+            background: #38cc5f !important;
             transform: translateY(-2px);
         }
 
@@ -437,13 +502,47 @@
                 display: flex;
             }
 
-            .newsletter-input-group {
-                flex-direction: column;
+            .newsletter-input-group,
+            #sib-container .entry__field {
+                flex-direction: column !important;
             }
 
-            .newsletter-btn {
-                width: 100%;
+            .newsletter-btn,
+            #sib-container .sib-form-block__button {
+                width: 100% !important;
             }
+        }
+        
+        /* Esconder campos ocultos do Brevo */
+        .input--hidden {
+            display: none !important;
+        }
+        
+        /* Esconder loader icon */
+        .sib-hide-loader-icon {
+            display: none !important;
+        }
+        
+        /* Ajustar form do Brevo para layout inline */
+        #sib-container .entry__field {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        #sib-container .form__label-row {
+            width: 100%;
+        }
+        
+        #sib-container .sib-input {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        #sib-container .entry__error {
+            display: none !important;
         }
     </style>
 </head>
@@ -503,17 +602,56 @@
         </section>
     </main>
 
+    <!-- SEÇÃO NEWSLETTER COM BREVO -->
     <section class="newsletter-section">
         <div class="container">
             <div class="newsletter-content">
                 <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
-                <form class="newsletter-form" id="newsletterForm">
-                    <div class="newsletter-input-group">
-                        <input type="email" placeholder="Digite seu e-mail" required class="newsletter-input" id="newsletterEmail">
-                        <button type="submit" class="newsletter-btn">Enviar</button>
+                
+                <!-- BEGIN - Brevo Form -->
+                <div class="sib-form" style="text-align: center;">
+                  <div id="sib-form-container" class="sib-form-container">
+                    <div id="error-message" class="sib-form-message-panel" style="font-size:16px; text-align:center; font-family:'Segoe UI', sans-serif; display:none;">
+                      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                        <span class="sib-form-message-panel__inner-text">
+                          Ocorreu um erro ao tentar assinar. Tente novamente.
+                        </span>
+                      </div>
                     </div>
-                </form>
-                <p class="newsletter-message" id="newsletterMessage" style="display: none;"></p>
+                    
+                    <div id="success-message" class="sib-form-message-panel" style="font-size:16px; text-align:center; font-family:'Segoe UI', sans-serif; display:none;">
+                      <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+                        <span class="sib-form-message-panel__inner-text">
+                          Você está cadastrado na nossa newsletter!
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div id="sib-container" class="sib-container--large sib-container--vertical" style="text-align:center; background-color:transparent; direction:ltr">
+                      <form id="sib-form" method="POST" action="https://057ec3c1.sibforms.com/serve/MUIFACp2rDm2qMkW3rMsWRc91lRWNugmQizIS9SMckLJ0OwkH4XJevYu5cKINQU-c1KHAxLrh43rW46JZWTcCMFL6vriLDSQpRPATUPXpgYjLvvS8myXNzmddqY997JTXc2e1KE9rHdi4EQxLxYfcawo6sfTwtzA0pj5z8wtLEs9ML9rb7W9ta6dF5vHQZ7SS1vTX2tb8KCzO2CLtg==" data-type="subscription">
+                        <div class="sib-input sib-form-block">
+                          <div class="form__entry entry_block">
+                            <div class="form__label-row">
+                              <div class="entry__field">
+                                <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Digite seu e-mail" data-required="true" required />
+                                <button class="sib-form-block__button sib-form-block__button-with-loader" form="sib-form" type="submit">
+                                  Enviar
+                                </button>
+                              </div>
+                            </div>
+                            <label class="entry__error entry__error--primary" style="font-size:16px; text-align:center; font-family:'Segoe UI', sans-serif; display:none;">
+                            </label>
+                          </div>
+                        </div>
+
+                        <input type="text" name="email_address_check" value="" class="input--hidden">
+                        <input type="hidden" name="locale" value="pt">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <!-- END - Brevo Form -->
+                
             </div>
         </div>
     </section>
@@ -558,6 +696,25 @@
             }
         });
     </script>
+    
+    <!-- Brevo Form Script -->
+    <script>
+      window.REQUIRED_CODE_ERROR_MESSAGE = 'Escolha um código de país';
+      window.LOCALE = 'pt';
+      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "A informação fornecida não é valida. Verifique e tente novamente.";
+      window.REQUIRED_ERROR_MESSAGE = "Preencha este campo. ";
+      window.GENERIC_INVALID_MESSAGE = "A informação fornecida não é valida. Verifique e tente novamente.";
+      window.translation = {
+        common: {
+          selectedList: '{quantity} lista selecionada',
+          selectedLists: '{quantity} listas selecionadas',
+          selectedOption: '{quantity} selecionado',
+          selectedOptions: '{quantity} selecionados',
+        }
+      };
+      var AUTOHIDE = Boolean(0);
+    </script>
+    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
     
     <!-- Script de integração com WordPress -->
     <script src="js/blog.js"></script>
