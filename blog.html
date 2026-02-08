@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Brevo Form Styles -->
-    <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
-    
     <style>
         :root {
             --primary-green: #46FE77;
@@ -21,7 +18,7 @@
             --text-light: #ffffff;
             --text-gray: #94a3b8;
             --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            --gradient-primary: linear-gradient(135deg, #46FE77 0%, #00D9FF 100%);
+            --gradient-primary: linear-gradient(135deg, #46FE77, #181D4E);
         }
 
         * {
@@ -231,85 +228,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .article-image {
-            width: 100%;
-            height: 180px;
-            overflow: hidden;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        }
-
-        .article-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .article-card:hover .article-image img {
-            transform: scale(1.05);
-        }
-
-        .placeholder-image {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        }
-
-        .article-content {
-            padding: 1.5rem;
-        }
-
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-        }
-
-        .article-category {
-            color: var(--primary-green);
-        }
-
-        .article-date-separator {
-            color: var(--text-gray);
-        }
-
-        .article-date {
-            color: var(--text-gray);
-        }
-
-        .article-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-light);
-            line-height: 1.4;
-        }
-
-        .article-excerpt {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: var(--text-gray);
-            margin-bottom: 1rem;
-        }
-
-        .article-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary-green);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: gap 0.3s ease;
-        }
-
-        .article-link:hover {
-            gap: 0.75rem;
-        }
-
         .load-more-container {
             display: flex;
             justify-content: center;
@@ -368,100 +286,85 @@
             padding: 0 2rem;
         }
         
-        /* RESETAR TODOS OS ESTILOS BREVO */
-        .sib-form * {
-            all: unset !important;
-            display: revert !important;
+        /* FORMULÁRIO NEWSLETTER - 100% CUSTOMIZADO */
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
         }
         
-        .sib-form-block p {
-            display: none !important;
+        .newsletter-input-group {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
         }
         
-        .sib-form {
-            background: transparent !important;
+        .newsletter-input {
+            flex: 1;
+            padding: 0.875rem 1.5rem;
+            border: 2px solid rgba(70, 254, 119, 0.3);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
         }
         
-        #sib-form-container,
-        #sib-container {
-            all: unset !important;
-            display: block !important;
-            background: transparent !important;
+        .newsletter-input::placeholder {
+            color: var(--text-gray);
         }
         
-        #error-message,
-        #success-message {
-            background: rgba(70, 254, 119, 0.1) !important;
-            border: 1px solid rgba(70, 254, 119, 0.3) !important;
-            border-radius: 8px !important;
-            color: #46FE77 !important;
-            padding: 1rem !important;
-            margin-top: 1rem !important;
-            font-family: 'Segoe UI' !important;
-            font-size: 1rem !important;
+        .newsletter-input:focus {
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.1);
         }
         
-        #error-message {
-            background: rgba(255, 77, 77, 0.1) !important;
-            border-color: rgba(255, 77, 77, 0.3) !important;
-            color: #ff4d4d !important;
+        .newsletter-btn {
+            padding: 0.875rem 2rem;
+            border-radius: 30px;
+            white-space: nowrap;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .entry__field {
-            display: flex !important;
-            gap: 1rem !important;
-            max-width: 500px !important;
-            margin: 0 auto !important;
-        }
-        
-        /* INPUT - EXATAMENTE COMO NO INDEX.HTML */
-        #EMAIL {
-            all: unset !important;
-            flex: 1 !important;
-            min-width: 0 !important;
-            padding: 0.875rem 1.5rem !important;
-            border: 2px solid rgba(70, 254, 119, 0.3) !important;
-            border-radius: 30px !important;
-            background: rgba(255, 255, 255, 0.05) !important;
-            color: white !important;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            font-size: 1rem !important;
-        }
-        
-        #EMAIL::placeholder {
-            color: #94a3b8 !important;
-        }
-        
-        #EMAIL:focus {
-            border-color: #46FE77 !important;
-            background: rgba(255, 255, 255, 0.1) !important;
-            outline: none !important;
-        }
-        
-        /* BOTÃO - COM GRADIENTE IGUAL AO INDEX.HTML */
-        .sib-form-block__button {
-            all: unset !important;
-            padding: 0.875rem 2rem !important;
-            border-radius: 30px !important;
-            background: linear-gradient(135deg, #46FE77 0%, #00D9FF 100%) !important;
-            color: #0a1628 !important;
-            font-weight: 600 !important;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-            font-size: 1rem !important;
-            cursor: pointer !important;
-            white-space: nowrap !important;
-            transition: all 0.3s ease !important;
-        }
-        
-        .sib-form-block__button:hover {
+        .newsletter-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
         }
         
-        .entry__error,
-        .input--hidden,
-        .progress-indicator__icon {
-            display: none !important;
+        .newsletter-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .newsletter-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: none;
+        }
+        
+        .newsletter-message.success {
+            background: rgba(70, 254, 119, 0.1);
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            color: #46FE77;
+            display: block;
+        }
+        
+        .newsletter-message.error {
+            background: rgba(255, 77, 77, 0.1);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            color: #ff4d4d;
+            display: block;
         }
         
         @media (max-width: 768px) {
@@ -487,12 +390,12 @@
                 display: flex;
             }
             
-            .entry__field {
-                flex-direction: column !important;
+            .newsletter-input-group {
+                flex-direction: column;
             }
             
-            .sib-form-block__button {
-                width: 100% !important;
+            .newsletter-btn {
+                width: 100%;
             }
         }
     </style>
@@ -552,41 +455,23 @@
         </section>
     </main>
 
+    <!-- NEWSLETTER SECTION - 100% CUSTOMIZADO -->
     <section class="newsletter-section">
         <div class="container">
             <div class="newsletter-content">
                 <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
-                
-                <!-- Brevo Form -->
-                <div class="sib-form">
-                  <div id="sib-form-container">
-                    <div id="error-message" style="display:none;">
-                      Ocorreu um erro ao tentar assinar. Tente novamente.
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" 
+                               placeholder="Digite seu e-mail" 
+                               required 
+                               class="newsletter-input" 
+                               id="newsletterEmail"
+                               name="EMAIL">
+                        <button type="submit" class="newsletter-btn" id="submitBtn">Enviar</button>
                     </div>
-                    <div id="success-message" style="display:none;">
-                      Você está cadastrado na nossa newsletter!
-                    </div>
-                    <div id="sib-container">
-                      <form id="sib-form" method="POST" action="https://057ec3c1.sibforms.com/serve/MUIFACp2rDm2qMkW3rMsWRc91lRWNugmQizIS9SMckLJ0OwkH4XJevYu5cKINQU-c1KHAxLrh43rW46JZWTcCMFL6vriLDSQpRPATUPXpgYjLvvS8myXNzmddqY997JTXc2e1KE9rHdi4EQxLxYfcawo6sfTwtzA0pj5z8wtLEs9ML9rb7W9ta6dF5vHQZ7SS1vTX2tb8KCzO2CLtg==" data-type="subscription">
-                        <div class="sib-input sib-form-block">
-                          <div class="form__entry entry_block">
-                            <div class="form__label-row">
-                              <div class="entry__field">
-                                <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Digite seu e-mail" data-required="true" required />
-                                <button class="sib-form-block__button" form="sib-form" type="submit">
-                                  Enviar
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <input type="text" name="email_address_check" value="" class="input--hidden">
-                        <input type="hidden" name="locale" value="pt">
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                
+                </form>
+                <p class="newsletter-message" id="newsletterMessage"></p>
             </div>
         </div>
     </section>
@@ -618,8 +503,8 @@
     </footer>
 
     <script>
+        // Menu hamburguer
         document.addEventListener('DOMContentLoaded', function() {
-            // Menu hamburguer
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             
@@ -629,64 +514,56 @@
                     navMenu.classList.toggle('active');
                 });
             }
+        });
+        
+        // FORMULÁRIO NEWSLETTER - ENVIA PARA BREVO
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // FORÇA ESTILOS DO FORMULÁRIO BREVO
-            setTimeout(function() {
-                const container = document.getElementById('sib-container');
-                const input = document.getElementById('EMAIL');
-                const button = document.querySelector('.sib-form-block__button');
+            const emailInput = document.getElementById('newsletterEmail');
+            const submitBtn = document.getElementById('submitBtn');
+            const message = document.getElementById('newsletterMessage');
+            const email = emailInput.value;
+            
+            // Desabilita botão durante envio
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            message.className = 'newsletter-message';
+            message.style.display = 'none';
+            
+            try {
+                // Envia para o endpoint do Brevo
+                const response = await fetch('https://057ec3c1.sibforms.com/serve/MUIFACp2rDm2qMkW3rMsWRc91lRWNugmQizIS9SMckLJ0OwkH4XJevYu5cKINQU-c1KHAxLrh43rW46JZWTcCMFL6vriLDSQpRPATUPXpgYjLvvS8myXNzmddqY997JTXc2e1KE9rHdi4EQxLxYfcawo6sfTwtzA0pj5z8wtLEs9ML9rb7W9ta6dF5vHQZ7SS1vTX2tb8KCzO2CLtg==', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        'EMAIL': email,
+                        'email_address_check': '',
+                        'locale': 'pt'
+                    })
+                });
                 
-                if (container) {
-                    container.style.background = 'transparent';
-                    container.style.border = 'none';
-                    container.style.boxShadow = 'none';
-                    container.style.maxWidth = '100%';
-                    container.style.padding = '0';
+                if (response.ok) {
+                    // Sucesso
+                    message.className = 'newsletter-message success';
+                    message.textContent = 'Você está cadastrado na nossa newsletter!';
+                    emailInput.value = '';
+                } else {
+                    throw new Error('Erro ao enviar');
                 }
-                
-                if (input) {
-                    input.style.background = 'rgba(255, 255, 255, 0.05)';
-                    input.style.backgroundColor = 'rgba(255, 255, 255, 0.05)';
-                    input.style.border = '2px solid rgba(70, 254, 119, 0.3)';
-                    input.style.borderRadius = '30px';
-                    input.style.color = '#ffffff';
-                    input.style.padding = '0.875rem 1.5rem';
-                    input.style.fontFamily = 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
-                    input.style.fontSize = '1rem';
-                }
-                
-                if (button) {
-                    button.style.background = 'linear-gradient(135deg, #46FE77 0%, #00D9FF 100%)';
-                    button.style.color = '#0a1628';
-                    button.style.border = 'none';
-                    button.style.borderRadius = '30px';
-                    button.style.padding = '0.875rem 2rem';
-                    button.style.fontWeight = '600';
-                    button.style.fontFamily = 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif';
-                    button.style.fontSize = '1rem';
-                }
-            }, 100);
+            } catch (error) {
+                // Erro
+                message.className = 'newsletter-message error';
+                message.textContent = 'Ocorreu um erro ao tentar assinar. Tente novamente.';
+            } finally {
+                // Reabilita botão
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar';
+            }
         });
     </script>
-    
-    <!-- Brevo Scripts -->
-    <script>
-      window.REQUIRED_CODE_ERROR_MESSAGE = 'Escolha um código de país';
-      window.LOCALE = 'pt';
-      window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "A informação fornecida não é valida. Verifique e tente novamente.";
-      window.REQUIRED_ERROR_MESSAGE = "Preencha este campo. ";
-      window.GENERIC_INVALID_MESSAGE = "A informação fornecida não é valida. Verifique e tente novamente.";
-      window.translation = {
-        common: {
-          selectedList: '{quantity} lista selecionada',
-          selectedLists: '{quantity} listas selecionadas',
-          selectedOption: '{quantity} selecionado',
-          selectedOptions: '{quantity} selecionados',
-        }
-      };
-      var AUTOHIDE = Boolean(0);
-    </script>
-    <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
     
     <script src="js/blog.js"></script>
 </body>
