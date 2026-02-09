@@ -2,19 +2,19 @@
 // Deploy na Vercel para evitar CORS
 
 export default async function handler(req, res) {
-  // Apenas POST permitido
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  // CORS headers
+  // CORS headers PRIMEIRO (antes de qualquer outra coisa)
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight
+  // Handle preflight (OPTIONS request)
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
+  }
+
+  // Apenas POST permitido
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
