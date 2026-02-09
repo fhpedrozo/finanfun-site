@@ -104,48 +104,173 @@
             padding-top: 120px;
             padding-bottom: 80px;
             min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        .page-placeholder {
+        /* Estilos para o documento legal */
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(70, 254, 119, 0.1);
+        }
+
+        .document-header {
             text-align: center;
-            color: white;
+            padding: 3rem 2rem 2rem;
+            border-bottom: 2px solid rgba(70, 254, 119, 0.2);
         }
 
-        .page-placeholder .icon-container {
-            font-size: 5rem;
-            margin-bottom: 2rem;
+        .document-header h1 {
             color: var(--primary-green);
-        }
-
-        .page-placeholder h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
+        }
+
+        .document-header .subtitle {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .document-header .version {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .document-header .update-date {
+            color: var(--text-gray);
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .lgpd-badge {
+            background: rgba(45, 212, 191, 0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .lgpd-badge p {
+            color: #2DD4BF;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 193, 7, 0.15);
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .warning-box h3 {
+            color: #ffc107;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .warning-box p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .definitions-box {
+            background: rgba(70, 254, 119, 0.08);
+            border-left: 4px solid var(--primary-green);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .definitions-box h2 {
+            border: none !important;
+            padding-left: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .document-content {
+            padding: 2rem;
+        }
+
+        .document-content h2 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-green);
+            padding-left: 1rem;
+        }
+
+        .document-content h3 {
+            color: #2DD4BF;
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .document-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .document-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-gray);
+        }
+
+        .document-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            background: rgba(70, 254, 119, 0.05);
+            border-left: 3px solid var(--primary-green);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            color: #ff5252;
+            font-weight: 600;
+        }
+
+        a {
+            color: #2DD4BF;
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        a:hover {
+            text-decoration: underline;
             color: var(--primary-green);
         }
 
-        .page-placeholder p {
-            font-size: 1.2rem;
+        .document-footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 2px solid rgba(70, 254, 119, 0.2);
+            margin-top: 3rem;
+        }
+
+        .document-footer p {
             color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-
-        .btn-voltar {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, #46FE77, #2DD4BF);
-            color: #0a1628;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .btn-voltar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(70, 254, 119, 0.4);
+            margin-bottom: 0.5rem;
+            text-align: center;
         }
 
         .container {
@@ -177,8 +302,16 @@
                 display: flex;
             }
 
-            .page-placeholder h1 {
+            .document-header h1 {
                 font-size: 2rem;
+            }
+
+            .document-content {
+                padding: 1.5rem;
+            }
+
+            .content-container {
+                padding: 0 1rem;
             }
         }
     </style>
@@ -204,13 +337,230 @@
     </nav>
 
     <main class="main-content">
-        <div class="page-placeholder">
-            <div class="icon-container">
-                <i class="fas fa-shield-halved"></i>
+        <div class="content-container">
+            <div class="document-header">
+                <h1>POLÍTICA DE PRIVACIDADE</h1>
+                <p class="subtitle">FinanFun - Educação Financeira</p>
+                <p class="version">Versão 2.0</p>
+                <p class="update-date">Última atualização: <script>document.write(new Date().toLocaleDateString('pt-BR'))</script></p>
+                <div class="lgpd-badge">
+                    <p>De acordo com a Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)</p>
+                </div>
             </div>
-            <h1>Em Desenvolvimento!</h1>
-            <p>A Política de Privacidade está sendo preparada para você.</p>
-            <a href="../index.html" class="btn-voltar">Voltar ao Início</a>
+
+            <div class="document-content">
+                <div class="warning-box">
+                    <h3>⚠️ IMPORTANTE PARA MENORES DE 18 ANOS</h3>
+                    <p>Se você tem menos de 18 anos, PEÇA PARA SEUS PAIS OU RESPONSÁVEL LEGAL LEREM ESTA POLÍTICA junto com você. De acordo com a Lei Geral de Proteção de Dados (LGPD), o tratamento de dados de crianças e adolescentes deve ser feito com o consentimento de pelo menos um dos pais ou responsável legal. Ao fornecer seus dados, você declara ter essa autorização.</p>
+                </div>
+
+                <div class="definitions-box">
+                    <h2>Palavras que Você Precisa Conhecer</h2>
+                    <p>Para facilitar a compreensão desta Política, veja o significado de alguns termos importantes:</p>
+                    <ul>
+                        <li><strong>Dados Pessoais:</strong> Informações que podem identificar você (como seu e-mail).</li>
+                        <li><strong>Tratamento de Dados:</strong> Qualquer uso dos seus dados (coletar, armazenar, enviar, excluir).</li>
+                        <li><strong>Titular:</strong> Você, dono dos dados.</li>
+                        <li><strong>Controlador:</strong> Nós (FinanFun), responsável pelos dados.</li>
+                        <li><strong>DPO (Encarregado):</strong> Pessoa responsável por questões de privacidade.</li>
+                        <li><strong>LGPD:</strong> Lei Geral de Proteção de Dados - lei brasileira que protege sua privacidade.</li>
+                        <li><strong>Cookies:</strong> Pequenos arquivos armazenados no seu navegador para melhorar sua experiência.</li>
+                    </ul>
+                </div>
+
+                <h2>1. Introdução</h2>
+                <p>Esta Política de Privacidade explica de forma clara e transparente como o FinanFun coleta, usa, armazena e protege suas informações pessoais, em total conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018).</p>
+                <p>Nós respeitamos sua privacidade e nos comprometemos a proteger seus dados pessoais.</p>
+
+                <h2>2. Controlador de Dados (Quem Somos)</h2>
+                <p>O responsável pelo tratamento dos seus dados pessoais é:</p>
+                <div class="contact-info">
+                    <p><strong>Nome:</strong> Fabio Hommerding Pedrozo</p>
+                    <p><strong>CPF:</strong> 030.358.739-33</p>
+                    <p><strong>Endereço:</strong> Londrina/PR</p>
+                    <p><strong>E-mail (geral):</strong> adm@finanfun.com.br</p>
+                    <p><strong>E-mail (privacidade/LGPD):</strong> privacidade@finanfun.com.br</p>
+                    <p><strong>Site:</strong> finanfun.com.br</p>
+                </div>
+
+                <h2>3. Quais Dados Coletamos</h2>
+                <p>Coletamos apenas os dados essenciais para fornecer nossos serviços educacionais:</p>
+
+                <h3>3.1. Dados Fornecidos por Você</h3>
+                <p><strong>Newsletter:</strong></p>
+                <ul>
+                    <li>Endereço de e-mail (fornecido voluntariamente no cadastro)</li>
+                </ul>
+                <p><span class="highlight">Importante:</span> NÃO coletamos nome completo, data de nascimento, telefone ou endereço residencial no cadastro da newsletter.</p>
+
+                <h3>3.2. Dados Coletados Automaticamente</h3>
+                <p>Quando você visita nosso site, coletamos automaticamente:</p>
+                <ul>
+                    <li>Endereço IP (anonimizado);</li>
+                    <li>Tipo de navegador;</li>
+                    <li>Páginas visitadas;</li>
+                    <li>Tempo de permanência no site;</li>
+                    <li>Dispositivo utilizado (computador, celular, tablet).</li>
+                </ul>
+                <p><strong>Finalidade:</strong> Esses dados são coletados através de cookies e ferramentas de análise (Google Analytics) para melhorar a experiência do usuário e entender como nosso conteúdo é utilizado.</p>
+
+                <h2>4. Como Usamos Seus Dados</h2>
+                <p>Utilizamos seus dados pessoais APENAS para as seguintes finalidades:</p>
+
+                <h3>4.1. Envio de Newsletter</h3>
+                <ul>
+                    <li>Enviar conteúdo educacional sobre finanças e empreendedorismo;</li>
+                    <li>Informar sobre novos artigos e recursos do blog;</li>
+                    <li>Compartilhar dicas e informações relevantes.</li>
+                </ul>
+                <p><strong>Base legal (LGPD):</strong> Consentimento (você autoriza ao se cadastrar).</p>
+
+                <h3>4.2. Análise de Navegação</h3>
+                <ul>
+                    <li>Entender quais conteúdos são mais acessados;</li>
+                    <li>Melhorar a experiência do usuário no site;</li>
+                    <li>Identificar problemas técnicos.</li>
+                </ul>
+                <p><strong>Base legal (LGPD):</strong> Interesse legítimo (melhorar nossos serviços).</p>
+
+                <p><span class="highlight">O QUE NÃO FAZEMOS:</span></p>
+                <ul>
+                    <li>NÃO vendemos seus dados;</li>
+                    <li>NÃO compartilhamos com terceiros para fins comerciais;</li>
+                    <li>NÃO enviamos propaganda ou ofertas de produtos/serviços;</li>
+                    <li>NÃO fazemos recomendações de investimentos.</li>
+                </ul>
+
+                <h2>5. Com Quem Compartilhamos Seus Dados</h2>
+                <p>Compartilhamos seus dados APENAS com as seguintes ferramentas essenciais para o funcionamento do site:</p>
+
+                <h3>5.1. Brevo (Serviço de Newsletter)</h3>
+                <div class="contact-info">
+                    <p><strong>O que é:</strong> Plataforma europeia de e-mail marketing que armazena os e-mails cadastrados.</p>
+                    <p><strong>Dados compartilhados:</strong> Endereço de e-mail.</p>
+                    <p><strong>Finalidade:</strong> Envio de newsletters educacionais.</p>
+                    <p><strong>Localização:</strong> Brevo possui servidores na Europa e é adequado à LGPD e GDPR.</p>
+                    <p><strong>Política de Privacidade:</strong> <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank">https://www.brevo.com/legal/privacypolicy/</a></p>
+                </div>
+
+                <h3>5.2. Google Analytics</h3>
+                <div class="contact-info">
+                    <p><strong>O que é:</strong> Ferramenta de análise de tráfego do Google.</p>
+                    <p><strong>Dados compartilhados:</strong> Dados de navegação (IP anonimizado, páginas visitadas, tempo no site).</p>
+                    <p><strong>Finalidade:</strong> Estatísticas de uso do site para melhorias.</p>
+                    <p><strong>Política de Privacidade:</strong> <a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a></p>
+                    <p><strong>Como desativar:</strong> Você pode bloquear o Google Analytics através do complemento de navegador em: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">https://tools.google.com/dlpage/gaoptout</a></p>
+                </div>
+
+                <h2>6. Uso de Cookies</h2>
+                <p><strong>O que são cookies?</strong> São pequenos arquivos de texto armazenados no seu navegador para melhorar sua experiência.</p>
+                <p>Utilizamos cookies para:</p>
+                <ul>
+                    <li>Lembrar suas preferências de navegação;</li>
+                    <li>Coletar estatísticas de visitação (Google Analytics);</li>
+                    <li>Melhorar o desempenho do site.</li>
+                </ul>
+
+                <p><strong>Tipos de cookies:</strong></p>
+                <ul>
+                    <li><strong>Essenciais:</strong> Necessários para o funcionamento básico do site.</li>
+                    <li><strong>Analíticos:</strong> Google Analytics (podem ser desativados).</li>
+                </ul>
+
+                <p><strong>Como bloquear cookies:</strong> Você pode desativar cookies através das configurações do seu navegador. Isso pode afetar a funcionalidade do site.</p>
+
+                <h2>7. Segurança dos Dados</h2>
+                <p>Levamos a segurança dos seus dados muito a sério. Implementamos medidas técnicas e organizacionais para proteger suas informações:</p>
+                <ul>
+                    <li>Certificado SSL (HTTPS) para criptografia de dados em trânsito;</li>
+                    <li>Firewall e monitoramento de segurança (Wordfence);</li>
+                    <li>Acesso restrito aos dados apenas por pessoal autorizado;</li>
+                    <li>Backups regulares para evitar perda de dados;</li>
+                    <li>Servidor VPS seguro com sistema de detecção de intrusão.</li>
+                </ul>
+                <p><strong>Importante:</strong> Apesar de todos os esforços, nenhum sistema é 100% seguro. Recomendamos usar senhas fortes e não compartilhar informações sensíveis por e-mail.</p>
+
+                <h2>8. Por Quanto Tempo Guardamos Seus Dados</h2>
+
+                <p><strong>E-mails da newsletter:</strong></p>
+                <ul>
+                    <li>Mantemos enquanto você estiver inscrito;</li>
+                    <li>Ao cancelar a inscrição: <strong>removidos em até 30 dias</strong>.</li>
+                </ul>
+
+                <p><strong>Dados de navegação (Google Analytics):</strong></p>
+                <ul>
+                    <li>Armazenados por até <strong>26 meses</strong>, de forma anonimizada;</li>
+                    <li>Você pode bloquear através das configurações do navegador.</li>
+                </ul>
+
+                <p><strong>Logs de segurança (Wordfence):</strong></p>
+                <ul>
+                    <li>Mantidos por até <strong>6 meses</strong> para proteção do site contra ataques.</li>
+                </ul>
+
+                <p><em><strong>Dados fiscais (futuros):</strong> Se no futuro houver vendas/pagamentos, manteremos dados fiscais pelo prazo legal de 5 anos, conforme legislação tributária brasileira.</em></p>
+
+                <h2>9. Seus Direitos (LGPD)</h2>
+                <p>De acordo com a Lei Geral de Proteção de Dados (LGPD), você tem os seguintes direitos:</p>
+                <ul>
+                    <li><strong>✓ Confirmação:</strong> Saber se tratamos seus dados pessoais.</li>
+                    <li><strong>✓ Acesso:</strong> Ter acesso aos seus dados que possuímos.</li>
+                    <li><strong>✓ Correção:</strong> Corrigir dados incompletos, inexatos ou desatualizados.</li>
+                    <li><strong>✓ Anonimização/Bloqueio/Eliminação:</strong> Solicitar anonimização, bloqueio ou exclusão de dados desnecessários.</li>
+                    <li><strong>✓ Portabilidade:</strong> Solicitar a transferência de seus dados para outro fornecedor.</li>
+                    <li><strong>✓ Revogação do Consentimento:</strong> Cancelar sua inscrição na newsletter a qualquer momento.</li>
+                    <li><strong>✓ Oposição:</strong> Opor-se ao tratamento de dados.</li>
+                    <li><strong>✓ Informação:</strong> Saber com quem compartilhamos seus dados.</li>
+                </ul>
+                <p><strong>Como exercer seus direitos:</strong> Entre em contato através do e-mail privacidade@finanfun.com.br. Responderemos em até 15 dias úteis.</p>
+
+                <h2>10. Proteção de Crianças e Adolescentes (LGPD - Art. 14)</h2>
+                <p>Levamos muito a sério a proteção de dados de crianças e adolescentes, conforme determina o artigo 14 da LGPD.</p>
+                <p><span class="highlight">Para menores de 18 anos:</span></p>
+                <ul>
+                    <li>É OBRIGATÓRIO o consentimento de pelo menos um dos pais ou responsável legal para se cadastrar;</li>
+                    <li>Os pais/responsáveis têm o direito de acessar e solicitar a exclusão dos dados a qualquer momento;</li>
+                    <li>Nosso conteúdo é educacional e não contém propaganda ou ofertas comerciais;</li>
+                    <li>NÃO coletamos dados sensíveis de menores (como localização, biometria, etc.).</li>
+                </ul>
+                <p><strong>Pais e Responsáveis:</strong> Se você identificar que seu filho/tutelado se cadastrou sem sua autorização, entre em contato imediatamente através do e-mail privacidade@finanfun.com.br para remoção dos dados.</p>
+
+                <h2>11. Alterações nesta Política</h2>
+                <p>Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou na legislação. Alterações significativas serão notificadas através de:</p>
+                <ul>
+                    <li>Aviso destacado no site;</li>
+                    <li>E-mail para os inscritos na newsletter.</li>
+                </ul>
+                <p>A data da última atualização estará sempre visível no topo deste documento.</p>
+
+                <h2>12. Contato e Encarregado de Dados (DPO)</h2>
+                <p>Para dúvidas, solicitações ou exercer seus direitos relacionados à privacidade e proteção de dados:</p>
+                <div class="contact-info">
+                    <p><strong>E-mail (geral):</strong> adm@finanfun.com.br</p>
+                    <p><strong>E-mail (questões de privacidade/LGPD):</strong> privacidade@finanfun.com.br</p>
+                    <p><strong>Responsável/Encarregado (DPO):</strong> Fabio Hommerding Pedrozo</p>
+                    <p><strong>Prazo de resposta:</strong> Até 15 dias úteis</p>
+                    <p><strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h (horário de Brasília)</p>
+                </div>
+
+                <p><strong>Autoridade Nacional de Proteção de Dados (ANPD):</strong></p>
+                <p>Em caso de não resolução de questões, você pode contatar a ANPD:</p>
+                <div class="contact-info">
+                    <p><strong>Site:</strong> <a href="https://www.gov.br/anpd" target="_blank">https://www.gov.br/anpd</a></p>
+                    <p><strong>E-mail:</strong> atendimento@anpd.gov.br</p>
+                </div>
+
+                <h2>13. Consentimento</h2>
+                <p>Ao se cadastrar em nossa newsletter ou utilizar nosso site, você declara ter lido, compreendido e concordado com esta Política de Privacidade.</p>
+
+                <div class="document-footer">
+                    <p><strong>FinanFun - Educação Financeira para Jovens</strong></p>
+                    <p>finanfun.com.br</p>
+                    <p>adm@finanfun.com.br | privacidade@finanfun.com.br</p>
+                    <p>Em conformidade com a LGPD (Lei nº 13.709/2018)</p>
+                </div>
+            </div>
         </div>
     </main>
 
