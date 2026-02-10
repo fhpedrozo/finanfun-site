@@ -171,9 +171,6 @@
         }
 
         .newsletter-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
             margin-bottom: 1.5rem;
         }
 
@@ -481,9 +478,10 @@
         .signup-message {
             margin-top: 1rem;
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 25px;
             font-size: 1rem;
             display: none;
+            text-align: center;
         }
         
         .signup-message.success {
@@ -541,24 +539,28 @@
             </div>
             <p class="newsletter-description">
                 Explore todas as nossas newsletters anteriores! Conteúdos exclusivos sobre educação financeira, 
-                empreendedorismo, dicas práticas, novidades do FinanFun e muito mais. Cada edição foi cuidadosamente
-                preparada para você e sua família aprenderem sobre dinheiro de forma fácil, divertida e acessível.
+                dicas práticas, novidades do FinanFun e muito mais. Cada edição foi cuidadosamente preparada 
+                para você e sua família aprenderem sobre dinheiro de forma divertida e acessível.
             </p>
             <div class="newsletter-filters">
-                <button class="filter-btn active" data-filter="all">Todas</button>
-                <button class="filter-btn" data-year="2026">2026</button>
-                <button class="filter-btn" data-month="janeiro">Janeiro</button>
-                <button class="filter-btn" data-month="fevereiro">Fevereiro</button>
-                <button class="filter-btn" data-month="marco">Março</button>
-                <button class="filter-btn" data-month="abril">Abril</button>
-                <button class="filter-btn" data-month="maio">Maio</button>
-                <button class="filter-btn" data-month="junho">Junho</button>
-                <button class="filter-btn" data-month="julho">Julho</button>
-                <button class="filter-btn" data-month="agosto">Agosto</button>
-                <button class="filter-btn" data-month="setembro">Setembro</button>
-                <button class="filter-btn" data-month="outubro">Outubro</button>
-                <button class="filter-btn" data-month="novembro">Novembro</button>
-                <button class="filter-btn" data-month="dezembro">Dezembro</button>
+                <div style="display: flex; gap: 0.75rem; margin-bottom: 0.75rem;">
+                    <button class="filter-btn active" data-filter="all">Todas</button>
+                    <button class="filter-btn" data-year="2026">2026</button>
+                </div>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <button class="filter-btn" data-month="janeiro">Janeiro</button>
+                    <button class="filter-btn" data-month="fevereiro">Fevereiro</button>
+                    <button class="filter-btn" data-month="marco">Março</button>
+                    <button class="filter-btn" data-month="abril">Abril</button>
+                    <button class="filter-btn" data-month="maio">Maio</button>
+                    <button class="filter-btn" data-month="junho">Junho</button>
+                    <button class="filter-btn" data-month="julho">Julho</button>
+                    <button class="filter-btn" data-month="agosto">Agosto</button>
+                    <button class="filter-btn" data-month="setembro">Setembro</button>
+                    <button class="filter-btn" data-month="outubro">Outubro</button>
+                    <button class="filter-btn" data-month="novembro">Novembro</button>
+                    <button class="filter-btn" data-month="dezembro">Dezembro</button>
+                </div>
             </div>
             
             <div class="newsletter-search">
@@ -587,7 +589,7 @@
     <section class="signup-section">
         <div class="container">
             <div class="signup-content">
-                <h2 class="section-title">Receba nossas Newsletters</h2>
+                <h2 class="section-title">Cadastre-se para receber nossas Newsletters</h2>
                 <form class="signup-form" id="signupForm">
                     <div class="signup-input-group">
                         <input type="email" 
@@ -595,14 +597,15 @@
                                required 
                                class="signup-input" 
                                id="signupEmail"
-                               name="EMAIL">
-                        <button type="submit" class="signup-btn" id="submitBtn">Enviar</button>
+                               name="EMAIL"
+                               style="border-radius: 25px;">
+                        <button type="submit" class="signup-btn" id="submitBtn" style="border-radius: 25px;">Enviar</button>
                     </div>
+                    <p class="signup-message" id="signupMessage" style="max-width: 100%;"></p>
                 </form>
-                <p class="signup-message" id="signupMessage"></p>
                 
                 <!-- LGPD - Consentimento -->
-                <div class="newsletter-consent" style="max-width: 600px; margin: 1.5rem auto 0; padding: 1.25rem; background: rgba(70, 254, 119, 0.05); border-radius: 12px; border-left: 4px solid #46FE77;">
+                <div class="newsletter-consent" style="max-width: 100%; margin: 1.5rem 0 0; padding: 1.25rem; background: rgba(70, 254, 119, 0.05); border-radius: 12px; border-left: 4px solid #46FE77;">
                     <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); margin-bottom: 0.875rem; line-height: 1.6; text-align: left;">
                         Ao se cadastrar, você concorda com nossos 
                         <a href="pages/termos-uso.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Termos de Uso</a> e 
