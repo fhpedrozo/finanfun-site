@@ -8,6 +8,17 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <meta name="description" content="Conheça mais sobre o FinanFun e nossa missão de educar financeiramente crianças e adolescentes.">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-39RE1PVHEL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-39RE1PVHEL');
+    </script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css?v=20250620-0230">
     <style>
@@ -280,12 +291,12 @@
                 </a></h2>
             </div>
             <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link">Voltar ao Início</a></li>
+                <li><a href="../index.html" class="nav-link">Início</a></li>
                 <li><a href="../index.html#problema" class="nav-link">O Problema</a></li>
                 <li><a href="../index.html#solucao" class="nav-link">Solução</a></li>
                 <li><a href="fale-conosco.html" class="nav-link">Contato</a></li>
                 <li><a href="../blog.html" class="nav-link login-btn">Blog</a></li>
-                <li><a href="../educa.html" class="nav-link login-btn">Educa</a></li>
+                <li><a href="../newsletter.html" class="nav-link login-btn">Newsletter</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -403,6 +414,15 @@
                 <div class="footer-section">
                     <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
                     <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                    
+                    <!-- Redes Sociais -->
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
                 
                 <div class="footer-section">
@@ -410,6 +430,7 @@
                     <ul>
                         <li><a href="../index.html">Início</a></li>
                         <li><a href="../blog.html">Blog</a></li>
+                        <li><a href="../newsletter.html">Newsletters</a></li>
                         <li><a href="../educa.html">Educa</a></li>
                         <li><a href="fale-conosco.html">Fale Conosco</a></li>
                     </ul>
@@ -433,6 +454,15 @@
                 hamburger.addEventListener('click', function() {
                     hamburger.classList.toggle('active');
                     navMenu.classList.toggle('active');
+                });
+                
+                // Fechar menu ao clicar em um link
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
                 });
             }
         });
