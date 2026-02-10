@@ -709,14 +709,32 @@
     <section class="section newsletter-section">
         <div class="container">
             <div class="newsletter-content">
-                <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
+                <h2 class="section-title">Cadastre-se para receber nossas Newsletters</h2>
                 <form class="newsletter-form" id="newsletterForm">
                     <div class="newsletter-input-group">
-                        <input type="email" placeholder="Digite seu e-mail" required class="newsletter-input" id="newsletterEmail">
-                        <button type="submit" class="btn btn-primary newsletter-btn">Enviar</button>
+                        <input type="email" 
+                               placeholder="Digite seu e-mail" 
+                               required 
+                               class="newsletter-input" 
+                               id="newsletterEmail"
+                               name="EMAIL"
+                               style="border-radius: 25px;">
+                        <button type="submit" class="btn btn-primary newsletter-btn" style="border-radius: 25px;">Enviar</button>
                     </div>
+                    <p class="newsletter-message" id="newsletterMessage" style="max-width: 100%;"></p>
                 </form>
-                <p class="newsletter-message" id="newsletterMessage" style="display: none;"></p>
+                
+                <!-- LGPD - Consentimento -->
+                <div class="newsletter-consent" style="max-width: 600px; margin: 1.5rem auto 0; padding: 1.25rem; background: rgba(70, 254, 119, 0.05); border-radius: 12px; border-left: 4px solid #46FE77;">
+                    <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); margin: 0; line-height: 1.6; text-align: center;">
+                        Ao se cadastrar, você concorda com nossos 
+                        <a href="pages/termos-uso.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Termos de Uso</a> e 
+                        <a href="pages/politica-privacidade.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Política de Privacidade</a>. 
+                        Em conformidade com a LGPD (Lei nº 13.709/2018).
+                        <br><br>
+                        <span style="font-size: 1.1rem;">⚠️</span> Se você tem menos de 18 anos, certifique-se de ter autorização dos seus pais ou responsável legal.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -744,6 +762,12 @@
                         <li><a href="blog.html">Blog</a></li>
                         <li><a href="newsletter.html" class="nav-link">Newsletters</a></li>
                         <li><a href="educa.html">Educa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
                         <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
                         <li><a href="pages/politica-privacidade.html">Política de Privacidade</a></li>
                         <li><a href="pages/termos-uso.html">Termos de Uso</a></li>
@@ -753,7 +777,7 @@
                 <div class="footer-section">
                     <h4>Contato</h4>
                     <div class="contact-info">
-                        <p><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86e5e9e8f2e7f2e9c6e0efe8e7e8e0f3e8a8e5e9eba8e4f4">[email&#160;protected]</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:contato@finanfun.com.br">contato@finanfun.com.br</a></p>
                         <p style="display: none;"><i class="fas fa-phone"></i> (43) 1234-5678</p>
                         <p style="display: none;"><i class="fas fa-map-marker-alt"></i> Londrina, PR</p>
                     </div>
@@ -867,6 +891,31 @@
             </div>
         </div>
     </div>
+
+    <!-- Menu Hamburguer JavaScript -->
+    <script>
+        // Menu hamburguer
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Fechar menu ao clicar em um link
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
 
     <!-- Newsletter Form JavaScript -->
     <script>
