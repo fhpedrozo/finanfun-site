@@ -98,6 +98,26 @@
             color: var(--primary-green);
         }
 
+        /* Botão Voltar no Header */
+        .btn-voltar-header {
+            padding: 0.625rem 1.5rem;
+            border-radius: 25px;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-voltar-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
@@ -141,7 +161,6 @@
         .newsletter-title h1 {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--text-light);
         }
 
         .newsletter-description {
@@ -155,6 +174,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
 
         .filter-btn {
@@ -240,97 +260,129 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .newsletter-card-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+        .newsletter-card.hidden {
+            display: none;
         }
 
-        .newsletter-card-content {
+        .card-header {
             padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(70, 254, 119, 0.1), rgba(30, 41, 59, 0.8));
         }
 
-        .newsletter-card-date {
-            color: var(--primary-green);
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .newsletter-card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--text-light);
-            line-height: 1.4;
-        }
-
-        .newsletter-card-excerpt {
-            color: var(--text-gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
         }
 
-        .newsletter-card-link {
+        .card-date {
+            font-size: 0.875rem;
+            color: var(--text-gray);
+        }
+
+        .card-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(70, 254, 119, 0.2);
             color: var(--primary-green);
-            text-decoration: none;
-            font-weight: 500;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-description {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .read-more {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--primary-green);
+            font-weight: 500;
+            text-decoration: none;
             transition: gap 0.3s ease;
         }
 
-        .newsletter-card-link:hover {
+        .read-more:hover {
             gap: 0.75rem;
         }
 
-        .load-more-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-            margin-bottom: 3rem !important;
-            min-height: 60px;
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
         }
 
-        .load-more-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 14px 40px;
-            background: linear-gradient(135deg, var(--primary-green), #181D4E);
-            border: none;
-            border-radius: 30px;
-            color: white;
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--text-gray);
+            opacity: 0.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .empty-state p {
+            color: var(--text-gray);
             font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .load-more-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(70, 254, 119, 0.3);
         }
 
         .loading {
             text-align: center;
-            padding: 3rem;
+            padding: 4rem 2rem;
             color: var(--text-gray);
         }
 
-        .no-newsletters {
+        .load-more-container {
             text-align: center;
-            padding: 3rem;
-            color: var(--text-gray);
+            margin-top: 3rem;
+            padding-bottom: 2rem;
+        }
+
+        .load-more-btn {
+            padding: 0.875rem 2rem;
+            background: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .load-more-btn:hover {
+            background: var(--primary-green);
+            color: #0a1628;
         }
 
         @media (max-width: 768px) {
-            .newsletters-grid {
-                grid-template-columns: 1fr;
-            }
-
             .nav-menu {
                 position: fixed;
                 left: -100%;
@@ -352,71 +404,60 @@
             .hamburger {
                 display: flex;
             }
+
+            .newsletters-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .signup-section {
-            margin-top: 2rem !important;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(70, 254, 119, 0.1) 0%, transparent 50%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
         }
-
-        .signup-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
+        
         .section-title {
-            font-size: 1.8rem;
+            text-align: center;
+            font-size: 2rem;
             margin-bottom: 2rem;
             color: var(--text-light);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
         
-        /* FORMULÁRIO NEWSLETTER */
         .signup-form {
-            display: flex;
-            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
         }
         
         .signup-input-group {
             display: flex;
             gap: 1rem;
-            width: 100%;
-            max-width: 500px;
+            align-items: stretch;
         }
         
         .signup-input {
             flex: 1;
-            padding: 0.875rem 1.5rem;
+            padding: 1rem 1.5rem;
             border: 2px solid rgba(70, 254, 119, 0.3);
-            border-radius: 30px;
+            border-radius: 8px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-light);
             font-size: 1rem;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            outline: none;
             transition: all 0.3s ease;
+        }
+        
+        .signup-input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            background: rgba(255, 255, 255, 0.08);
         }
         
         .signup-input::placeholder {
             color: var(--text-gray);
         }
         
-        .signup-input:focus {
-            border-color: var(--primary-green);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
         .signup-btn {
-            padding: 0.875rem 2rem;
-            border-radius: 30px;
-            white-space: nowrap;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
             background: linear-gradient(135deg, var(--primary-green), #181D4E);
             color: white;
             border: none;
@@ -482,6 +523,7 @@
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
                 <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
                 <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
+                <li><a href="index.html" class="btn-voltar-header">Voltar</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -495,17 +537,28 @@
         <div class="newsletter-header">
             <div class="newsletter-title">
                 <i class="fas fa-envelope-open-text newsletter-icon"></i>
-                <h1>Arquivo de <span class="fun-text">Newsletters</span></h1>
+                <h1><span class="finan-text">Finan</span><span class="fun-text">Fun</span> <span class="finan-text">Newsletter</span></h1>
             </div>
             <p class="newsletter-description">
                 Explore todas as nossas newsletters anteriores! Conteúdos exclusivos sobre educação financeira, 
-                dicas práticas, novidades do FinanFun e muito mais. Cada edição foi cuidadosamente preparada 
-                para você e sua família aprenderem sobre dinheiro de forma divertida e acessível.
+                empreendedorismo, dicas práticas, novidades do FinanFun e muito mais. Cada edição foi cuidadosamente
+                preparada para você e sua família aprenderem sobre dinheiro de forma fácil, divertida e acessível.
             </p>
             <div class="newsletter-filters">
-                <button class="filter-btn active" data-year="">Todas</button>
+                <button class="filter-btn active" data-filter="all">Todas</button>
                 <button class="filter-btn" data-year="2026">2026</button>
-                <button class="filter-btn" data-year="2025">2025</button>
+                <button class="filter-btn" data-month="janeiro">Janeiro</button>
+                <button class="filter-btn" data-month="fevereiro">Fevereiro</button>
+                <button class="filter-btn" data-month="marco">Março</button>
+                <button class="filter-btn" data-month="abril">Abril</button>
+                <button class="filter-btn" data-month="maio">Maio</button>
+                <button class="filter-btn" data-month="junho">Junho</button>
+                <button class="filter-btn" data-month="julho">Julho</button>
+                <button class="filter-btn" data-month="agosto">Agosto</button>
+                <button class="filter-btn" data-month="setembro">Setembro</button>
+                <button class="filter-btn" data-month="outubro">Outubro</button>
+                <button class="filter-btn" data-month="novembro">Novembro</button>
+                <button class="filter-btn" data-month="dezembro">Dezembro</button>
             </div>
             
             <div class="newsletter-search">
@@ -547,6 +600,22 @@
                     </div>
                 </form>
                 <p class="signup-message" id="signupMessage"></p>
+                
+                <!-- LGPD - Consentimento -->
+                <div class="newsletter-consent" style="max-width: 600px; margin: 1.5rem auto 0; padding: 1.25rem; background: rgba(70, 254, 119, 0.05); border-radius: 12px; border-left: 4px solid #46FE77;">
+                    <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); margin-bottom: 0.875rem; line-height: 1.6; text-align: left;">
+                        Ao se cadastrar, você concorda com nossos 
+                        <a href="pages/termos-uso.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Termos de Uso</a> e 
+                        <a href="pages/politica-privacidade.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Política de Privacidade</a>. 
+                        Em conformidade com a LGPD (Lei nº 13.709/2018).
+                    </p>
+                    <div style="display: flex; align-items: start; gap: 0.625rem; background: rgba(255, 193, 7, 0.1); padding: 0.875rem; border-radius: 8px; border: 1px solid rgba(255, 193, 7, 0.3);">
+                        <span style="font-size: 1.25rem; line-height: 1; color: #ffc107; flex-shrink: 0;">⚠️</span>
+                        <p style="font-size: 0.875rem; color: #ffc107; margin: 0; line-height: 1.5; text-align: left;">
+                            Se você tem menos de 18 anos, certifique-se de ter autorização dos seus pais ou responsável legal.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -564,7 +633,7 @@
                     <ul>
                         <li><a href="index.html">Início</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="newsletter.html">Newsletters</a></li>
+                        <li><a href="educa.html">Educa</a></li>
                         <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
                     </ul>
                 </div>
