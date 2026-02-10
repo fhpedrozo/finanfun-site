@@ -7,6 +7,17 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Educa - FinanFun</title>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-39RE1PVHEL"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-39RE1PVHEL');
+    </script>
+    
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -83,6 +94,26 @@
 
         .nav-link:hover {
             color: var(--primary-green);
+        }
+
+        /* Botão Voltar no Header */
+        .btn-voltar-header {
+            padding: 0.625rem 1.5rem;
+            border-radius: 25px;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-voltar-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
         }
 
         .hamburger {
@@ -192,8 +223,11 @@
                 </a></h2>
             </div>
             <ul class="nav-menu">
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="newsletter.html" class="nav-link">Newsletter</a></li>
                 <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
                 <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
+                <li><a href="index.html" class="btn-voltar-header">Voltar</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -218,6 +252,15 @@
                 <div class="footer-section">
                     <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
                     <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                    
+                    <!-- Redes Sociais -->
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
                 
                 <div class="footer-section">
@@ -225,7 +268,7 @@
                     <ul>
                         <li><a href="index.html">Início</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="educa.html">Educa</a></li>
+                        <li><a href="newsletter.html">Newsletters</a></li>
                         <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
                     </ul>
                 </div>
@@ -247,6 +290,15 @@
                 hamburger.addEventListener('click', function() {
                     hamburger.classList.toggle('active');
                     navMenu.classList.toggle('active');
+                });
+                
+                // Fechar menu ao clicar em um link
+                const navLinks = document.querySelectorAll('.nav-link, .btn-voltar-header');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
                 });
             }
         });
