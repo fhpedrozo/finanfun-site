@@ -98,6 +98,26 @@
             color: var(--primary-green);
         }
 
+        /* Botão Voltar no Header */
+        .btn-voltar-header {
+            padding: 0.625rem 1.5rem;
+            border-radius: 25px;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            color: white;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-voltar-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
@@ -190,7 +210,7 @@
             padding: 1rem 1.5rem;
             padding-right: 3rem;
             border: 1px solid rgba(70, 254, 119, 0.3);
-            border-radius: 8px;
+            border-radius: 25px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-light);
             font-size: 1rem;
@@ -420,8 +440,10 @@
                 </a></h2>
             </div>
             <ul class="nav-menu">
+                <li><a href="newsletter.html" class="nav-link">Newsletter</a></li>
                 <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
                 <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
+                <li><a href="index.html" class="btn-voltar-header">Voltar</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -438,10 +460,7 @@
                 <h1><span class="finan-text">Finan</span><span class="fun-text">Fun</span> Blog</h1>
             </div>
             <p class="blog-description">
-                Dicas valiosas, tutoriais práticos, tendências e ferramentas para você dominar a 
-                educação financeira e aplicar no seu dia a dia com clareza, velocidade e impacto 
-                real. Aprenda com cases, explore novas ideias e fique por dentro do futuro que já 
-                começou.
+                Dicas valiosas, tutoriais práticos, tendências, estatísticas e ferramentas para você dominar a educação financeira e o empreendedorismo para aplicar no seu dia a dia com clareza, facilidade, velocidade e impacto real. Aprenda com cases, explore novas ideias e fique por dentro daquilo que impactará o futuro financeiro e dos negócios no mundo.
             </p>
             <div class="blog-filters">
                 <button class="filter-btn active" data-category="">Todos</button>
@@ -470,7 +489,7 @@
     <section class="newsletter-section">
         <div class="container">
             <div class="newsletter-content">
-                <h2 class="section-title">Cadastre-se para receber nossa Newsletter</h2>
+                <h2 class="section-title">Cadastre-se para receber nossas Newsletters</h2>
                 <form class="newsletter-form" id="newsletterForm">
                     <div class="newsletter-input-group">
                         <input type="email" 
@@ -478,11 +497,24 @@
                                required 
                                class="newsletter-input" 
                                id="newsletterEmail"
-                               name="EMAIL">
-                        <button type="submit" class="newsletter-btn" id="submitBtn">Enviar</button>
+                               name="EMAIL"
+                               style="border-radius: 25px;">
+                        <button type="submit" class="newsletter-btn" id="submitBtn" style="border-radius: 25px;">Enviar</button>
                     </div>
+                    <p class="newsletter-message" id="newsletterMessage" style="max-width: 100%;"></p>
                 </form>
-                <p class="newsletter-message" id="newsletterMessage"></p>
+                
+                <!-- LGPD - Consentimento -->
+                <div class="newsletter-consent" style="max-width: 600px; margin: 1.5rem auto 0; padding: 1.25rem; background: rgba(70, 254, 119, 0.05); border-radius: 12px; border-left: 4px solid #46FE77;">
+                    <p style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); margin: 0; line-height: 1.6; text-align: center;">
+                        Ao se cadastrar, você concorda com nossos 
+                        <a href="pages/termos-uso.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Termos de Uso</a> e 
+                        <a href="pages/politica-privacidade.html" style="color: #46FE77; text-decoration: none; font-weight: 600; border-bottom: 1px solid #46FE77;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Política de Privacidade</a>. 
+                        Em conformidade com a LGPD (Lei nº 13.709/2018).
+                        <br><br>
+                        <span style="font-size: 1.1rem;">⚠️</span> Se você tem menos de 18 anos, certifique-se de ter autorização dos seus pais ou responsável legal.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -493,13 +525,22 @@
                 <div class="footer-section">
                     <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
                     <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                    
+                    <!-- Redes Sociais -->
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
                 
                 <div class="footer-section">
                     <h4>Links Rápidos</h4>
                     <ul>
                         <li><a href="index.html">Início</a></li>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="newsletter.html">Newsletters</a></li>
                         <li><a href="educa.html">Educa</a></li>
                         <li><a href="pages/fale-conosco.html">Fale Conosco</a></li>
                     </ul>
@@ -523,6 +564,15 @@
                 hamburger.addEventListener('click', function() {
                     hamburger.classList.toggle('active');
                     navMenu.classList.toggle('active');
+                });
+                
+                // Fechar menu ao clicar em um link
+                const navLinks = document.querySelectorAll('.nav-link, .btn-voltar-header');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
                 });
             }
         });
