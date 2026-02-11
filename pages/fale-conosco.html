@@ -16,7 +16,7 @@
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css?v=20250620-0255">
+    <link rel="stylesheet" href="../css/style.css?v=20250620-0300">
     
     <style>
         /* Reduzir espaçamento do hero */
@@ -71,7 +71,7 @@
         }
         
         .form-field textarea {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
             padding: 14px 20px;
         }
@@ -89,6 +89,15 @@
             background-color: #0f172a;
             color: var(--text-light);
             padding: 10px;
+        }
+        
+        /* Ajustar altura dos cards de info */
+        .info-cards-wrapper .problem-item {
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-cards-wrapper .problem-item:last-child {
+            margin-bottom: 0;
         }
         
         /* FAQ Section */
@@ -139,6 +148,10 @@
             .faq-section {
                 padding: 1.5rem;
             }
+            
+            .form-field textarea {
+                min-height: 150px;
+            }
         }
     </style>
 </head>
@@ -180,7 +193,7 @@
     <!-- Contact Section -->
     <section id="contato" class="section">
         <div class="container">
-            <div class="contact-grid-custom" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;">
+            <div class="contact-grid-custom" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;">
                 
                 <!-- Contact Form -->
                 <div>
@@ -220,17 +233,17 @@
                             <textarea id="message" name="message" required placeholder="Digite sua mensagem aqui..."></textarea>
                         </div>
 
-                        <button type="submit" class="newsletter-btn" id="submitBtn">
+                        <button type="submit" class="newsletter-btn" id="submitBtn" style="width: 100%; padding: 14px 28px; background: linear-gradient(135deg, var(--primary-green), #00d4aa); color: var(--dark-navy); border: none; border-radius: 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
                             <i class="fas fa-paper-plane"></i> Enviar Mensagem
                         </button>
                     </form>
                 </div>
 
                 <!-- Contact Info -->
-                <div>
+                <div class="info-cards-wrapper">
                     <h2 class="section-title">Informações de Contato</h2>
                     
-                    <div class="problem-item" style="margin-bottom: 2rem;">
+                    <div class="problem-item">
                         <div class="problem-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
@@ -238,7 +251,7 @@
                         <p><a href="mailto:contato@finanfun.com.br" style="color: var(--primary-green); text-decoration: none;">contato@finanfun.com.br</a></p>
                     </div>
 
-                    <div class="problem-item" style="margin-bottom: 2rem;">
+                    <div class="problem-item">
                         <div class="problem-icon">
                             <i class="fas fa-clock"></i>
                         </div>
@@ -246,7 +259,7 @@
                         <p>Segunda a Sexta, 9h às 18h<br>(horário de Brasília)</p>
                     </div>
 
-                    <div class="problem-item" style="margin-bottom: 0;">
+                    <div class="problem-item">
                         <div class="problem-icon">
                             <i class="fas fa-share-nodes"></i>
                         </div>
