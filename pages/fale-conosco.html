@@ -117,6 +117,39 @@
             cursor: not-allowed;
         }
         
+        /* Form Message - Mensagem de feedback */
+        .form-message {
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .form-message.success {
+            background: rgba(70, 254, 119, 0.1);
+            border: 2px solid rgba(70, 254, 119, 0.5);
+            color: var(--primary-green);
+        }
+        
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.5);
+            color: #ef4444;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         /* Contact Info Card - ESPAÇAMENTOS AINDA MAIORES */
         .contact-info-card {
             background: rgba(15, 23, 42, 0.6);
@@ -323,7 +356,6 @@
                 <!-- Contact Form -->
                 <div>
                     <h2 class="section-title">Envie sua Mensagem</h2>
-                    <div id="formMessage" class="newsletter-message" style="display: none; margin-bottom: 1.5rem;"></div>
                     
                     <form id="contactForm" class="contact-form">
                         <div class="form-field">
@@ -361,6 +393,9 @@
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <i class="fas fa-paper-plane"></i> Enviar Mensagem
                         </button>
+
+                        <!-- Mensagem de feedback (movida para baixo do botão) -->
+                        <div id="formMessage" class="form-message" style="display: none; margin-top: 1.5rem;"></div>
                     </form>
                 </div>
 
@@ -508,7 +543,7 @@
     </button>
 
     <!-- JavaScript -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Menu Hamburguer
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -550,7 +585,8 @@
             }
         });
 
-       // Contact Form Submission - Via API Route Vercel
+
+        // Contact Form Submission - Via API Route Vercel
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -558,24 +594,14 @@
             const formMessage = document.getElementById('formMessage');
             const formData = new FormData(this);
             
-            // Coletar dados do formulário
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                subject: formData.get('subject'),
-                message: formData.get('message')
-            };
-            
             // Validação básica
-            if (!data.name || !data.email || !data.subject || !data.message) {
-                showMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
-                return;
-            }
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
             
-            // Validar email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                showMessage('Por favor, insira um e-mail válido.', 'error');
+            if (!name || !email || !subject || !message) {
+                showMessage('Por favor, preencha todos os campos obrigatórios.', 'error');
                 return;
             }
             
@@ -584,62 +610,30 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             
             try {
-                console.log('📧 Enviando via API Route...');
-                
-                // Chamar API Route do Vercel (mesmo domínio, sem CORS!)
+                // Envio real via API Route do Vercel
                 const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data)
+                    body: JSON.stringify({
+                        name: name,
+                        email: email,
+                        subject: subject,
+                        message: message
+                    })
                 });
                 
-                console.log('📥 Resposta recebida:', response.status);
-                
-                const result = await response.json();
-                console.log('📦 Dados:', result);
-                
-                if (response.ok && result.success) {
-                    console.log('✅ Sucesso!');
-                    showMessage('✅ ' + result.message, 'success');
-                    this.reset();
-                } else {
-                    console.log('❌ Erro do servidor');
-                    showMessage('❌ ' + (result.message || 'Erro ao enviar mensagem. Tente novamente.'), 'error');
-                }
-                
-            } catch (error) {
-                console.error('❌ Erro:', error);
-                showMessage('❌ Erro ao enviar mensagem. Por favor, tente novamente ou envie diretamente para contato@finanfun.com.br', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensagem';
-                console.log('🔄 Botão reabilitado');
-            }
-            
-            function showMessage(message, type) {
-                formMessage.textContent = message;
-                formMessage.className = 'form-message ' + type;
-                formMessage.style.display = 'block';
-                
-                setTimeout(() => {
-                    formMessage.style.display = 'none';
-                }, 5000);
-            }
-        });
-                
                 const result = await response.json();
                 
                 if (response.ok && result.success) {
                     showMessage('✅ ' + result.message, 'success');
                     this.reset();
                 } else {
-                    showMessage('❌ ' + (result.message || 'Erro ao enviar mensagem. Tente novamente.'), 'error');
+                    showMessage('❌ ' + (result.message || 'Erro ao enviar mensagem.'), 'error');
                 }
                 
             } catch (error) {
-                console.error('Erro:', error);
                 showMessage('❌ Erro ao enviar mensagem. Por favor, tente novamente ou envie diretamente para contato@finanfun.com.br', 'error');
             } finally {
                 submitBtn.disabled = false;
@@ -656,7 +650,7 @@
                 }, 5000);
             }
         });
-        
+
         // SCRIPT PARA FORÇAR O GRADIENTE DOS ÍCONES SOCIAIS - IGUAL AO FOOTER
         window.addEventListener('DOMContentLoaded', function() {
             // Aguarda um pouco para garantir que todo CSS foi carregado
@@ -664,18 +658,3 @@
                 const socialLinks = document.querySelectorAll('.contact-info-socials .social-link');
                 socialLinks.forEach(function(link) {
                     // Força o GRADIENTE igual ao footer
-                    link.style.setProperty('background', 'linear-gradient(135deg, #46FE77 0%, #181D4E 100%)', 'important');
-                    link.style.setProperty('color', '#ffffff', 'important');
-                    
-                    // Força a cor do ícone dentro
-                    const icon = link.querySelector('i');
-                    if (icon) {
-                        icon.style.setProperty('color', '#ffffff', 'important');
-                    }
-                });
-                console.log('✅ Gradiente dos ícones sociais forçado via JavaScript!');
-            }, 100);
-        });
-    </script>
-</body>
-</html>
