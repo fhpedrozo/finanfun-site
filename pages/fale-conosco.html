@@ -181,7 +181,8 @@
             margin-top: 1.25rem;
         }
         
-        /* Social Links - Ícones BRANCOS com !important */
+        /* Social Links - Ícones BRANCOS com fundo VERDE-ESCURO (TEAL) */
+        /* Copiado do estilo do footer para o campo "Informações de Contato" */
         .contact-info-socials .social-links {
             display: flex;
             gap: 0.75rem;
@@ -191,7 +192,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--primary-green);
+            background: #2DD4BF !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -207,8 +208,8 @@
 
         .contact-info-socials .social-link:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
-            background: #3ee568;
+            box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+            background: #14b8a6 !important;
         }
         
         /* FAQ Section */
@@ -363,7 +364,7 @@
                         
                         <div class="contact-info-item">
                             <h4><i class="fas fa-envelope"></i> E-mail</h4>
-                            <p><a href="mailto:contato@finanfun.com.br">contato@finanfun.com.br</a></p>
+                            <p><a href="/cdn-cgi/l/email-protection#7a1915140e1b0e153a1c13141b141c0f1454191517541808"><span class="__cf_email__" data-cfemail="c4a7abaab0a5b0ab84a2adaaa5aaa2b1aaeaa7aba9eaa6b6">[email&#160;protected]</span></a></p>
                         </div>
 
                         <div class="contact-info-item">
@@ -427,12 +428,12 @@
                 
                 <div class="faq-item">
                     <h4>Como posso excluir meus dados?</h4>
-                    <p>Envie e-mail para privacidade@finanfun.com.br solicitando exclusão. Processaremos sua solicitação em até 15 dias úteis. Você também pode solicitar acesso, correção ou portabilidade dos seus dados conforme seus direitos na LGPD.</p>
+                    <p>Envie e-mail para <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8d8dac1dec9cbc1ccc9cccde8cec1c6c9c6ceddc686cbc7c586cada">[email&#160;protected]</a> solicitando exclusão. Processaremos sua solicitação em até 15 dias úteis. Você também pode solicitar acesso, correção ou portabilidade dos seus dados conforme seus direitos na LGPD.</p>
                 </div>
                 
                 <div class="faq-item">
                     <h4>Onde está a Política de Privacidade completa?</h4>
-                    <p>Acesse nossa Política de Privacidade e Termos de Uso através dos links no rodapé do site. Estes documentos detalham como coletamos e usamos dados, seus direitos conforme LGPD e nossas medidas de segurança. Dúvidas: privacidade@finanfun.com.br</p>
+                    <p>Acesse nossa Política de Privacidade e Termos de Uso através dos links no rodapé do site. Estes documentos detalham como coletamos e usamos dados, seus direitos conforme LGPD e nossas medidas de segurança. Dúvidas: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b2b29322d3a38323f3a3f3e1b3d32353a353d2e3575383436753929">[email&#160;protected]</a></p>
                 </div>
                 
                 <div class="faq-item">
@@ -442,7 +443,7 @@
                 
                 <div class="faq-item">
                     <h4>Como faço para cancelar a newsletter?</h4>
-                    <p>Clique no link "Descadastrar" no rodapé de qualquer newsletter recebida ou envie e-mail para privacidade@finanfun.com.br com o assunto "Cancelar Newsletter". Processamento em até 2 dias úteis.</p>
+                    <p>Clique no link "Descadastrar" no rodapé de qualquer newsletter recebida ou envie e-mail para <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="08787a617e696b616c696c6d486e616669666e7d66266b6765266a7a">[email&#160;protected]</a> com o assunto "Cancelar Newsletter". Processamento em até 2 dias úteis.</p>
                 </div>
                 
                 <div class="faq-item">
@@ -452,7 +453,7 @@
                 
                 <div class="faq-item">
                     <h4>Como posso dar sugestões ou feedback?</h4>
-                    <p>Envie suas sugestões para contato@finanfun.com.br, pelas redes sociais @finanfunapp ou pelo formulário em "Fale Conosco". Sua opinião nos ajuda a criar conteúdos mais relevantes para sua família!</p>
+                    <p>Envie suas sugestões para <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e98a86879d889d86a98f808788878f9c87c78a8684c78b9b">[email&#160;protected]</a>, pelas redes sociais @finanfunapp ou pelo formulário em "Fale Conosco". Sua opinião nos ajuda a criar conteúdos mais relevantes para sua família!</p>
                 </div>
             </div>
         </div>
@@ -498,7 +499,7 @@
     </button>
 
     <!-- JavaScript -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Menu Hamburguer
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -589,25 +590,4 @@
             
             // Auto-hide after 5 seconds
             setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
-        }
-
-        // Phone mask
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length > 11) value = value.slice(0, 11);
-            
-            if (value.length >= 11) {
-                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
-            } else if (value.length >= 7) {
-                value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
-            } else if (value.length >= 3) {
-                value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
-            }
-            
-            e.target.value = value;
-        });
-    </script>
-</body>
-</html>
+                formMe
