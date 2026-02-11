@@ -385,11 +385,11 @@
                             <p style="margin-bottom: 1.25rem;">Fique por dentro de todas as novidades!</p>
                             <div class="contact-info-socials">
                                 <div class="social-links">
-                                    <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram" style="width: 40px; height: 40px; border-radius: 50%; background: #2DD4BF !important; background-color: #2DD4BF !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram" style="color: #ffffff !important;"></i></a>
-                                    <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook" style="width: 40px; height: 40px; border-radius: 50%; background: #2DD4BF !important; background-color: #2DD4BF !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook" style="color: #ffffff !important;"></i></a>
-                                    <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X" style="width: 40px; height: 40px; border-radius: 50%; background: #2DD4BF !important; background-color: #2DD4BF !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter" style="color: #ffffff !important;"></i></a>
-                                    <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn" style="width: 40px; height: 40px; border-radius: 50%; background: #2DD4BF !important; background-color: #2DD4BF !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin" style="color: #ffffff !important;"></i></a>
-                                    <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube" style="width: 40px; height: 40px; border-radius: 50%; background: #2DD4BF !important; background-color: #2DD4BF !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-youtube" style="color: #ffffff !important;"></i></a>
+                                    <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #46FE77 0%, #181D4E 100%) !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram" style="color: #ffffff !important;"></i></a>
+                                    <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #46FE77 0%, #181D4E 100%) !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook" style="color: #ffffff !important;"></i></a>
+                                    <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #46FE77 0%, #181D4E 100%) !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter" style="color: #ffffff !important;"></i></a>
+                                    <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #46FE77 0%, #181D4E 100%) !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin" style="color: #ffffff !important;"></i></a>
+                                    <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube" style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #46FE77 0%, #181D4E 100%) !important; display: flex; align-items: center; justify-content: center; color: #ffffff !important; font-size: 1.1rem; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-youtube" style="color: #ffffff !important;"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -597,15 +597,14 @@
             }
         });
 
-        // SCRIPT PARA FORÇAR A COR DOS ÍCONES SOCIAIS - SOLUÇÃO DEFINITIVA
+        // SCRIPT PARA FORÇAR O GRADIENTE DOS ÍCONES SOCIAIS - IGUAL AO FOOTER
         window.addEventListener('DOMContentLoaded', function() {
             // Aguarda um pouco para garantir que todo CSS foi carregado
             setTimeout(function() {
                 const socialLinks = document.querySelectorAll('.contact-info-socials .social-link');
                 socialLinks.forEach(function(link) {
-                    // Força o background
-                    link.style.setProperty('background', '#2DD4BF', 'important');
-                    link.style.setProperty('background-color', '#2DD4BF', 'important');
+                    // Força o GRADIENTE igual ao footer
+                    link.style.setProperty('background', 'linear-gradient(135deg, #46FE77 0%, #181D4E 100%)', 'important');
                     link.style.setProperty('color', '#ffffff', 'important');
                     
                     // Força a cor do ícone dentro
@@ -614,7 +613,7 @@
                         icon.style.setProperty('color', '#ffffff', 'important');
                     }
                 });
-                console.log('✅ Cores dos ícones sociais forçadas via JavaScript!');
+                console.log('✅ Gradiente dos ícones sociais forçado via JavaScript!');
             }, 100);
         });
     </script>
