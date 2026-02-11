@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
-        /* Variáveis CSS do index.html */
+        /* Variáveis CSS - IGUAIS ao index.html */
         :root {
             --primary-green: #46FE77;
             --primary-green-dark: #38cc5f;
@@ -38,19 +38,18 @@
         }
 
         * {
-            margin: 0 !important;
-            padding: 0 !important;
-            box-sizing: border-box !important;
+            margin: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: var(--font-primary) !important;
             background: var(--gradient-dark) !important;
             color: var(--text-light) !important;
-            min-height: 100vh !important;
+            min-height: 100vh;
         }
 
-        /* NAVBAR - SOBRESCREVER style.css com !important */
+        /* ========== NAVBAR - SOBRESCREVER TUDO ========== */
         .navbar {
             position: fixed !important;
             top: 0 !important;
@@ -59,7 +58,7 @@
             background: rgba(15, 23, 42, 0.95) !important;
             backdrop-filter: blur(10px) !important;
             z-index: 1000 !important;
-            padding: 0.75rem 0 !important;  /* Padding fino como index.html */
+            padding: 0.75rem 0 !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
         }
 
@@ -112,7 +111,8 @@
             color: var(--primary-green) !important;
         }
 
-        /* Botão Voltar - PADRÃO login-btn do index.html */
+        /* ========== BOTÕES - PADRÃO login-btn ========== */
+        /* Botão "Voltar" no Navbar */
         .btn-voltar-header {
             background: var(--gradient-primary) !important;
             color: var(--white) !important;
@@ -132,76 +132,81 @@
             box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
         }
 
-        .hamburger {
-            display: none !important;
-            flex-direction: column !important;
-            cursor: pointer !important;
-        }
-
-        .hamburger span {
-            width: 25px !important;
-            height: 3px !important;
-            background: var(--text-light) !important;
-            margin: 3px 0 !important;
-            transition: 0.3s !important;
-            border-radius: 2px !important;
-        }
-
-        /* Main Content */
-        .main-content {
-            padding-top: 100px !important;
-            padding-bottom: 40px !important;
-            min-height: auto !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        .educa-placeholder {
-            text-align: center !important;
-            color: white !important;
-        }
-
-        .educa-placeholder img {
-            max-width: 300px !important;
-            margin-bottom: 2rem !important;
-            border-radius: 12px !important;
-        }
-
-        .educa-placeholder h1 {
-            font-size: 3rem !important;
-            margin-bottom: 1rem !important;
-            color: var(--primary-green) !important;
-        }
-
-        .educa-placeholder p {
-            font-size: 1.2rem !important;
-            color: var(--text-gray) !important;
-            margin-bottom: 2rem !important;
-        }
-
+        /* Botão "Voltar ao Início" no Corpo - MESMO PADRÃO */
         .btn-voltar {
-            display: inline-block !important;
+            background: var(--gradient-primary) !important;
+            color: var(--white) !important;
             padding: 12px 30px !important;
-            background: linear-gradient(135deg, #46FE77, #2DD4BF) !important;
-            color: #0a1628 !important;
-            text-decoration: none !important;
             border-radius: 25px !important;
-            font-weight: bold !important;
+            font-weight: 600 !important;
             transition: all 0.3s ease !important;
+            box-shadow: 0 2px 10px rgba(70, 254, 119, 0.3) !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            border: none !important;
+            cursor: pointer !important;
         }
 
         .btn-voltar:hover {
             transform: translateY(-2px) !important;
-            box-shadow: 0 4px 15px rgba(70, 254, 119, 0.4) !important;
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-light);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            padding-top: 100px !important;
+            padding-bottom: 40px;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .educa-placeholder {
+            text-align: center;
+            color: white;
+        }
+
+        .educa-placeholder img {
+            max-width: 300px;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+        }
+
+        .educa-placeholder h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .educa-placeholder p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
         }
 
         .container {
-            max-width: 1200px !important;
-            margin: 0 auto !important;
-            padding: 0 2rem !important;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed !important;
@@ -222,16 +227,16 @@
             }
 
             .hamburger {
-                display: flex !important;
+                display: flex;
             }
 
             .main-content {
                 padding-top: 80px !important;
-                padding-bottom: 30px !important;
+                padding-bottom: 30px;
             }
 
             .educa-placeholder h1 {
-                font-size: 2rem !important;
+                font-size: 2rem;
             }
         }
     </style>
