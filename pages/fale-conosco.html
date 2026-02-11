@@ -12,319 +12,11 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-39RE1PVHEL');
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css?v=20250620-0235">
-    
-    <style>
-        /* Hero Section */
-        .hero-contact {
-            padding: 140px 0 80px;
-            background: linear-gradient(135deg, #0a1628 0%, #181D4E 100%);
-            text-align: center;
-        }
-
-        .hero-contact h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #46FE77, #2DD4BF);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-contact p {
-            font-size: 1.2rem;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Contact Section */
-        .contact-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Contact Form */
-        .contact-form-container {
-            background: rgba(30, 41, 59, 0.5);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(70, 254, 119, 0.2);
-        }
-
-        .contact-form-container h2 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: #46FE77;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(70, 254, 119, 0.3);
-            border-radius: 10px;
-            color: #ffffff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #46FE77;
-            box-shadow: 0 0 0 3px rgba(70, 254, 119, 0.1);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #46FE77, #2DD4BF);
-            color: #0a1628;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(70, 254, 119, 0.4);
-        }
-
-        .submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Contact Info */
-        .contact-info-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .info-card {
-            background: rgba(30, 41, 59, 0.5);
-            padding: 2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(70, 254, 119, 0.2);
-        }
-
-        .info-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #46FE77;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .info-card h3 i {
-            font-size: 1.8rem;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.25rem;
-            color: #ffffff;
-        }
-
-        .info-item i {
-            width: 40px;
-            height: 40px;
-            background: rgba(70, 254, 119, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #46FE77;
-            font-size: 1.2rem;
-        }
-
-        .info-item a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .info-item a:hover {
-            color: #46FE77;
-        }
-
-        .social-links-contact {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links-contact a {
-            width: 45px;
-            height: 45px;
-            background: rgba(70, 254, 119, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #46FE77;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-links-contact a:hover {
-            background: #46FE77;
-            color: #0a1628;
-            transform: translateY(-3px);
-        }
-
-        /* Cards Section */
-        .cards-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #0a1628 0%, #181D4E 100%);
-        }
-
-        .cards-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .cards-container h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #46FE77;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(30, 41, 59, 0.5);
-            padding: 2.5rem;
-            border-radius: 20px;
-            border: 1px solid rgba(70, 254, 119, 0.2);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(70, 254, 119, 0.3);
-            border-color: #46FE77;
-        }
-
-        .feature-card i {
-            font-size: 3rem;
-            color: #46FE77;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #ffffff;
-        }
-
-        .feature-card p {
-            color: #94a3b8;
-            line-height: 1.6;
-        }
-
-        .feature-card .card-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #46FE77;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card .card-link:hover {
-            transform: translateX(5px);
-        }
-
-        /* Success/Error Messages */
-        .form-message {
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            display: none;
-        }
-
-        .form-message.success {
-            background: rgba(70, 254, 119, 0.1);
-            border: 1px solid #46FE77;
-            color: #46FE77;
-        }
-
-        .form-message.error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef4444;
-            color: #ef4444;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-contact h1 {
-                font-size: 2rem;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form-container,
-            .info-card {
-                padding: 1.5rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../css/style.css?v=20250620-0240">
 </head>
 <body>
     <!-- Navbar -->
@@ -349,145 +41,136 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-contact">
-        <div class="container">
-            <h1>Fale Conosco</h1>
-            <p>Tem alguma dúvida ou sugestão? Estamos aqui para ajudar! Entre em contato conosco e responderemos o mais breve possível.</p>
+    <!-- Header Section -->
+    <header id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Fale Conosco</h1>
+                <p class="hero-description">
+                    Tem alguma dúvida ou sugestão? Estamos aqui para ajudar! Entre em contato conosco e responderemos o mais breve possível.
+                </p>
+            </div>
         </div>
-    </section>
+    </header>
 
     <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="contact-grid">
-            <!-- Contact Form -->
-            <div class="contact-form-container">
-                <h2>Envie sua Mensagem</h2>
-                <div id="formMessage" class="form-message"></div>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Nome Completo *</label>
-                        <input type="text" id="name" name="name" required placeholder="Digite seu nome completo">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">E-mail *</label>
-                        <input type="email" id="email" name="email" required placeholder="seu@email.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Telefone</label>
-                        <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject">Assunto *</label>
-                        <select id="subject" name="subject" required>
-                            <option value="">Selecione um assunto</option>
-                            <option value="duvida">Dúvida</option>
-                            <option value="sugestao">Sugestão</option>
-                            <option value="suporte">Suporte Técnico</option>
-                            <option value="parceria">Parceria</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Mensagem *</label>
-                        <textarea id="message" name="message" required placeholder="Digite sua mensagem aqui..."></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn" id="submitBtn">
-                        <i class="fas fa-paper-plane"></i> Enviar Mensagem
-                    </button>
-                </form>
-            </div>
-
-            <!-- Contact Info -->
-            <div class="contact-info-container">
-                <!-- Contact Details -->
-                <div class="info-card">
-                    <h3><i class="fas fa-address-card"></i> Informações de Contato</h3>
+    <section id="contato" class="section">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start;">
+                
+                <!-- Contact Form -->
+                <div>
+                    <h2 class="section-title">Envie sua Mensagem</h2>
+                    <div id="formMessage" class="newsletter-message" style="display: none; margin-bottom: 1.5rem;"></div>
                     
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>E-mail</strong><br>
-                            <a href="mailto:contato@finanfun.com.br">contato@finanfun.com.br</a>
+                    <form id="contactForm" class="newsletter-form" style="max-width: none;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Nome Completo *</label>
+                            <input type="text" 
+                                   id="name" 
+                                   name="name" 
+                                   required 
+                                   placeholder="Digite seu nome completo"
+                                   class="newsletter-input"
+                                   style="width: 100%;">
                         </div>
-                    </div>
 
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Localização</strong><br>
-                            Londrina, Paraná - Brasil
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">E-mail *</label>
+                            <input type="email" 
+                                   id="email" 
+                                   name="email" 
+                                   required 
+                                   placeholder="seu@email.com"
+                                   class="newsletter-input"
+                                   style="width: 100%;">
                         </div>
-                    </div>
 
-                    <div class="info-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <strong>Horário de Atendimento</strong><br>
-                            Segunda a Sexta, 9h às 18h
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Telefone</label>
+                            <input type="tel" 
+                                   id="phone" 
+                                   name="phone" 
+                                   placeholder="(00) 00000-0000"
+                                   class="newsletter-input"
+                                   style="width: 100%;">
                         </div>
-                    </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Assunto *</label>
+                            <select id="subject" 
+                                    name="subject" 
+                                    required
+                                    class="newsletter-input"
+                                    style="width: 100%; cursor: pointer;">
+                                <option value="">Selecione um assunto</option>
+                                <option value="duvida">Dúvida</option>
+                                <option value="sugestao">Sugestão</option>
+                                <option value="suporte">Suporte Técnico</option>
+                                <option value="parceria">Parceria</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 1.5rem;">
+                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Mensagem *</label>
+                            <textarea id="message" 
+                                      name="message" 
+                                      required 
+                                      placeholder="Digite sua mensagem aqui..."
+                                      class="newsletter-input"
+                                      style="width: 100%; min-height: 150px; resize: vertical; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"></textarea>
+                        </div>
+
+                        <button type="submit" class="newsletter-btn" id="submitBtn" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensagem
+                        </button>
+                    </form>
                 </div>
 
-                <!-- Social Media -->
-                <div class="info-card">
-                    <h3><i class="fas fa-share-nodes"></i> Redes Sociais</h3>
-                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">Siga-nos nas redes sociais e fique por dentro de todas as novidades!</p>
+                <!-- Contact Info -->
+                <div>
+                    <h2 class="section-title">Informações de Contato</h2>
                     
-                    <div class="social-links-contact">
-                        <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" title="Facebook">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" title="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
+                    <div class="problem-item" style="margin-bottom: 2rem;">
+                        <div class="problem-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>E-mail</h3>
+                        <p><a href="mailto:contato@finanfun.com.br" style="color: var(--primary-green); text-decoration: none;">contato@finanfun.com.br</a></p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Cards Section -->
-    <section class="cards-section">
-        <div class="cards-container">
-            <h2>Como Podemos Ajudar?</h2>
-            <div class="cards-grid">
-                <!-- FAQ Card -->
-                <div class="feature-card">
-                    <i class="fas fa-question-circle"></i>
-                    <h3>Perguntas Frequentes</h3>
-                    <p>Encontre respostas rápidas para as dúvidas mais comuns sobre o FinanFun.</p>
-                    <a href="#" class="card-link">Ver FAQ <i class="fas fa-arrow-right"></i></a>
-                </div>
+                    <div class="problem-item" style="margin-bottom: 2rem;">
+                        <div class="problem-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Localização</h3>
+                        <p>Londrina, Paraná - Brasil</p>
+                    </div>
 
-                <!-- Support Card -->
-                <div class="feature-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>Suporte Técnico</h3>
-                    <p>Precisa de ajuda técnica? Nossa equipe está pronta para resolver seus problemas.</p>
-                    <a href="mailto:contato@finanfun.com.br" class="card-link">Abrir chamado <i class="fas fa-arrow-right"></i></a>
-                </div>
+                    <div class="problem-item" style="margin-bottom: 2rem;">
+                        <div class="problem-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Horário de Atendimento</h3>
+                        <p>Segunda a Sexta, 9h às 18h<br>(horário de Brasília)</p>
+                    </div>
 
-                <!-- Partnership Card -->
-                <div class="feature-card">
-                    <i class="fas fa-handshake"></i>
-                    <h3>Parcerias</h3>
-                    <p>Interessado em fazer parceria com o FinanFun? Entre em contato conosco!</p>
-                    <a href="mailto:contato@finanfun.com.br" class="card-link">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                    <div class="problem-item" style="margin-bottom: 2rem;">
+                        <div class="problem-icon">
+                            <i class="fas fa-share-nodes"></i>
+                        </div>
+                        <h3>Redes Sociais</h3>
+                        <p style="margin-bottom: 1rem;">Siga-nos e fique por dentro de todas as novidades!</p>
+                        
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                            <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -546,7 +229,7 @@
                 });
                 
                 // Fechar menu ao clicar em um link
-                const navLinks = document.querySelectorAll('.nav-link');
+                const navLinks = document.querySelectorAll('.nav-link, .login-btn');
                 navLinks.forEach(link => {
                     link.addEventListener('click', function() {
                         hamburger.classList.remove('active');
@@ -619,7 +302,7 @@
         function showMessage(text, type) {
             const formMessage = document.getElementById('formMessage');
             formMessage.textContent = text;
-            formMessage.className = `form-message ${type}`;
+            formMessage.className = `newsletter-message ${type}`;
             formMessage.style.display = 'block';
             
             // Auto-hide after 5 seconds
