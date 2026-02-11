@@ -550,7 +550,7 @@
             }
         });
 
-        // Contact Form Submission - Integração com Contact Form 7
+       // Contact Form Submission - Via API Route Vercel
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -584,14 +584,50 @@
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             
             try {
-                // Enviar para o endpoint PHP no servidor Hostinger
-                const response = await fetch('https://finanfun.com.br/process-contact.php', {
+                console.log('📧 Enviando via API Route...');
+                
+                // Chamar API Route do Vercel (mesmo domínio, sem CORS!)
+                const response = await fetch('/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
                 });
+                
+                console.log('📥 Resposta recebida:', response.status);
+                
+                const result = await response.json();
+                console.log('📦 Dados:', result);
+                
+                if (response.ok && result.success) {
+                    console.log('✅ Sucesso!');
+                    showMessage('✅ ' + result.message, 'success');
+                    this.reset();
+                } else {
+                    console.log('❌ Erro do servidor');
+                    showMessage('❌ ' + (result.message || 'Erro ao enviar mensagem. Tente novamente.'), 'error');
+                }
+                
+            } catch (error) {
+                console.error('❌ Erro:', error);
+                showMessage('❌ Erro ao enviar mensagem. Por favor, tente novamente ou envie diretamente para contato@finanfun.com.br', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensagem';
+                console.log('🔄 Botão reabilitado');
+            }
+            
+            function showMessage(message, type) {
+                formMessage.textContent = message;
+                formMessage.className = 'form-message ' + type;
+                formMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                    formMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
                 
                 const result = await response.json();
                 
