@@ -100,20 +100,22 @@
         .btn-voltar-header {
             padding: 0.625rem 1.5rem;
             border-radius: 25px;
-            background: linear-gradient(135deg, var(--primary-green), #181D4E);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E) !important;
+            color: white !important;
             border: none;
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
+            text-decoration: none !important;
             display: inline-block;
         }
 
         .btn-voltar-header:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
+            color: white !important;
+            text-decoration: none !important;
         }
 
         .hamburger {
@@ -435,8 +437,8 @@
                 <h2>10. Contato</h2>
                 <p>Para dúvidas sobre estes Termos de Uso, entre em contato:</p>
                 <div class="contact-info">
-                    <p><strong>E-mail (geral):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
-                    <p><strong>E-mail (questões legais):</strong> <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a></p>
+                    <p><strong>E-mail (geral):</strong> <a href="/cdn-cgi/l/email-protection#debfbab39eb8b7b0bfb0b8abb0f0bdb1b3f0bcac"><span class="__cf_email__" data-cfemail="7110151c3117181f101f17041f5f121e1c5f1303">[email&#160;protected]</span></a></p>
+                    <p><strong>E-mail (questões legais):</strong> <a href="/cdn-cgi/l/email-protection#a2d2d0cbd4c3c1cbc6c3c6c7e2c4cbccc3ccc4d7cc8cc1cdcf8cc0d0"><span class="__cf_email__" data-cfemail="0f7f7d66796e6c666b6e6b6a4f6966616e61697a61216c6062216d7d">[email&#160;protected]</span></a></p>
                     <p><strong>Responsável:</strong> Fabio Hommerding Pedrozo</p>
                     <p><strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h (horário de Brasília)</p>
                 </div>
@@ -444,7 +446,7 @@
                 <div class="document-footer">
                     <p><strong>FinanFun - Educação Financeira e Empreendedorismo para Jovens</strong></p>
                     <p>finanfun.com.br</p>
-                    <p>adm@finanfun.com.br | privacidade@finanfun.com.br</p>
+                    <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4524212805232c2b242b23302b6b262a286b2737">[email&#160;protected]</a> | <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="09797b607f686a606d686d6c496f606768676f7c67276a6664276b7b">[email&#160;protected]</a></p>
                 </div>
             </div>
         </div>
@@ -486,27 +488,10 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             
             if (hamburger && navMenu) {
-                hamburger.addEventListener('click', function() {
-                    hamburger.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                });
-                
-                // Fechar menu ao clicar em um link
-                const navLinks = document.querySelectorAll('.nav-link, .btn-voltar-header');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        hamburger.classList.remove('active');
-                        navMenu.classList.remove('active');
-                    });
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+                hamburger.addEventListener('
