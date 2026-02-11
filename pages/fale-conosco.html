@@ -16,7 +16,7 @@
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css?v=20250620-0300">
+    <link rel="stylesheet" href="../css/style.css?v=20250620-0305">
     
     <style>
         /* Reduzir espaçamento do hero */
@@ -91,13 +91,69 @@
             padding: 10px;
         }
         
-        /* Ajustar altura dos cards de info */
-        .info-cards-wrapper .problem-item {
-            margin-bottom: 1.5rem;
+        /* Contact Info Card - Simplificado */
+        .contact-info-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
         }
         
-        .info-cards-wrapper .problem-item:last-child {
+        .contact-info-card h3 {
+            color: var(--primary-green);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact-info-item:last-child {
             margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .contact-info-item h4 {
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info-item h4 i {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+        
+        .contact-info-item p {
+            color: #94a3b8;
+            margin: 0;
+            padding-left: 1.7rem;
+        }
+        
+        .contact-info-item a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .contact-info-item a:hover {
+            opacity: 0.8;
+        }
+        
+        .contact-info-socials {
+            padding-left: 1.7rem;
+            margin-top: 0.75rem;
         }
         
         /* FAQ Section */
@@ -151,6 +207,10 @@
             
             .form-field textarea {
                 min-height: 150px;
+            }
+            
+            .contact-info-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -239,39 +299,35 @@
                     </form>
                 </div>
 
-                <!-- Contact Info -->
-                <div class="info-cards-wrapper">
+                <!-- Contact Info - Card Simplificado -->
+                <div>
                     <h2 class="section-title">Informações de Contato</h2>
                     
-                    <div class="problem-item">
-                        <div class="problem-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <h3>E-mail</h3>
-                        <p><a href="mailto:contato@finanfun.com.br" style="color: var(--primary-green); text-decoration: none;">contato@finanfun.com.br</a></p>
-                    </div>
-
-                    <div class="problem-item">
-                        <div class="problem-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Horário de Atendimento</h3>
-                        <p>Segunda a Sexta, 9h às 18h<br>(horário de Brasília)</p>
-                    </div>
-
-                    <div class="problem-item">
-                        <div class="problem-icon">
-                            <i class="fas fa-share-nodes"></i>
-                        </div>
-                        <h3>Redes Sociais</h3>
-                        <p style="margin-bottom: 1rem;">Siga-nos e fique por dentro de todas as novidades!</p>
+                    <div class="contact-info-card">
+                        <h3><i class="fas fa-address-card"></i> Informações de Contato</h3>
                         
-                        <div class="social-links">
-                            <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
-                            <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <div class="contact-info-item">
+                            <h4><i class="fas fa-envelope"></i> E-mail</h4>
+                            <p><a href="mailto:contato@finanfun.com.br">contato@finanfun.com.br</a></p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <h4><i class="fas fa-clock"></i> Horário de Atendimento</h4>
+                            <p>Segunda a Sexta, 9h às 18h<br>(horário de Brasília)</p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <h4><i class="fas fa-share-nodes"></i> Siga-nos nas Redes Sociais</h4>
+                            <p style="margin-bottom: 0.75rem;">Fique por dentro de todas as novidades!</p>
+                            <div class="contact-info-socials">
+                                <div class="social-links">
+                                    <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
+                                    <a href="https://x.com/Finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="X"><i class="fab fa-twitter"></i></a>
+                                    <a href="https://www.linkedin.com/company/finanfun" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                    <a href="https://www.youtube.com/channel/UC-5J3dU6f1ilsQVt28xc0ug" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
