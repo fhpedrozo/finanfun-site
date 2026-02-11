@@ -91,26 +91,51 @@
             padding: 10px;
         }
         
-        /* Contact Info Card - Simplificado */
+        /* Botão Enviar - Estilo dos botões Blog/Newsletter */
+        .submit-btn {
+            width: 100%;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, var(--primary-green), #00d4aa);
+            color: var(--dark-navy);
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(70, 254, 119, 0.3);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        /* Contact Info Card - Reduzido */
         .contact-info-card {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(70, 254, 119, 0.3);
             border-radius: 20px;
-            padding: 2rem;
+            padding: 1.5rem;
         }
         
         .contact-info-card h3 {
             color: var(--primary-green);
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            margin-bottom: 1.25rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
         .contact-info-item {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
@@ -122,9 +147,9 @@
         
         .contact-info-item h4 {
             color: var(--text-light);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -132,13 +157,14 @@
         
         .contact-info-item h4 i {
             color: var(--primary-green);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
         }
         
         .contact-info-item p {
             color: #94a3b8;
             margin: 0;
-            padding-left: 1.7rem;
+            padding-left: 1.6rem;
+            font-size: 0.95rem;
         }
         
         .contact-info-item a {
@@ -152,8 +178,34 @@
         }
         
         .contact-info-socials {
-            padding-left: 1.7rem;
+            padding-left: 1.6rem;
             margin-top: 0.75rem;
+        }
+        
+        /* Social Links - Padrão do footer */
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a1628;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
+            background: #3ee568;
         }
         
         /* FAQ Section */
@@ -179,8 +231,8 @@
         
         .faq-item h4 {
             color: #ffffff;
-            font-size: 1.1rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
             font-weight: 600;
         }
         
@@ -188,6 +240,7 @@
             color: #94a3b8;
             line-height: 1.6;
             margin: 0;
+            font-size: 0.95rem;
         }
         
         /* Responsive */
@@ -293,13 +346,13 @@
                             <textarea id="message" name="message" required placeholder="Digite sua mensagem aqui..."></textarea>
                         </div>
 
-                        <button type="submit" class="newsletter-btn" id="submitBtn" style="width: 100%; padding: 14px 28px; background: linear-gradient(135deg, var(--primary-green), #00d4aa); color: var(--dark-navy); border: none; border-radius: 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        <button type="submit" class="submit-btn" id="submitBtn">
                             <i class="fas fa-paper-plane"></i> Enviar Mensagem
                         </button>
                     </form>
                 </div>
 
-                <!-- Contact Info - Card Simplificado -->
+                <!-- Contact Info - Card Reduzido -->
                 <div>
                     <h2 class="section-title">Informações de Contato</h2>
                     
@@ -341,33 +394,63 @@
                 </h2>
                 
                 <div class="faq-item">
-                    <h4>Quando o FinanFun estará disponível?</h4>
-                    <p>Estamos trabalhando no desenvolvimento do aplicativo. Em breve divulgaremos mais informações sobre o lançamento.</p>
+                    <h4>O que é o FinanFun?</h4>
+                    <p>O FinanFun é uma plataforma de educação financeira e empreendedorismo para crianças e adolescentes. Oferecemos site educativo, blog com artigos e newsletters semanais com dicas práticas. Em breve lançaremos um aplicativo mobile com jogos e ferramentas interativas.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h4>Para que idade o app é indicado?</h4>
-                    <p>O FinanFun foi desenvolvido para crianças e adolescentes de 6 a 18 anos, com conteúdo adaptado para cada faixa etária.</p>
+                    <h4>Para quem é o FinanFun?</h4>
+                    <p>Para crianças e adolescentes de 6 a 18 anos, com conteúdo adaptado por faixa etária. Também apoiamos pais, responsáveis e educadores com materiais e orientações para ensinar educação financeira de forma eficaz e divertida.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h4>O FinanFun é seguro para as crianças?</h4>
-                    <p>A segurança é uma das nossas principais prioridades. Os pais têm controle total para estabelecer funcionalidades e limites na plataforma. Nosso sistema de proteção de dados segue rigorosamente a Lei Geral de Proteção de Dados (LGPD).</p>
+                    <h4>O FinanFun é gratuito?</h4>
+                    <p>Sim! Todo o conteúdo do site, blog e newsletters é 100% gratuito. Nossa missão é democratizar a educação financeira para todas as famílias brasileiras.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h4>Como funciona o sistema de recompensas?</h4>
-                    <p>As crianças acumulam pontos ao completar missões e desafios educativos. Esses pontos podem ser trocados por recompensas virtuais ou combinados com os pais para recompensas reais, incentivando o aprendizado contínuo.</p>
+                    <h4>O FinanFun é seguro para crianças?</h4>
+                    <p>Sim, a segurança é nossa prioridade. Todo conteúdo é educativo e apropriado para todas as idades. Não temos anúncios de terceiros, chats ou interações com desconhecidos. Seguimos rigorosamente a LGPD (Lei nº 13.709/2018) na proteção de dados.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h4>Os pais podem acompanhar o progresso?</h4>
-                    <p>Sim! Oferecemos um painel completo para que os pais acompanhem o desenvolvimento dos filhos, visualizem atividades realizadas e ajustem configurações conforme necessário.</p>
+                    <h4>Quais informações pessoais são coletadas?</h4>
+                    <p>Coletamos apenas: endereço de e-mail (se você se cadastrar na newsletter) e dados anônimos de navegação via Google Analytics (páginas visitadas, tempo no site, tipo de dispositivo e localização aproximada). NÃO coletamos nome completo, CPF, endereço residencial, dados bancários ou informações financeiras.</p>
                 </div>
                 
                 <div class="faq-item">
-                    <h4>Quanto custa o FinanFun?</h4>
-                    <p>Ainda estamos definindo os planos de assinatura. Nosso objetivo é oferecer opções acessíveis para que todas as famílias possam proporcionar educação financeira de qualidade para seus filhos.</p>
+                    <h4>O FinanFun compartilha meus dados?</h4>
+                    <p>Não! Nunca vendemos ou compartilhamos seus dados pessoais com terceiros para fins comerciais. Utilizamos apenas Google Analytics (análise anônima) e Brevo (envio de newsletters). Você tem total controle e pode solicitar exclusão a qualquer momento.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Como posso excluir meus dados?</h4>
+                    <p>Envie e-mail para privacidade@finanfun.com.br solicitando exclusão. Processaremos sua solicitação em até 15 dias úteis. Você também pode solicitar acesso, correção ou portabilidade dos seus dados conforme seus direitos na LGPD.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Onde está a Política de Privacidade completa?</h4>
+                    <p>Acesse nossa Política de Privacidade e Termos de Uso através dos links no rodapé do site. Estes documentos detalham como coletamos e usamos dados, seus direitos conforme LGPD e nossas medidas de segurança. Dúvidas: privacidade@finanfun.com.br</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Como funciona a newsletter?</h4>
+                    <p>Enviamos newsletters semanais (toda segunda-feira) com dicas práticas de educação financeira, atividades para fazer com seus filhos, notícias do mundo financeiro explicadas para jovens e histórias inspiradoras de empreendedorismo. É 100% gratuita e você pode cancelar quando quiser.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Como faço para cancelar a newsletter?</h4>
+                    <p>Clique no link "Descadastrar" no rodapé de qualquer newsletter recebida ou envie e-mail para privacidade@finanfun.com.br com o assunto "Cancelar Newsletter". Processamento em até 2 dias úteis.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Haverá um aplicativo FinanFun?</h4>
+                    <p>Sim! Estamos desenvolvendo um app mobile (iOS e Android) com jogos educativos, desafios de economia, missões de empreendedorismo e acompanhamento de metas financeiras. Previsão de lançamento: 2026. Inscreva-se em nossa newsletter para ser avisado!</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h4>Como posso dar sugestões ou feedback?</h4>
+                    <p>Envie suas sugestões para contato@finanfun.com.br, pelas redes sociais @finanfunapp ou pelo formulário em "Fale Conosco". Sua opinião nos ajuda a criar conteúdos mais relevantes para sua família!</p>
                 </div>
             </div>
         </div>
@@ -519,8 +602,6 @@
                 value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
             } else if (value.length >= 3) {
                 value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
-            } else if (value.length >= 1) {
-                value = value.replace(/^(\d*)/, '($1');
             }
             
             e.target.value = value;
