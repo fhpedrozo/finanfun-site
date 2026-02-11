@@ -18,137 +18,43 @@
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20250620-0400">
     
     <style>
-        /* Variáveis CSS */
-        :root {
-            --primary-green: #46FE77;
-            --primary-green-dark: #38cc5f;
-            --secondary-blue: #181D4E;
-            --secondary-blue-dark: #141741;
-            --dark-navy: #0f172a;
-            --dark-slate: #1e293b;
-            --text-light: #f8fafc;
-            --text-gray: #64748b;
-            --white: #ffffff;
-            --gradient-primary: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-blue) 100%);
-            --gradient-dark: linear-gradient(135deg, var(--dark-navy) 0%, var(--dark-slate) 100%);
-            --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* Ajustes mínimos - deixar o style.css fazer o trabalho */
+        .main-content {
+            padding-top: 120px;  /* Espaço para o navbar */
+            padding-bottom: 60px;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        * {
-            margin: 0;
-            box-sizing: border-box;
+        .educa-placeholder {
+            text-align: center;
+            color: white;
         }
 
-        body {
-            font-family: var(--font-primary) !important;
-            background: var(--gradient-dark) !important;
-            color: var(--text-light) !important;
-            min-height: 100vh;
+        .educa-placeholder img {
+            max-width: 300px;
+            margin-bottom: 2rem;  /* Espaço entre imagem e título */
+            border-radius: 12px;
         }
 
-        /* ========== NAVBAR FINO - FORÇAR TUDO ========== */
-        .navbar {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            background: rgba(15, 23, 42, 0.95) !important;
-            backdrop-filter: blur(10px) !important;
-            z-index: 1000 !important;
-            padding: 0.5rem 0 !important;  /* REDUZIDO para ficar mais fino */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-            margin: 0 !important;
+        .educa-placeholder h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
         }
 
-        .nav-container {
-            max-width: 1200px !important;
-            margin: 0 auto !important;
-            padding: 0 2rem !important;
-            display: flex !important;
-            justify-content: space-between !important;
-            align-items: center !important;
+        .educa-placeholder p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;  /* Mesmo espaço que entre imagem e título */
         }
 
-        /* ZERAR padding/margin de TODOS filhos do navbar */
-        .nav-logo,
-        .nav-logo h2,
-        .nav-logo h2 a {
-            margin: 0 !important;
-            padding: 0 !important;
-            line-height: 1 !important;
-        }
-
-        .nav-logo h2 {
-            font-size: 1.5rem !important;
-        }
-
-        .nav-logo h2 a {
-            text-decoration: none !important;
-        }
-
-        .finan-text {
-            color: var(--text-light) !important;
-            font-weight: 700 !important;
-        }
-
-        .fun-text {
-            color: var(--primary-green) !important;
-            font-weight: 700 !important;
-        }
-
-        .nav-menu {
-            display: flex !important;
-            list-style: none !important;
-            gap: 2rem !important;
-            align-items: center !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .nav-menu li {
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .nav-link {
-            color: var(--text-light) !important;
-            text-decoration: none !important;
-            font-weight: 500 !important;
-            transition: color 0.3s ease !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            line-height: 1 !important;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-green) !important;
-        }
-
-        /* ========== BOTÕES - PADRÃO login-btn ========== */
-        .btn-voltar-header {
-            background: var(--gradient-primary) !important;
-            color: var(--white) !important;
-            padding: 8px 20px !important;
-            border-radius: 25px !important;
-            font-weight: 600 !important;
-            transition: all 0.3s ease !important;
-            box-shadow: 0 2px 10px rgba(70, 254, 119, 0.3) !important;
-            text-decoration: none !important;
-            display: inline-block !important;
-            border: none !important;
-            cursor: pointer !important;
-            margin: 0 !important;
-            line-height: 1 !important;
-        }
-
-        .btn-voltar-header:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
-        }
-
+        /* Botão padrão login-btn */
         .btn-voltar {
             background: var(--gradient-primary) !important;
             color: var(--white) !important;
@@ -168,89 +74,10 @@
             box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
         }
 
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        /* ========== MAIN CONTENT ========== */
-        .main-content {
-            padding-top: 90px !important;  /* REDUZIDO porque navbar é mais fino */
-            padding-bottom: 40px;
-            min-height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .educa-placeholder {
-            text-align: center;
-            color: white;
-        }
-
-        .educa-placeholder img {
-            max-width: 300px;
-            margin-bottom: 2rem;
-            border-radius: 12px;
-        }
-
-        .educa-placeholder h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-green);
-        }
-
-        .educa-placeholder p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
-            .nav-menu {
-                position: fixed !important;
-                left: -100% !important;
-                top: 50px !important;  /* Ajustado para navbar fino */
-                flex-direction: column !important;
-                background-color: rgba(15, 20, 25, 0.98) !important;
-                width: 100% !important;
-                text-align: center !important;
-                transition: 0.3s !important;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05) !important;
-                backdrop-filter: blur(10px) !important;
-                padding: 2rem 0 !important;
-            }
-
-            .nav-menu.active {
-                left: 0 !important;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
             .main-content {
-                padding-top: 70px !important;
-                padding-bottom: 30px;
+                padding-top: 100px;
+                padding-bottom: 40px;
             }
 
             .educa-placeholder h1 {
@@ -260,19 +87,18 @@
     </style>
 </head>
 <body>
+    <!-- Navigation - ESTRUTURA EXATA DO INDEX.HTML -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2><a href="index.html">
-                    <span class="finan-text">Finan</span><span class="fun-text">Fun</span>
-                </a></h2>
+                <h2 class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></h2>
             </div>
             <ul class="nav-menu">
                 <li><a href="blog.html" class="nav-link">Blog</a></li>
                 <li><a href="newsletter.html" class="nav-link">Newsletter</a></li>
                 <li><a href="pages/sobre.html" class="nav-link">Sobre</a></li>
                 <li><a href="pages/fale-conosco.html" class="nav-link">Contato</a></li>
-                <li><a href="index.html" class="btn-voltar-header">Voltar</a></li>
+                <li><a href="index.html" class="nav-link login-btn">Voltar</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -282,6 +108,7 @@
         </div>
     </nav>
 
+    <!-- Main Content -->
     <main class="main-content">
         <div class="educa-placeholder">
             <img src="images/logo-educa.jpeg" alt="FinanFun Educa" onerror="this.style.display='none'">
@@ -291,12 +118,13 @@
         </div>
     </main>
 
-    <footer style="background: var(--gradient-dark); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 3rem 0;">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
-                    <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
+                    <h3 class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></h3>
+                    <p>Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
                     
                     <div class="social-links">
                         <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -317,14 +145,14 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p style="color: var(--text-gray); margin: 0;">
-                    &copy; 2026 <span style="color: var(--text-light); font-weight: 600;">Finan</span><span style="color: var(--primary-green); font-weight: 600;">Fun</span>. Todos os direitos reservados.
-                </p>
+                <p>&copy; 2026 <span class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></span>. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
@@ -336,7 +164,7 @@
                     navMenu.classList.toggle('active');
                 });
                 
-                const navLinks = document.querySelectorAll('.nav-link, .btn-voltar-header');
+                const navLinks = document.querySelectorAll('.nav-link, .login-btn');
                 navLinks.forEach(link => {
                     link.addEventListener('click', function() {
                         hamburger.classList.remove('active');
