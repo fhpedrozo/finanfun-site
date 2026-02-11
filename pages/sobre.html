@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós - FinanFun</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <meta name="description" content="Conheça mais sobre o FinanFun e nossa missão de educar financeiramente crianças e adolescentes.">
     
     <!-- Google tag (gtag.js) -->
@@ -15,284 +12,132 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-39RE1PVHEL');
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css?v=20250620-0230">
+    <link rel="stylesheet" href="../css/style.css?v=20250620-0310">
+    
     <style>
-        :root {
-            --primary-green: #46FE77;
-            --secondary-blue: #181D4E;
-            --accent-purple: #8b5cf6;
-            --dark-navy: #0F1419;
-            --text-light: #ffffff;
-            --text-gray: #a0a9c0;
-            --white: #ffffff;
-            --gradient-primary: linear-gradient(135deg, var(--primary-green), #00d4aa);
-            --gradient-secondary: linear-gradient(135deg, var(--secondary-blue), #2d3748);
-            --gradient-card: linear-gradient(135deg, rgba(15, 20, 25, 0.8), rgba(24, 29, 78, 0.3));
-            --gradient-dark: linear-gradient(135deg, var(--dark-navy), var(--secondary-blue));
+        /* Reduzir espaçamento do hero */
+        .hero {
+            padding: 100px 0 40px !important;
+            min-height: auto !important;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--gradient-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 20, 25, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .finan-text {
-            color: var(--text-light);
-        }
-
-        .fun-text {
-            color: var(--primary-green);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-green);
-        }
-
-        .nav-link.login-btn {
-            background: var(--primary-green);
-            color: var(--dark-bg);
-            padding: 0.5rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link.login-btn:hover {
-            background: transparent;
-            color: var(--primary-green);
-            box-shadow: inset 0 0 0 2px var(--primary-green);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-light);
-            margin: 3px 0;
-            transition: 0.3s;
-        }
-
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .title-finan {
-            color: var(--text-light) !important;
-            background: none !important;
-            -webkit-text-fill-color: var(--text-light) !important;
-        }
-
-        .title-fun {
-            color: var(--primary-green) !important;
-            background: none !important;
-            -webkit-text-fill-color: var(--primary-green) !important;
-        }
-
+        
+        /* Mission Card */
         .mission-card {
-            background: var(--gradient-card);
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            border-radius: 15px;
-            padding: 3rem;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
             margin-bottom: 3rem;
             text-align: center;
         }
-
+        
         .mission-icon {
-            width: 100px;
-            height: 100px;
-            background: var(--gradient-primary);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-green), #00d4aa);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 2rem;
-            font-size: 3rem;
-            color: var(--white);
+            margin: 0 auto 1.5rem;
         }
-
+        
+        .mission-icon i {
+            font-size: 2.5rem;
+            color: var(--dark-navy);
+        }
+        
+        /* Values Grid */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 3rem 0;
+            margin-top: 2rem;
         }
-
+        
         .value-card {
-            background: var(--gradient-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(70, 254, 119, 0.3);
+            border-radius: 20px;
             padding: 2rem;
             text-align: center;
+            transition: all 0.3s ease;
         }
-
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-green);
+            box-shadow: 0 10px 30px rgba(70, 254, 119, 0.2);
+        }
+        
         .value-icon {
             width: 60px;
             height: 60px;
-            background: var(--gradient-primary);
+            background: rgba(70, 254, 119, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1rem;
-            font-size: 1.5rem;
-            color: var(--dark-navy);
         }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3, .footer-section h4 {
+        
+        .value-icon i {
+            font-size: 1.8rem;
             color: var(--primary-green);
+        }
+        
+        .value-card h3 {
+            color: var(--text-light);
             margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section ul li a {
+        
+        .value-card p {
             color: var(--text-gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
-
-        .footer-section ul li a:hover {
+        
+        /* Section Title Customization */
+        .title-finan {
+            color: var(--text-light);
+        }
+        
+        .title-fun {
             color: var(--primary-green);
         }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
-            text-align: center;
-        }
-
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
+            .hero {
+                padding: 80px 0 30px !important;
             }
-
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 70px;
-                flex-direction: column;
-                background-color: rgba(15, 20, 25, 0.98);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                backdrop-filter: blur(10px);
-                padding: 2rem 0;
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            main {
-                padding: 80px 1.5rem 30px !important;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
+            
             .values-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .mission-card {
+                padding: 1.5rem;
+            }
+            
+            .value-card {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2><a href="../index.html" style="text-decoration: none;">
-                    <span class="finan-text">Finan</span><span class="fun-text">Fun</span>
-                </a></h2>
+                <h2 class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></h2>
             </div>
             <ul class="nav-menu">
                 <li><a href="../index.html" class="nav-link">Início</a></li>
@@ -310,116 +155,121 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main style="padding: 100px 2rem 40px; min-height: 80vh;">
-        <div class="container">
-            <section class="section">
-                <h1 class="section-title">Sobre o <span class="title-finan">Finan</span><span class="title-fun">Fun</span></h1>
-                
-                <div style="max-width: 800px; margin: 0 auto;">
-                    <div class="mission-card">
-                        <div class="mission-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        
-                        <h2 style="color: var(--primary-green); margin-bottom: 1.5rem; font-size: 2rem;">Nossa Missão</h2>
-                        <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2rem;">
-                            O <span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span> nasceu na busca dos pais por transformarem a educação financeira dos seus filhos em uma experiência 
-                            divertida e acessível para toda família. Nosso objetivo é criar uma geração 
-                            mais consciente financeiramente, capacitando os jovens com conhecimentos práticos sobre 
-                            dinheiro, economia e investimentos.
-                        </p>
-                        
+    <!-- Header Section -->
+    <header id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Sobre o <span class="title-finan">Finan</span><span class="title-fun">Fun</span></h1>
+                <p class="hero-description">
+                    Conheça nossa missão de transformar a educação financeira em uma experiência divertida e acessível para toda a família.
+                </p>
+            </div>
+        </div>
+    </header>
 
+    <!-- Main Content -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <!-- Nossa Missão -->
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-rocket"></i>
                     </div>
                     
-                    <!-- Valores -->
-                    <div style="text-align: center; margin-bottom: 2rem;">
-                        <h2 style="color: var(--primary-green); font-size: 2.5rem; margin-bottom: 1rem;">Nossos Valores</h2>
-                        <p style="color: var(--text-gray); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
-                            Orientamos nosso trabalho por valores que refletem nosso compromisso com a educação de qualidade e transformação financeira.
+                    <h2 style="color: var(--primary-green); margin-bottom: 1.5rem; font-size: 2rem;">Nossa Missão</h2>
+                    <p style="color: var(--text-gray); font-size: 1.1rem; line-height: 1.7; margin: 0;">
+                        O <span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span> nasceu na busca dos pais por transformarem a educação financeira dos seus filhos em uma experiência 
+                        divertida e acessível para toda família. Nosso objetivo é criar uma geração 
+                        mais consciente financeiramente, capacitando os jovens com conhecimentos práticos sobre 
+                        dinheiro, economia e investimentos.
+                    </p>
+                </div>
+                
+                <!-- Nossos Valores -->
+                <div style="text-align: center; margin-bottom: 2.5rem;">
+                    <h2 class="section-title">Nossos Valores</h2>
+                    <p style="color: var(--text-gray); font-size: 1.1rem; max-width: 700px; margin: 1rem auto 0;">
+                        Orientamos nosso trabalho por valores que refletem nosso compromisso com a educação de qualidade e transformação financeira.
+                    </p>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Inclusão</h3>
+                        <p>
+                            Acreditamos que educação financeira deve ser acessível a todas as crianças, 
+                            independentemente de sua origem socioeconômica.
                         </p>
                     </div>
                     
-                    <div class="values-grid">
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <h3 style="color: var(--text-light); margin-bottom: 1rem;">Inclusão</h3>
-                            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
-                                Acreditamos que educação financeira deve ser acessível a todas as crianças, 
-                                independentemente de sua origem socioeconômica.
-                            </p>
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3 style="color: var(--text-light); margin-bottom: 1rem;">Família</h3>
-                            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
-                                Fortalecemos os laços familiares através de ferramentas que promovem conversas educativas e saudáveis sobre dinheiro e investimentos.
-                            </p>
+                        <h3>Família</h3>
+                        <p>
+                            Fortalecemos os laços familiares através de ferramentas que promovem conversas educativas e saudáveis sobre dinheiro e investimentos.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
                         </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <h3 style="color: var(--text-light); margin-bottom: 1rem;">Segurança</h3>
-                            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
-                                Priorizamos a segurança dos dados e a proteção das crianças em todas 
-                                as funcionalidades da plataforma.
-                            </p>
+                        <h3>Segurança</h3>
+                        <p>
+                            Priorizamos a segurança dos dados e a proteção das crianças em todas 
+                            as funcionalidades da plataforma.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-graduation-cap"></i>
                         </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <i class="fas fa-graduation-cap"></i>
-                            </div>
-                            <h3 style="color: var(--text-light); margin-bottom: 1rem;">Educação</h3>
-                            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
-                                Nosso compromisso é com uma educação financeira sólida, prática 
-                                e adaptada para cada faixa etária.
-                            </p>
+                        <h3>Educação</h3>
+                        <p>
+                            Nosso compromisso é com uma educação financeira sólida, prática 
+                            e adaptada para cada faixa etária.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-gamepad"></i>
                         </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <i class="fas fa-gamepad"></i>
-                            </div>
-                            <h3 style="color: var(--text-light); margin-bottom: 1rem;">Diversão</h3>
-                            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
-                                Transformamos o aprendizado em uma aventura lúdica e divertida, usando metas, recompensas, jogos e inteligência artificial para manter as crianças engajadas.
-                            </p>
+                        <h3>Diversão</h3>
+                        <p>
+                            Transformamos o aprendizado em uma aventura lúdica e divertida, usando metas, recompensas, jogos e inteligência artificial para manter as crianças engajadas.
+                        </p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
                         </div>
-                        
-                        <div class="value-card">
-                            <div class="value-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <h3 style="color: var(--text-light); margin-bottom: 1rem;">Inovação</h3>
-                            <p style="color: var(--text-gray); font-size: 0.95rem; line-height: 1.6;">
-                                Utilizamos tecnologia de ponta e metodologias inovadoras para criar 
-                                experiências de aprendizado únicas e eficazes.
-                            </p>
-                        </div>
+                        <h3>Inovação</h3>
+                        <p>
+                            Utilizamos tecnologia de ponta e metodologias inovadoras para criar 
+                            experiências educacionais envolventes e eficazes.
+                        </p>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
 
     <!-- Footer -->
-    <footer style="background: var(--gradient-dark); border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 3rem 0;">
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3><span style="color: var(--text-light);">Finan</span><span style="color: var(--primary-green);">Fun</span></h3>
-                    <p style="color: var(--text-gray);">Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
-                    
-                    <!-- Redes Sociais -->
+                    <h3 class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></h3>
+                    <p>Educação financeira divertida para crianças e adolescentes. Construindo o futuro financeiro através da tecnologia e inovação.</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
                         <a href="https://www.facebook.com/share/1GbcaBHaKj/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -440,17 +290,22 @@
                     </ul>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p style="color: var(--text-gray); margin: 0;">
-                    &copy; 2026 <span style="color: var(--text-light); font-weight: 600;">Finan</span><span style="color: var(--primary-green); font-weight: 600;">Fun</span>. Todos os direitos reservados.
-                </p>
+                <p>&copy; 2026 <span class="finanfun-brand"><span class="finan">Finan</span><span class="fun">Fun</span></span>. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
     <script>
+        // Menu Hamburguer
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile navigation
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             
@@ -461,7 +316,7 @@
                 });
                 
                 // Fechar menu ao clicar em um link
-                const navLinks = document.querySelectorAll('.nav-link');
+                const navLinks = document.querySelectorAll('.nav-link, .login-btn');
                 navLinks.forEach(link => {
                     link.addEventListener('click', function() {
                         hamburger.classList.remove('active');
@@ -469,13 +324,24 @@
                     });
                 });
             }
-        });
 
-        // Force content update to bypass cache
-        document.addEventListener('DOMContentLoaded', function() {
-            const missionText = document.getElementById('mission-text');
-            if (missionText) {
-                missionText.innerHTML = 'Educação financeira divertida para crianças e adolescentes. Formando futuros investidores através da tecnologia e inovação.';
+            // Back to Top Button
+            const backToTop = document.getElementById('backToTop');
+            if (backToTop) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTop.classList.add('show');
+                    } else {
+                        backToTop.classList.remove('show');
+                    }
+                });
+
+                backToTop.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
             }
         });
     </script>
