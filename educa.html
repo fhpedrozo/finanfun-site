@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
-        /* Variáveis CSS - IGUAIS ao index.html */
+        /* Variáveis CSS */
         :root {
             --primary-green: #46FE77;
             --primary-green-dark: #38cc5f;
@@ -49,7 +49,7 @@
             min-height: 100vh;
         }
 
-        /* ========== NAVBAR - SOBRESCREVER TUDO ========== */
+        /* ========== NAVBAR FINO - FORÇAR TUDO ========== */
         .navbar {
             position: fixed !important;
             top: 0 !important;
@@ -58,8 +58,9 @@
             background: rgba(15, 23, 42, 0.95) !important;
             backdrop-filter: blur(10px) !important;
             z-index: 1000 !important;
-            padding: 0.75rem 0 !important;
+            padding: 0.5rem 0 !important;  /* REDUZIDO para ficar mais fino */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            margin: 0 !important;
         }
 
         .nav-container {
@@ -71,9 +72,16 @@
             align-items: center !important;
         }
 
-        .nav-logo h2 {
+        /* ZERAR padding/margin de TODOS filhos do navbar */
+        .nav-logo,
+        .nav-logo h2,
+        .nav-logo h2 a {
             margin: 0 !important;
             padding: 0 !important;
+            line-height: 1 !important;
+        }
+
+        .nav-logo h2 {
             font-size: 1.5rem !important;
         }
 
@@ -100,11 +108,19 @@
             padding: 0 !important;
         }
 
+        .nav-menu li {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
         .nav-link {
             color: var(--text-light) !important;
             text-decoration: none !important;
             font-weight: 500 !important;
             transition: color 0.3s ease !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            line-height: 1 !important;
         }
 
         .nav-link:hover {
@@ -112,7 +128,6 @@
         }
 
         /* ========== BOTÕES - PADRÃO login-btn ========== */
-        /* Botão "Voltar" no Navbar */
         .btn-voltar-header {
             background: var(--gradient-primary) !important;
             color: var(--white) !important;
@@ -125,6 +140,8 @@
             display: inline-block !important;
             border: none !important;
             cursor: pointer !important;
+            margin: 0 !important;
+            line-height: 1 !important;
         }
 
         .btn-voltar-header:hover {
@@ -132,7 +149,6 @@
             box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
         }
 
-        /* Botão "Voltar ao Início" no Corpo - MESMO PADRÃO */
         .btn-voltar {
             background: var(--gradient-primary) !important;
             color: var(--white) !important;
@@ -156,6 +172,8 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .hamburger span {
@@ -169,7 +187,7 @@
 
         /* ========== MAIN CONTENT ========== */
         .main-content {
-            padding-top: 100px !important;
+            padding-top: 90px !important;  /* REDUZIDO porque navbar é mais fino */
             padding-bottom: 40px;
             min-height: auto;
             display: flex;
@@ -211,7 +229,7 @@
             .nav-menu {
                 position: fixed !important;
                 left: -100% !important;
-                top: 60px !important;
+                top: 50px !important;  /* Ajustado para navbar fino */
                 flex-direction: column !important;
                 background-color: rgba(15, 20, 25, 0.98) !important;
                 width: 100% !important;
@@ -231,7 +249,7 @@
             }
 
             .main-content {
-                padding-top: 80px !important;
+                padding-top: 70px !important;
                 padding-bottom: 30px;
             }
 
