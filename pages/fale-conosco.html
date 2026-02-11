@@ -181,35 +181,43 @@
             margin-top: 1.25rem;
         }
         
-        /* Social Links - Ícones BRANCOS com fundo VERDE-ESCURO (TEAL) */
-        /* Copiado do estilo do footer para o campo "Informações de Contato" */
+        /* Social Links - FORÇANDO cor teal com seletores super específicos */
         .contact-info-socials .social-links {
             display: flex;
             gap: 0.75rem;
         }
 
+        /* Seletor SUPER específico para vencer o style.css global */
+        .contact-info-card .contact-info-item .contact-info-socials .social-links .social-link,
+        .contact-info-socials .social-links .social-link,
         .contact-info-socials .social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
             background: #2DD4BF !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background-color: #2DD4BF !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
             color: #ffffff !important;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            text-decoration: none;
+            font-size: 1.1rem !important;
+            transition: all 0.3s ease !important;
+            text-decoration: none !important;
         }
 
+        .contact-info-card .contact-info-item .contact-info-socials .social-links .social-link i,
+        .contact-info-socials .social-links .social-link i,
         .contact-info-socials .social-link i {
             color: #ffffff !important;
         }
 
+        .contact-info-card .contact-info-item .contact-info-socials .social-links .social-link:hover,
+        .contact-info-socials .social-links .social-link:hover,
         .contact-info-socials .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+            transform: translateY(-3px) !important;
+            box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4) !important;
             background: #14b8a6 !important;
+            background-color: #14b8a6 !important;
         }
         
         /* FAQ Section */
@@ -364,7 +372,7 @@
                         
                         <div class="contact-info-item">
                             <h4><i class="fas fa-envelope"></i> E-mail</h4>
-                            <p><a href="/cdn-cgi/l/email-protection#7a1915140e1b0e153a1c13141b141c0f1454191517541808"><span class="__cf_email__" data-cfemail="c4a7abaab0a5b0ab84a2adaaa5aaa2b1aaeaa7aba9eaa6b6">[email&#160;protected]</span></a></p>
+                            <p><a href="mailto:contato@finanfun.com.br">contato@finanfun.com.br</a></p>
                         </div>
 
                         <div class="contact-info-item">
