@@ -116,26 +116,26 @@
             cursor: not-allowed;
         }
         
-        /* Contact Info Card - ESPAÇAMENTOS AUMENTADOS */
+        /* Contact Info Card - ESPAÇAMENTOS AINDA MAIORES */
         .contact-info-card {
             background: rgba(15, 23, 42, 0.6);
             border: 1px solid rgba(70, 254, 119, 0.3);
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 3rem;
         }
         
         .contact-info-card h3 {
             color: var(--primary-green);
             font-size: 1.3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         
         .contact-info-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
@@ -149,7 +149,7 @@
             color: var(--text-light);
             font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -178,16 +178,16 @@
         
         .contact-info-socials {
             padding-left: 1.7rem;
-            margin-top: 1rem;
+            margin-top: 1.25rem;
         }
         
-        /* Social Links - Ícones BRANCOS */
-        .social-links {
+        /* Social Links - Ícones BRANCOS com !important */
+        .contact-info-socials .social-links {
             display: flex;
             gap: 0.75rem;
         }
 
-        .social-link {
+        .contact-info-socials .social-link {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -195,13 +195,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ffffff;
+            color: #ffffff !important;
             font-size: 1.1rem;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
-        .social-link:hover {
+        .contact-info-socials .social-link i {
+            color: #ffffff !important;
+        }
+
+        .contact-info-socials .social-link:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
             background: #3ee568;
@@ -350,7 +354,7 @@
                     </form>
                 </div>
 
-                <!-- Contact Info - Card com ESPAÇAMENTOS AUMENTADOS -->
+                <!-- Contact Info - Card com ESPAÇAMENTOS AINDA MAIORES -->
                 <div>
                     <h2 class="section-title">Informações de Contato</h2>
                     
@@ -369,7 +373,7 @@
 
                         <div class="contact-info-item">
                             <h4><i class="fas fa-share-nodes"></i> Siga-nos nas Redes Sociais</h4>
-                            <p style="margin-bottom: 1rem;">Fique por dentro de todas as novidades!</p>
+                            <p style="margin-bottom: 1.25rem;">Fique por dentro de todas as novidades!</p>
                             <div class="contact-info-socials">
                                 <div class="social-links">
                                     <a href="https://www.instagram.com/finanfunapp?igsh=MXNkNno2azFncjA3Yw%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram"><i class="fab fa-instagram"></i></a>
