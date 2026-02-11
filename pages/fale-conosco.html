@@ -16,7 +16,7 @@
     </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/style.css?v=20250620-0245">
+    <link rel="stylesheet" href="../css/style.css?v=20250620-0250">
     
     <style>
         /* Reduzir espaçamento do hero */
@@ -25,10 +25,76 @@
             min-height: auto !important;
         }
         
+        /* Form styles */
+        .contact-form {
+            max-width: none;
+        }
+        
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-field label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+        }
+        
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            padding: 14px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(70, 254, 119, 0.3);
+            border-radius: 25px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(70, 254, 119, 0.1);
+        }
+        
+        .form-field textarea {
+            min-height: 150px;
+            resize: vertical;
+            padding: 14px 20px;
+        }
+        
+        .form-field select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2346FE77' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            padding-right: 45px;
+        }
+        
+        .form-field select option {
+            background-color: #0f172a;
+            color: var(--text-light);
+            padding: 10px;
+        }
+        
         /* FAQ Section */
         .faq-section {
             background: rgba(15, 23, 42, 0.5);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: 20px;
             border: 1px solid rgba(70, 254, 119, 0.2);
             margin-top: 3rem;
@@ -68,6 +134,10 @@
             
             .hero {
                 padding: 80px 0 30px !important;
+            }
+            
+            .faq-section {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -117,46 +187,25 @@
                     <h2 class="section-title">Envie sua Mensagem</h2>
                     <div id="formMessage" class="newsletter-message" style="display: none; margin-bottom: 1.5rem;"></div>
                     
-                    <form id="contactForm" class="newsletter-form" style="max-width: none;">
-                        <div style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Nome Completo *</label>
-                            <input type="text" 
-                                   id="name" 
-                                   name="name" 
-                                   required 
-                                   placeholder="Digite seu nome completo"
-                                   class="newsletter-input"
-                                   style="width: 100%;">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-field">
+                            <label for="name">Nome Completo *</label>
+                            <input type="text" id="name" name="name" required placeholder="Digite seu nome completo">
                         </div>
 
-                        <div style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">E-mail *</label>
-                            <input type="email" 
-                                   id="email" 
-                                   name="email" 
-                                   required 
-                                   placeholder="seu@email.com"
-                                   class="newsletter-input"
-                                   style="width: 100%;">
+                        <div class="form-field">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required placeholder="seu@email.com">
                         </div>
 
-                        <div style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Telefone</label>
-                            <input type="tel" 
-                                   id="phone" 
-                                   name="phone" 
-                                   placeholder="(00) 00000-0000"
-                                   class="newsletter-input"
-                                   style="width: 100%;">
+                        <div class="form-field">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000">
                         </div>
 
-                        <div style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Assunto *</label>
-                            <select id="subject" 
-                                    name="subject" 
-                                    required
-                                    class="newsletter-input"
-                                    style="width: 100%; cursor: pointer;">
+                        <div class="form-field">
+                            <label for="subject">Assunto *</label>
+                            <select id="subject" name="subject" required>
                                 <option value="">Selecione um assunto</option>
                                 <option value="duvida">Dúvida</option>
                                 <option value="sugestao">Sugestão</option>
@@ -166,17 +215,12 @@
                             </select>
                         </div>
 
-                        <div style="margin-bottom: 1.5rem;">
-                            <label style="display: block; margin-bottom: 0.5rem; color: var(--text-light); font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Mensagem *</label>
-                            <textarea id="message" 
-                                      name="message" 
-                                      required 
-                                      placeholder="Digite sua mensagem aqui..."
-                                      class="newsletter-input"
-                                      style="width: 100%; min-height: 150px; resize: vertical; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;"></textarea>
+                        <div class="form-field">
+                            <label for="message">Mensagem *</label>
+                            <textarea id="message" name="message" required placeholder="Digite sua mensagem aqui..."></textarea>
                         </div>
 
-                        <button type="submit" class="newsletter-btn" id="submitBtn" style="width: 100%;">
+                        <button type="submit" class="newsletter-btn" id="submitBtn">
                             <i class="fas fa-paper-plane"></i> Enviar Mensagem
                         </button>
                     </form>
