@@ -26,8 +26,10 @@
             --dark-bg: #0f172a;
             --dark-navy: #0a1628;
             --text-light: #ffffff;
+            --white: #ffffff;
             --text-gray: #94a3b8;
             --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --gradient-primary: linear-gradient(135deg, #46FE77, #181D4E);
         }
 
         * {
@@ -96,27 +98,28 @@
             color: var(--primary-green);
         }
 
-        /* Botão Voltar no Header */
-        .btn-voltar-header {
-            padding: 0.625rem 1.5rem;
-            border-radius: 25px;
-            background: linear-gradient(135deg, var(--primary-green), #181D4E) !important;
-            color: white !important;
-            border: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
+        /* Botão Login - Padrão FinanFun */
+        .login-btn {
+            background: var(--gradient-primary) !important;
+            color: var(--white) !important;
+            padding: 0.625rem 1.5rem !important;
+            border-radius: 25px !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 10px rgba(70, 254, 119, 0.3) !important;
             text-decoration: none !important;
-            display: inline-block;
+            display: inline-block !important;
+            border: none !important;
+            cursor: pointer !important;
         }
 
-        .btn-voltar-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
-            color: white !important;
-            text-decoration: none !important;
+        .login-btn:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4) !important;
         }
+
+
+        
 
         .hamburger {
             display: none;
@@ -318,7 +321,8 @@
                 </a></h2>
             </div>
             <ul class="nav-menu">
-                <li><a href="../index.html" class="btn-voltar-header">Voltar</a></li>
+                <li><a href="politica-privacidade.html" class="nav-link">Política de Privacidade</a></li>
+                <li><a href="../index.html" class="login-btn">Voltar</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -344,12 +348,12 @@
                 </div>
 
                 <h2>1. Aceitação dos Termos</h2>
-                <p>Ao acessar e utilizar o site FinanFun (finanfun.com.br), você concorda em cumprir estes Termos de Uso. Se você não concordar com qualquer parte destes termos, não utilize o site.</p>
+                <p>Ao acessar e utilizar o site FinanFun (www.finanfun.com.br), você concorda em cumprir estes Termos de Uso. Se você não concordar com qualquer parte destes termos, não utilize o site.</p>
 
                 <h2>2. Sobre o FinanFun</h2>
                 <p>O FinanFun é uma plataforma educacional dedicada ao desenvolvimento de crianças e adolescentes nas áreas de finanças e empreendedorismo, operada por:</p>
                 <div class="contact-info">
-                    <p><strong>Nome:</strong> Fabio Hommerding Pedrozo</p>
+                    <p><strong>Nome:</strong> Fabio Pedrozo</p>
                     <p><strong>CPF:</strong> 030.358.739-33</p>
                     <p><strong>Cidade:</strong> Londrina/PR</p>
                     <p><strong>E-mail (geral):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
@@ -439,13 +443,13 @@
                 <div class="contact-info">
                     <p><strong>E-mail (geral):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
                     <p><strong>E-mail (questões legais):</strong> <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a></p>
-                    <p><strong>Responsável:</strong> Fabio Hommerding Pedrozo</p>
+                    <p><strong>Responsável:</strong> Fabio Pedrozo</p>
                     <p><strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h (horário de Brasília)</p>
                 </div>
 
                 <div class="document-footer">
                     <p><strong>FinanFun - Educação Financeira e Empreendedorismo para Jovens</strong></p>
-                    <p>finanfun.com.br</p>
+                    <p>www.finanfun.com.br</p>
                     <p><a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a> | <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a></p>
                 </div>
             </div>
@@ -488,10 +492,28 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
             
             if (hamburger && navMenu) {
-                hamburger.addEventListener('
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Adiciona listener para fechar menu ao clicar em links
+                const navLinks = document.querySelectorAll('.nav-link, .login-btn');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
