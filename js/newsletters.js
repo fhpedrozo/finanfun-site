@@ -8,6 +8,9 @@ let allNewsletters = [];
 let filteredNewsletters = [];
 let selectedYear = '';
 
+// PLACEHOLDER IMAGE (SVG inline - nunca dá erro 404)
+const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="800" height="400"%3E%3Crect width="800" height="400" fill="%230a1628"/%3E%3Ctext x="50%25" y="50%25" font-family="Arial,sans-serif" font-size="24" fill="%2346FE77" text-anchor="middle" dy=".3em"%3EFinanFun Newsletter%3C/text%3E%3C/svg%3E';
+
 // ELEMENTOS DOM
 const newslettersGrid = document.querySelector('.newsletters-grid');
 const loadMoreContainer = document.querySelector('.load-more-container');
@@ -63,8 +66,8 @@ function renderNewsletterCard(newsletter) {
     });
     
     // Imagem destacada (featured image)
-    // ✅ CORRIGIDO - Usando placeholder online que funciona
-    let imageUrl = 'https://via.placeholder.com/800x400/0a1628/46FE77?text=FinanFun+Newsletter';
+    // ✅ CORRIGIDO - Usando SVG inline que NUNCA falha
+    let imageUrl = PLACEHOLDER_IMAGE;
     if (newsletter._embedded && newsletter._embedded['wp:featuredmedia']) {
         imageUrl = newsletter._embedded['wp:featuredmedia'][0].source_url;
     }
@@ -74,7 +77,7 @@ function renderNewsletterCard(newsletter) {
     
     return `
         <div class="newsletter-card" onclick="window.location.href='${link}'">
-            <img src="${imageUrl}" alt="${title}" class="newsletter-card-image" onerror="this.src='https://via.placeholder.com/800x400/0a1628/46FE77?text=FinanFun+Newsletter'">
+            <img src="${imageUrl}" alt="${title}" class="newsletter-card-image" onerror="this.src='${PLACEHOLDER_IMAGE}'">
             <div class="newsletter-card-content">
                 <div class="newsletter-card-date">
                     <i class="fas fa-calendar-alt"></i> ${formattedDate}
