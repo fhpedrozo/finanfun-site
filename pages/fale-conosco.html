@@ -477,12 +477,12 @@
                 
                 <div class="faq-item">
                     <h4>Como posso excluir meus dados?</h4>
-                    <p>Você pode solicitar a exclusão dos seus dados a qualquer momento enviando um e-mail para privacidade@finanfun.com.br. Processaremos sua solicitação em até 15 dias úteis.</p>
+                    <p>Você pode solicitar a exclusão dos seus dados a qualquer momento enviando um e-mail para contato@finanfun.com.br. Processaremos sua solicitação em até 15 dias úteis.</p>
                 </div>
                 
                 <div class="faq-item">
                     <h4>Onde está a Política de Privacidade completa?</h4>
-                    <p>Acesse nossa Política de Privacidade e Termos de Uso através dos links no rodapé do site (página inicial). Estes documentos detalham como coletamos e usamos dados, seus direitos conforme LGPD e nossas medidas de segurança. Dúvidas: privacidade@finanfun.com.br</p>
+                    <p>Acesse nossa Política de Privacidade e Termos de Uso através dos links no rodapé do site (página inicial). Estes documentos detalham como coletamos e usamos dados, seus direitos conforme LGPD e nossas medidas de segurança. Dúvidas: contato@finanfun.com.br</p>
                 </div>
                 
                 <div class="faq-item">
@@ -492,7 +492,7 @@
                 
                 <div class="faq-item">
                     <h4>Como faço para cancelar a newsletter?</h4>
-                    <p>Clique no link "Descadastrar" no rodapé de qualquer newsletter recebida ou envie e-mail para privacidade@finanfun.com.br com o assunto "Cancelar Newsletter". Processamento em até 3 dias úteis.</p>
+                    <p>Clique no link "Descadastrar" no rodapé de qualquer newsletter recebida ou envie e-mail para contato@finanfun.com.br com o assunto "Cancelar Newsletter". Processamento em até 3 dias úteis.</p>
                 </div>
                 
                 <div class="faq-item">
@@ -502,7 +502,7 @@
                 
                 <div class="faq-item">
                     <h4>Como posso dar sugestões ou feedback?</h4>
-                    <p>Envie suas sugestões para privacidade@finanfun.com.br, pelas redes sociais ou pelo formulário em "Fale Conosco". Sua opinião nos ajuda a melhorar e criar conteúdos ainda mais relevantes para sua família!</p>
+                    <p>Envie suas sugestões para contato@finanfun.com.br, pelas redes sociais ou pelo formulário em "Fale Conosco". Sua opinião nos ajuda a melhorar e criar conteúdos ainda mais relevantes para sua família!</p>
                 </div>
             </div>
         </div>
@@ -643,13 +643,13 @@
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensagem';
             }
-            
+                
             function showMessage(message, type) {
                 formMessage.textContent = message;
                 formMessage.className = 'form-message ' + type;
                 formMessage.style.display = 'block';
                 
-                       setTimeout(() => {
+                setTimeout(() => {
                     formMessage.style.display = 'none';
                 }, 5000);
             }
@@ -657,6 +657,20 @@
 
         // SCRIPT PARA FORÇAR O GRADIENTE DOS ÍCONES SOCIAIS - IGUAL AO FOOTER
         window.addEventListener('DOMContentLoaded', function() {
-            // Aguarda um pouco para garantir que todo CSS foi carregado
             setTimeout(function() {
                 const socialLinks = document.querySelectorAll('.contact-info-socials .social-link');
+                socialLinks.forEach(function(link) {
+                    link.style.setProperty('background', 'linear-gradient(135deg, #46FE77 0%, #181D4E 100%)', 'important');
+                    link.style.setProperty('color', '#ffffff', 'important');
+                    
+                    const icon = link.querySelector('i');
+                    if (icon) {
+                        icon.style.setProperty('color', '#ffffff', 'important');
+                    }
+                });
+                console.log('✅ Gradiente dos ícones sociais forçado!');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
