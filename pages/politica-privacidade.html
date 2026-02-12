@@ -88,14 +88,15 @@
         }
 
         .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            color: var(--text-light) !important;
+            text-decoration: none !important;
+            font-weight: 500 !important;
+            transition: color 0.3s ease !important;
         }
 
         .nav-link:hover {
-            color: var(--primary-green);
+            color: var(--primary-green) !important;
+            text-decoration: none !important;
         }
 
         /* Botão Login - Padrão FinanFun */
@@ -561,7 +562,7 @@
                     <li>Nosso conteúdo é educacional e não contém propaganda ou ofertas comerciais;</li>
                     <li>NÃO coletamos dados sensíveis de menores (como localização, biometria, etc.).</li>
                 </ul>
-                <p><strong>Pais e Responsáveis:</strong> Se você identificar que seu filho/tutelado se cadastrou sem sua autorização, entre em contato imediatamente através do e-mail <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a> para remoção dos dados.</p>
+                <p><strong>Pais e Responsáveis:</strong> Se você identificar que seu filho/tutelado se cadastrou sem sua autorização, entre em contato imediatamente através do e-mail <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a> para remoção dos dados.</p>
 
                 <h2>11. Alterações nesta Política</h2>
                 <p>Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou na legislação. Alterações significativas serão notificadas através de:</p>
@@ -630,34 +631,4 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p style="color: var(--text-gray); margin: 0;">
-                    &copy; 2026 <span style="color: var(--text-light); font-weight: 600;">Finan</span><span style="color: var(--primary-green); font-weight: 600;">Fun</span>. Todos os direitos reservados.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-            
-            if (hamburger && navMenu) {
-                hamburger.addEventListener('click', function() {
-                    hamburger.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                });
-                
-                // Adiciona listener para fechar menu ao clicar em links
-                const navLinks = document.querySelectorAll('.nav-link, .login-btn');
-                navLinks.forEach(link => {
-                    link.addEventListener('click', function() {
-                        hamburger.classList.remove('active');
-                        navMenu.classList.remove('active');
-                    });
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+                <p style="color: var(
