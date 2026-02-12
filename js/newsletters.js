@@ -63,7 +63,8 @@ function renderNewsletterCard(newsletter) {
     });
     
     // Imagem destacada (featured image)
-    let imageUrl = 'images/newsletter-placeholder.jpg'; // imagem padrão
+    // ✅ CORRIGIDO - Usando placeholder online que funciona
+    let imageUrl = 'https://via.placeholder.com/800x400/0a1628/46FE77?text=FinanFun+Newsletter';
     if (newsletter._embedded && newsletter._embedded['wp:featuredmedia']) {
         imageUrl = newsletter._embedded['wp:featuredmedia'][0].source_url;
     }
@@ -73,7 +74,7 @@ function renderNewsletterCard(newsletter) {
     
     return `
         <div class="newsletter-card" onclick="window.location.href='${link}'">
-            <img src="${imageUrl}" alt="${title}" class="newsletter-card-image" onerror="this.src='images/newsletter-placeholder.jpg'">
+            <img src="${imageUrl}" alt="${title}" class="newsletter-card-image" onerror="this.src='https://via.placeholder.com/800x400/0a1628/46FE77?text=FinanFun+Newsletter'">
             <div class="newsletter-card-content">
                 <div class="newsletter-card-date">
                     <i class="fas fa-calendar-alt"></i> ${formattedDate}
