@@ -100,22 +100,20 @@
         .btn-voltar-header {
             padding: 0.625rem 1.5rem;
             border-radius: 25px;
-            background: linear-gradient(135deg, var(--primary-green), #181D4E) !important;
-            color: white !important;
+            background: linear-gradient(135deg, var(--primary-green), #181D4E);
+            color: white;
             border: none;
             font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none !important;
+            text-decoration: none;
             display: inline-block;
         }
 
         .btn-voltar-header:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(70, 254, 119, 0.4);
-            color: white !important;
-            text-decoration: none !important;
         }
 
         .hamburger {
@@ -411,7 +409,7 @@
                     <p><strong>CPF:</strong> 030.358.739-33</p>
                     <p><strong>Endereço:</strong> Londrina/PR</p>
                     <p><strong>E-mail (geral):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
-                    <p><strong>E-mail (privacidade/LGPD):</strong> <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a></p>
+                    <p><strong>E-mail (privacidade/LGPD):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
                     <p><strong>Site:</strong> finanfun.com.br</p>
                 </div>
 
@@ -545,7 +543,7 @@
                     <li><strong>✓ Oposição:</strong> Opor-se ao tratamento de dados.</li>
                     <li><strong>✓ Informação:</strong> Saber com quem compartilhamos seus dados.</li>
                 </ul>
-                <p><strong>Como exercer seus direitos:</strong> Entre em contato através do e-mail <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a>. Responderemos em até 15 dias úteis.</p>
+                <p><strong>Como exercer seus direitos:</strong> Entre em contato através do e-mail <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a>. Responderemos em até 15 dias úteis.</p>
 
                 <h2>10. Proteção de Crianças e Adolescentes (LGPD - Art. 14)</h2>
                 <p>Levamos muito a sério a proteção de dados de crianças e adolescentes, conforme determina o artigo 14 da LGPD.</p>
@@ -556,7 +554,7 @@
                     <li>Nosso conteúdo é educacional e não contém propaganda ou ofertas comerciais;</li>
                     <li>NÃO coletamos dados sensíveis de menores (como localização, biometria, etc.).</li>
                 </ul>
-                <p><strong>Pais e Responsáveis:</strong> Se você identificar que seu filho/tutelado se cadastrou sem sua autorização, entre em contato imediatamente através do e-mail <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a> para remoção dos dados.</p>
+                <p><strong>Pais e Responsáveis:</strong> Se você identificar que seu filho/tutelado se cadastrou sem sua autorização, entre em contato imediatamente através do e-mail <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a> para remoção dos dados.</p>
 
                 <h2>11. Alterações nesta Política</h2>
                 <p>Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou na legislação. Alterações significativas serão notificadas através de:</p>
@@ -570,7 +568,7 @@
                 <p>Para dúvidas, solicitações ou exercer seus direitos relacionados à privacidade e proteção de dados:</p>
                 <div class="contact-info">
                     <p><strong>E-mail (geral):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
-                    <p><strong>E-mail (questões de privacidade/LGPD):</strong> <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a></p>
+                    <p><strong>E-mail (questões de privacidade/LGPD):</strong> <a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a></p>
                     <p><strong>Responsável/Encarregado (DPO):</strong> Fabio Hommerding Pedrozo</p>
                     <p><strong>Prazo de resposta:</strong> Até 15 dias úteis</p>
                     <p><strong>Horário de atendimento:</strong> Segunda a sexta, 9h às 18h (horário de Brasília)</p>
@@ -589,7 +587,7 @@
                 <div class="document-footer">
                     <p><strong>FinanFun - Educação Financeira e Empreendedorismo para Jovens</strong></p>
                     <p>finanfun.com.br</p>
-                    <p><a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a> | <a href="mailto:privacidade@finanfun.com.br">privacidade@finanfun.com.br</a></p>
+                    <p><a href="mailto:adm@finanfun.com.br">adm@finanfun.com.br</a> | <a href="mailto:adm@finanfun.com.br">privacidade@finanfun.com.br</a></p>
                     <p>Em conformidade com a LGPD (Lei nº 13.709/2018)</p>
                 </div>
             </div>
@@ -626,3 +624,27 @@
             </div>
             <div class="footer-bottom">
                 <p style="
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Adiciona listener para fechar menu ao clicar em links
+                const navLinks = document.querySelectorAll('.nav-link, .btn-voltar-header');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
